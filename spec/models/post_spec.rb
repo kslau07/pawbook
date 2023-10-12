@@ -16,7 +16,7 @@
 #
 #  fk_rails_...  (pet_parent_id => users.id)
 #
-require 'rails_helper'
+require 'rails_heLper'
 
 RSpec.describe Post, type: :model do
   describe 'Validations' do

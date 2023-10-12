@@ -19,6 +19,11 @@
 #
 require 'rails_helper'
 
+# TODO: Add factory bot, then create a user
+# Build a Post with that user. Save it.
+# Add test for User.first.posts
+# TODO: After above test passes, create a commentable polymorphic model
+# TODO: Utilize guard gem
 RSpec.describe User, type: :model do
   describe 'Validations' do
     it { should validate_presence_of :email }
@@ -28,5 +33,8 @@ RSpec.describe User, type: :model do
 
   describe 'Associations' do
     it { should have_many :posts }
+    it { should have_one :profile }
   end
+
+  let!(:user) { create(:user) }
 end

@@ -18,13 +18,12 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
-  # TODO: DELETE ME
-  # Note that devise automatically validates presence of its attrs
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :posts, dependent: :destroy
+  has_many :posts, dependent: :destroy, foreign_key: 'pet_parent_id'
+  has_one :profile, dependent: :destroy
   validates :pets_name, presence: true
 end

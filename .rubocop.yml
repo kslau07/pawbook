@@ -7,6 +7,7 @@ Rails:
 Style/FrozenStringLiteralComment:
   Exclude:
     - db/migrate/*.rb
+    - Gemfile
 
 Style/Documentation:
   Exclude:

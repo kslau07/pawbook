@@ -21,4 +21,5 @@ I will use Test Driven Development (TDD) to develop this app.
 Gems:
 - guard-rspec <!-- Possibly unmaintained -->
 - https://www.learnenough.com/ruby-on-rails-4th-edition-tutorial/static_pages#sec-guard
-
+- Overmind (not a gem, used for debugging with foreman)
+- https://github.com/DarthSim/overmind
