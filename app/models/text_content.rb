@@ -8,6 +8,6 @@
 #  updated_at :datetime         not null
 #
 class TextContent < ApplicationRecord
-  has_one :post, as: :postable
+  has_one :post, as: :postable, dependent: :destroy
   validates :content, presence: true
 end
