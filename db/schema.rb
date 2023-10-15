@@ -24,8 +24,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_15_215628) do
     t.bigint "author_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "postable_id"
-    t.string "postable_type"
+    t.integer "postable_id", null: false
+    t.string "postable_type", default: "", null: false
     t.index ["author_id"], name: "index_posts_on_author_id"
   end
 

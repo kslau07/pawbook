@@ -3,11 +3,11 @@
 # Table name: posts
 #
 #  id            :bigint           not null, primary key
-#  postable_type :string
+#  postable_type :string           default(""), not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  author_id     :bigint           not null
-#  postable_id   :integer
+#  postable_id   :integer          not null
 #
 # Indexes
 #

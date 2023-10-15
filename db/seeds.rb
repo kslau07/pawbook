@@ -9,3 +9,4 @@ User.create!(email: 'test@example.com',
 
 u = User.find 1
 u.posts.create!(postable: PhotoContent.create!(placeholder_content: 'a picture'))
+u.posts.create!(postable: TextContent.create!(content: 'my first post'))

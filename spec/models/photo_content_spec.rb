@@ -11,7 +11,7 @@ require 'rails_helper'
 
 RSpec.describe PhotoContent, type: :model do
   describe 'Associations' do
-    it { should have_one :post }
+    it { should have_one(:post).dependent(:destroy) }
   end
 
   describe 'Validations' do
