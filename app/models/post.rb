@@ -2,11 +2,12 @@
 #
 # Table name: posts
 #
-#  id         :bigint           not null, primary key
-#  body       :text             not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  author_id  :bigint           not null
+#  id            :bigint           not null, primary key
+#  postable_type :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  author_id     :bigint           not null
+#  postable_id   :integer
 #
 # Indexes
 #
@@ -18,5 +19,6 @@
 #
 class Post < ApplicationRecord
   belongs_to :author, class_name: 'User'
-  validates :body, presence: true
+  # validates :body, presence: true
+  delegated_type :postable, types: %w[PhotoContent TextContent]
 end

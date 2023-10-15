@@ -2,11 +2,11 @@
 #
 # Table name: profiles
 #
-#  id         :bigint           not null, primary key
-#  colortheme :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint           not null
+#  id                :bigint           not null, primary key
+#  placeholder_photo :string           not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  user_id           :bigint           not null
 #
 # Indexes
 #
@@ -18,4 +18,5 @@
 #
 class Profile < ApplicationRecord
   belongs_to :user
+  validates :placeholder_photo, presence: true
 end

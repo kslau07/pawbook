@@ -19,23 +19,9 @@
 #
 require 'rails_helper'
 
-# TODO: Add factory bot, then create a user
-# TODO: Use feature branches to add new features to Pawbook
-# Build a Post with that user. Save it.
-# Add test for User.first.posts
-# TODO: After above test passes, create a commentable polymorphic model
-# TODO: Utilize guard gem
 RSpec.describe User, type: :model do
-  # let!(:user) { create(:user) }          # NOTE: delete me
-
-  describe 'Validations' do
-    it { should validate_presence_of :email }
-    it { should validate_presence_of :password }
-    it { should validate_presence_of :pets_name }
-  end
-
   describe 'Associations' do
-    it { should have_many :posts }
+    it { should have_many(:posts).dependent(:destroy).with_foreign_key(:author_id) }
     it { should have_one :profile }
 
     describe '.posts.create' do
@@ -50,5 +36,11 @@ RSpec.describe User, type: :model do
         expect(user.posts.first.body).to eq 'My post'
       end
     end
+  end
+
+  describe 'Validations' do
+    it { should validate_presence_of :email }
+    it { should validate_presence_of :password }
+    it { should validate_presence_of :pets_name }
   end
 end
