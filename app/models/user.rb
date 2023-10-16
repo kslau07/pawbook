@@ -23,6 +23,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :posts, dependent: :destroy, foreign_key: 'author_id'
+  has_many :reactions, dependent: :destroy
 
   # TODO: check if dependent:destroy would orphan existing nested comments from other users
   has_many :comments, dependent: :destroy, foreign_key: 'author_id'

@@ -24,6 +24,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:posts).dependent(:destroy).with_foreign_key(:author_id) }
     it { should have_many(:comments).dependent(:destroy).with_foreign_key(:author_id) }
     it { should have_one :profile }
+    it { should have_many(:reactions).dependent(:destroy) }
 
     describe '.posts.create(postable: PhotoContent)' do
       let!(:user) { create(:user) }
