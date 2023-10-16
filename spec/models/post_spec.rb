@@ -31,6 +31,7 @@ RSpec.describe Post, type: :model do
   end
 
   describe 'Validations' do
-    # it { should validate_presence_of :body }
+    it { should validate_presence_of :postable_id }
+    it { should validate_presence_of :postable_type }
   end
 end
