@@ -3,7 +3,7 @@
 # Table name: photo_contents
 #
 #  id                  :bigint           not null, primary key
-#  placeholder_content :string           not null
+#  content :string           not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #
@@ -15,6 +15,6 @@ RSpec.describe PhotoContent, type: :model do
   end
 
   describe 'Validations' do
-    it { should validate_presence_of :placeholder_content }
+    it { should validate_presence_of :content }
   end
 end

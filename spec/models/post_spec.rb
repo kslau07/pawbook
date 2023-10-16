@@ -20,8 +20,6 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  # let!(:post) { create(:post) }
-  
   describe 'Associations' do
     it { should belong_to :author }
 

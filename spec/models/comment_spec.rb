@@ -21,5 +21,17 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'Associations' do
+    it { should belong_to(:author) }
+
+    xit 'belongs to commentable, a polymorphic association' do
+      expect(subject).to belong_to(:postable)
+    end
+  end
+
+  describe 'Validations' do
+    xit { should validate_presence_of :content }
+    xit { should validate_presence_of :commentable_id }
+    xit { should validate_presence_of :commentable_type }
+  end
 end

@@ -22,18 +22,32 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe 'Associations' do
     it { should have_many(:posts).dependent(:destroy).with_foreign_key(:author_id) }
+    it { should have_many(:comments).dependent(:destroy).with_foreign_key(:author_id) }
     it { should have_one :profile }
 
-    describe '.posts.create' do
+    describe '.posts.create(postable: PhotoContent)' do
       let!(:user) { create(:user) }
 
       before(:example) do
-        post_body = 'My post'
-        user.posts.create(body: post_body)
+        photo_con = 'A picture of a cat'
+        user.posts.create!(postable: PhotoContent.create!(content: photo_con))
       end
 
-      it 'creates a post associated with a user' do
-        expect(user.posts.first.body).to eq 'My post'
+      it 'creates a post with photo content associated with a user' do
+        expect(user.posts.first.postable.content).to eq 'A picture of a cat'
+      end
+    end
+
+    describe '.posts.create(postable: TextContent)' do
+      let!(:user) { create(:user) }
+
+      before(:example) do
+        photo_con = 'My first post'
+        user.posts.create!(postable: TextContent.create!(content: photo_con))
+      end
+
+      it 'creates a post with text content associated with a user' do
+        expect(user.posts.first.postable.content).to eq 'My first post'
       end
     end
   end

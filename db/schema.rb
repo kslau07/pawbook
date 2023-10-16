@@ -25,7 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_16_005459) do
   end
 
   create_table "photo_contents", force: :cascade do |t|
-    t.string "placeholder_content", null: false
+    t.string "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

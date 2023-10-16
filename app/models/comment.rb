@@ -19,4 +19,5 @@
 #  fk_rails_...  (author_id => users.id)
 #
 class Comment < ApplicationRecord
+  belongs_to :author, class_name: 'User'
 end
