@@ -23,6 +23,7 @@ require 'rails_helper'
 RSpec.describe Comment, type: :model do
   describe 'Associations' do
     it { should belong_to(:author) }
+    it { should have_many(:comments) }
 
     it 'belongs to commentable, a polymorphic association' do
       expect(subject).to belong_to(:commentable)
