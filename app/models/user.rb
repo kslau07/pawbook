@@ -22,9 +22,11 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
   has_many :posts, dependent: :destroy, foreign_key: 'author_id'
+
+  # TODO: check if dependent:destroy would orphan existing nested comments from other users
   has_many :comments, dependent: :destroy, foreign_key: 'author_id'
+
   has_one :profile, dependent: :destroy
   validates :pets_name, presence: true
 end

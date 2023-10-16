@@ -22,6 +22,7 @@ require 'rails_helper'
 RSpec.describe Post, type: :model do
   describe 'Associations' do
     it { should belong_to :author }
+    it { should have_many(:comments).dependent(:destroy) }
 
     it 'belongs to postable, a polymorphic association' do
       expect(subject).to belong_to(:postable)

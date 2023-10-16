@@ -19,6 +19,7 @@
 #
 class Post < ApplicationRecord
   belongs_to :author, class_name: 'User'
+  has_many :comments, as: :commentable, dependent: :destroy
   delegated_type :postable, types: %w[PhotoContent TextContent]
   validates :postable_id, presence: true
   validates :postable_type, presence: true
