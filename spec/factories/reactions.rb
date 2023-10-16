@@ -3,10 +3,11 @@
 # Table name: reactions
 #
 #  id                :bigint           not null, primary key
-#  reactionable_type :string
+#  kind              :integer          not null
+#  reactionable_type :string           not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  reactionable_id   :integer
+#  reactionable_id   :integer          not null
 #  user_id           :bigint           not null
 #
 # Indexes

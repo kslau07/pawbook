@@ -3,10 +3,11 @@
 # Table name: reactions
 #
 #  id                :bigint           not null, primary key
-#  reactionable_type :string
+#  kind              :integer          not null
+#  reactionable_type :string           not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  reactionable_id   :integer
+#  reactionable_id   :integer          not null
 #  user_id           :bigint           not null
 #
 # Indexes
@@ -22,6 +23,11 @@ require 'rails_helper'
 RSpec.describe Reaction, type: :model do
   describe 'Associations' do
     it { should belong_to(:user) }
+    it do
+      should define_enum_for(:kind)
+        .with_values(%i[like_emoji heart_emoji laugh_emoji sad_emoji])
+        .backed_by_column_of_type(:integer)
+    end
 
     it 'belongs to "reactionable", a polymorphic association' do
       expect(subject).to belong_to(:reactionable)
@@ -31,5 +37,6 @@ RSpec.describe Reaction, type: :model do
   describe 'Validations' do
     it { should validate_presence_of :reactionable_id }
     it { should validate_presence_of :reactionable_type }
+    it { should validate_presence_of :kind }
   end
 end
