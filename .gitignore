@@ -35,8 +35,5 @@
 
 /node_modules
 
-# Ignore vim workspace
-Session.vim
-
 # Ignore todo list
 pawbook_todo.md

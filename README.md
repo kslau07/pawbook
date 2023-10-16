@@ -1,6 +1,5 @@
 # Final Rails Project: Pawbook
 
-(Include a t.o.c., what else?)
 
 Link to project specs:
 https://www.theodinproject.com/lessons/ruby-on-rails-rails-final-project

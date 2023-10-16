@@ -30,8 +30,8 @@ RSpec.describe User, type: :model do
       let!(:user) { create(:user) }
 
       before(:example) do
-        photo_con = 'A picture of a cat'
-        user.posts.create!(postable: PhotoContent.create!(content: photo_con))
+        photo_cont = 'A picture of a cat'
+        user.posts.create!(postable: PhotoContent.create!(content: photo_cont))
       end
 
       it 'creates a post with photo content associated with a user' do
@@ -43,8 +43,8 @@ RSpec.describe User, type: :model do
       let!(:user) { create(:user) }
 
       before(:example) do
-        photo_con = 'My first post'
-        user.posts.create!(postable: TextContent.create!(content: photo_con))
+        text_cont = 'My first post'
+        user.posts.create!(postable: TextContent.create!(content: text_cont))
       end
 
       it 'creates a post with text content associated with a user' do
