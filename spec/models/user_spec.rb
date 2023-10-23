@@ -23,10 +23,12 @@ RSpec.describe User, type: :model do
   describe 'Associations' do
     it { should have_many(:posts).dependent(:destroy).with_foreign_key(:author_id) }
     it { should have_many(:comments).dependent(:destroy).with_foreign_key(:author_id) }
-    it { should have_one :profile }
+    it { should have_one(:profile).dependent(:destroy) }
     it { should have_many(:reactions).dependent(:destroy) }
+    it { should have_many(:requests_sent).dependent(:destroy).with_foreign_key(:sender_id) }
+    it { should have_many(:requests_received).dependent(:destroy).with_foreign_key(:recipient_id) }
 
-    describe '.posts.create(postable: PhotoContent)' do
+    describe '.posts.create(postable: photoContent)' do
       let!(:user) { create(:user) }
 
       before(:example) do
