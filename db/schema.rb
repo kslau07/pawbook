@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_16_055707) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_22_223127) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_16_055707) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_comments_on_author_id"
+  end
+
+  create_table "friend_requests", force: :cascade do |t|
+    t.bigint "sender_id", null: false
+    t.bigint "recipient_id", null: false
+    t.boolean "confirmed", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipient_id"], name: "index_friend_requests_on_recipient_id"
+    t.index ["sender_id"], name: "index_friend_requests_on_sender_id"
   end
 
   create_table "photo_contents", force: :cascade do |t|
@@ -77,6 +87,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_16_055707) do
   end
 
   add_foreign_key "comments", "users", column: "author_id"
+  add_foreign_key "friend_requests", "users", column: "recipient_id"
+  add_foreign_key "friend_requests", "users", column: "sender_id"
   add_foreign_key "posts", "users", column: "author_id"
   add_foreign_key "profiles", "users"
   add_foreign_key "reactions", "users"
