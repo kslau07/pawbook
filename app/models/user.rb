@@ -25,10 +25,12 @@ class User < ApplicationRecord
 
   has_many :requests_sent, class_name: 'FriendRequest', foreign_key: :sender_id, dependent: :destroy
   has_many :requests_received, class_name: 'FriendRequest', foreign_key: :recipient_id, dependent: :destroy
-  has_many :friends_sent, -> { merge(FriendRequest.confirmed) }, through: :requests_sent
-  # has_many :friends_received
-  # has_many :pending_requests_sent
-  # has_many :pending_requests_received
+  has_many :friends_sent, -> { merge(FriendRequest.confirmed) }, through: :requests_sent, source: :recipient
+  has_many :friends_received, -> { merge(FriendRequest.confirmed) }, through: :requests_received, source: :sender
+  has_many :pending_requests_sent, -> { merge(FriendRequest.unconfirmed) },
+           class_name: 'FriendRequest', foreign_key: :sender_id
+  has_many :pending_requests_received, -> { merge(FriendRequest.unconfirmed) },
+           class_name: 'FriendRequest', foreign_key: :recipient_id
 
   has_many :posts, dependent: :destroy, foreign_key: 'author_id'
   has_many :reactions, dependent: :destroy

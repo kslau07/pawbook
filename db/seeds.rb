@@ -3,9 +3,27 @@
 # creating a rake task
 # https://www.reddit.com/r/rails/comments/143j24q/seeding_the_db_best_approach/
 
-User.create!(email: 'test@example.com',
-             password: 'password123',
-             pets_name: 'Rufus')
+10.times do
+  User.create!(email: Faker::Internet.email,
+               password: 'password123',
+               pets_name: Faker::Creature::Dog.name)
+end
+
+# u1 requests u2 (confirmed)
+FriendRequest.create!(sender: User.find(1),
+                      recipient: User.find(2),
+                      confirmed: true)
+# u1 requests u3
+FriendRequest.create!(sender: User.find(1),
+                      recipient: User.find(3))
+
+# u4 requests u1 (confirmed)
+FriendRequest.create!(sender: User.find(4),
+                      recipient: User.find(1),
+                      confirmed: true)
+# u5 requests u1
+FriendRequest.create!(sender: User.find(4),
+                      recipient: User.find(1))
 
 # Nested comments
 # u = User.last

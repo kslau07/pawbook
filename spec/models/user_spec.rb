@@ -27,6 +27,10 @@ RSpec.describe User, type: :model do
     it { should have_many(:reactions).dependent(:destroy) }
     it { should have_many(:requests_sent).dependent(:destroy).with_foreign_key(:sender_id) }
     it { should have_many(:requests_received).dependent(:destroy).with_foreign_key(:recipient_id) }
+    it { should have_many(:friends_sent).source(:recipient) }
+    it { should have_many(:friends_received).source(:sender) }
+    it { should have_many(:pending_requests_sent).with_foreign_key(:sender_id) }
+    it { should have_many(:pending_requests_received).with_foreign_key(:recipient_id) }
 
     describe '.posts.create(postable: photoContent)' do
       let!(:user) { create(:user) }
