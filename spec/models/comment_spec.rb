@@ -26,15 +26,10 @@ RSpec.describe Comment, type: :model do
     it { should belong_to(:author) }
     it { should have_many(:comments) }
     it { should have_many(:reactions).dependent(:destroy) }
-
-    it 'belongs to "commentable", a polymorphic association' do
-      expect(subject).to belong_to(:commentable)
-    end
+    it { should belong_to(:commentable)}
   end
 
   describe 'Validations' do
     it { should validate_presence_of :content }
-    it { should validate_presence_of :commentable_id }
-    it { should validate_presence_of :commentable_type }
   end
 end

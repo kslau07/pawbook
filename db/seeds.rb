@@ -25,6 +25,8 @@ FriendRequest.create!(sender: User.find(4),
 FriendRequest.create!(sender: User.find(4),
                       recipient: User.find(1))
 
+
+
 # Nested comments
 # u = User.last
 # u.posts.create!(postable: TextContent.create!(content: 'My first post'))

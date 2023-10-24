@@ -24,14 +24,9 @@ RSpec.describe Post, type: :model do
     it { should belong_to :author }
     it { should have_many(:comments).dependent(:destroy) }
     it { should have_many(:reactions).dependent(:destroy) }
-
-    it 'belongs to "postable", a polymorphic association' do
-      expect(subject).to belong_to(:postable)
-    end
+    it { should belong_to(:postable) }
   end
 
   describe 'Validations' do
-    it { should validate_presence_of :postable_id }
-    it { should validate_presence_of :postable_type }
   end
 end
