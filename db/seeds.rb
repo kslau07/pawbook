@@ -25,7 +25,24 @@ FriendRequest.create!(sender: User.find(4),
 FriendRequest.create!(sender: User.find(4),
                       recipient: User.find(1))
 
-
+Post.create!([
+               { author: User.find(1),
+                 postable: TextContent.create!(content: 'A cool text post.') },
+               { author: User.find(1),
+                 postable: PhotoContent.create!(content: 'A cool photo post.') },
+               { author: User.find(1),
+                 postable: TextContent.create!(content: 'A cool text post.') },
+               { author: User.find(1),
+                 postable: PhotoContent.create!(content: 'A cool photo post.') },
+               { author: User.find(1),
+                 postable: TextContent.create!(content: 'A cool text post.') },
+               { author: User.find(1),
+                 postable: PhotoContent.create!(content: 'A cool photo post.') },
+               { author: User.find(1),
+                 postable: TextContent.create!(content: 'A cool text post.') },
+               { author: User.find(1),
+                 postable: PhotoContent.create!(content: 'A cool photo post.') },
+             ])
 
 # Nested comments
 # u = User.last

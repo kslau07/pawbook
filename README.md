@@ -17,4 +17,3 @@ JavaScript
 
 I will use Test Driven Development (TDD) to develop this app.
 
-
