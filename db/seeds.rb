@@ -3,6 +3,8 @@
 # creating a rake task
 # https://www.reddit.com/r/rails/comments/143j24q/seeding_the_db_best_approach/
 
+return
+
 10.times do
   User.create!(email: Faker::Internet.email,
                password: 'password123',

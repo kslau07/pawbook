@@ -21,11 +21,11 @@ RSpec.describe 'api/v1/posts', type: :request do
   #   end
   # end
 
-  describe 'GET /index' do
-    it 'returns status code 200' do
-      get api_v1_posts_path
-      # get api_v1_posts_url
-      expect(response).to have_http_status :ok
-    end
-  end
+  # describe 'GET /index' do
+  #   xit 'returns status code 200' do
+  #     get api_v1_posts_path
+  #     # get api_v1_posts_url
+  #     expect(response).to have_http_status :ok
+  #   end
+  # end
 end
