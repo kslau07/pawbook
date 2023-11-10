@@ -55,8 +55,10 @@ gem "bootsnap", require: false
 gem "better_errors"
 gem "bullet"
 gem "devise"
-gem "rubocop-rails"
+gem 'omniauth-facebook'
+gem 'omniauth-rails_csrf_protection'
 gem "retest"
+gem "rubocop-rails"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
