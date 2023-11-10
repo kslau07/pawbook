@@ -24,7 +24,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: %i[facebook]
+         :omniauthable, omniauth_providers: %i[facebook google_oauth2]
 
   has_many :requests_sent, class_name: 'FriendRequest', foreign_key: :sender_id, dependent: :destroy
   has_many :requests_received, class_name: 'FriendRequest', foreign_key: :recipient_id, dependent: :destroy
