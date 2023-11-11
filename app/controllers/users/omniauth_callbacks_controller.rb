@@ -44,7 +44,23 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     provider_callback('google')
   end
 
-  def github; end
+  # def github
+  #   provider_callback('github')
+  # end
+
+  def github
+    user = User.from_omniauth(auth) # new user is created here
+
+    if user.present?
+      sign_out_all_scopes
+      flash[:success] = t 'devise.omniauth_callbacks.success', kind: 'GitHub'
+      sign_in_and_redirect user, event: :authentication
+    else # if user not found
+      flash[:alert] =
+        t 'devise.omniauth_callbacks.failure', kind: 'GitHub', reason: "#{auth.info.email} is not authorized."
+      redirect_to new_user_session_path
+    end
+  end
 
   # More info at:
   # https://github.com/heartcombo/devise#omniauth
@@ -65,7 +81,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # end
 
   # TODO: delete me if unused
-  # def auth
-  #   @auth = request.env['omniauth.auth']
-  # end
+  def auth
+    @auth = request.env['omniauth.auth']
+  end
 end
