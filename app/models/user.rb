@@ -11,6 +11,7 @@
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  uid                    :string
+#  username               :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -18,6 +19,7 @@
 #
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_username              (username) UNIQUE
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
@@ -25,6 +27,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[facebook google_oauth2 github]
+
+  # TODO: Add test
+  # Require top-level domain in emails
+  validates :email,
+            format: { with: %r{\A[a-zA-Z0-9.!\#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+\z} }
+  validates :username, presence: true, length: { minimum: 5, maximum: 30 },
+                       format: { with: /\A[\w]+\z/,
+                                 message: 'can only contain letters, numbers, and underscores' }
 
   has_many :requests_sent, class_name: 'FriendRequest', foreign_key: :sender_id, dependent: :destroy
   has_many :requests_received, class_name: 'FriendRequest', foreign_key: :recipient_id, dependent: :destroy

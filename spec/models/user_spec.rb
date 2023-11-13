@@ -11,6 +11,7 @@
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  uid                    :string
+#  username               :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -18,6 +19,7 @@
 #
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_username              (username) UNIQUE
 #
 require 'rails_helper'
 
@@ -64,5 +66,13 @@ RSpec.describe User, type: :model do
   describe 'Validations' do
     it { should validate_presence_of :email }
     it { should validate_presence_of :password }
+    it { should validate_presence_of :username }
+
+    xit 'username cannot be under 5 chars' do
+    end
+    xit 'username cannot be over 30 chars' do
+    end
+    xit 'username cannot contain special chars except underscores' do
+    end
   end
 end

@@ -11,6 +11,7 @@
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  uid                    :string
+#  username               :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -18,10 +19,16 @@
 #
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_username              (username) UNIQUE
 #
 FactoryBot.define do
+  sequence :username do |n|
+    "test_user#{n}"
+  end
+
   factory :user do
     email { Faker::Internet.email }
+    username
     pets_name { Faker::Creature::Dog.name }
     password { 'password123' }
   end

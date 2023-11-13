@@ -55,6 +55,7 @@ gem "bootsnap", require: false
 gem "better_errors"
 gem "bullet"
 gem "devise"
+gem 'jwt'
 gem 'omniauth-facebook'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
