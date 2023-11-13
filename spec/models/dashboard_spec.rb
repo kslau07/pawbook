@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: profiles
+# Table name: dashboards
 #
 #  id                :bigint           not null, primary key
 #  placeholder_photo :string           not null
@@ -10,7 +10,7 @@
 #
 # Indexes
 #
-#  index_profiles_on_user_id  (user_id)
+#  index_dashboards_on_user_id  (user_id)
 #
 # Foreign Keys
 #
@@ -18,7 +18,7 @@
 #
 require 'rails_helper'
 
-RSpec.describe Profile, type: :model do
+RSpec.describe Dashboard, type: :model do
   describe 'Associations' do
     it { should belong_to :user }
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_12_232039) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_13_215323) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_12_232039) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_comments_on_author_id"
+  end
+
+  create_table "dashboards", force: :cascade do |t|
+    t.string "placeholder_photo", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_dashboards_on_user_id"
   end
 
   create_table "friend_requests", force: :cascade do |t|
@@ -47,14 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_12_232039) do
     t.integer "postable_id", null: false
     t.string "postable_type", default: "", null: false
     t.index ["author_id"], name: "index_posts_on_author_id"
-  end
-
-  create_table "profiles", force: :cascade do |t|
-    t.string "placeholder_photo", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_profiles_on_user_id"
+    t.index ["created_at"], name: "index_posts_on_created_at"
   end
 
   create_table "reactions", force: :cascade do |t|
@@ -91,9 +92,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_12_232039) do
   end
 
   add_foreign_key "comments", "users", column: "author_id"
+  add_foreign_key "dashboards", "users"
   add_foreign_key "friend_requests", "users", column: "recipient_id"
   add_foreign_key "friend_requests", "users", column: "sender_id"
   add_foreign_key "posts", "users", column: "author_id"
-  add_foreign_key "profiles", "users"
   add_foreign_key "reactions", "users"
 end

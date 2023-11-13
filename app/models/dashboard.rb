@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: profiles
+# Table name: dashboards
 #
 #  id                :bigint           not null, primary key
 #  placeholder_photo :string           not null
@@ -10,13 +10,13 @@
 #
 # Indexes
 #
-#  index_profiles_on_user_id  (user_id)
+#  index_dashboards_on_user_id  (user_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (user_id => users.id)
 #
-class Profile < ApplicationRecord
+class Dashboard < ApplicationRecord
   belongs_to :user
   validates :placeholder_photo, presence: true
 end

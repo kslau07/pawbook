@@ -3,10 +3,9 @@
 # creating a rake task
 # https://www.reddit.com/r/rails/comments/143j24q/seeding_the_db_best_approach/
 
-return
-
-10.times do
+10.times do |n|
   User.create!(email: Faker::Internet.email,
+               username: "seeded_user#{n}",
                password: 'password123',
                pets_name: Faker::Creature::Dog.name)
 end
@@ -27,24 +26,26 @@ FriendRequest.create!(sender: User.find(4),
 FriendRequest.create!(sender: User.find(4),
                       recipient: User.find(1))
 
-Post.create!([
-               { author: User.find(1),
-                 postable: TextContent.create!(content: 'A cool text post.') },
-               { author: User.find(1),
-                 postable: PhotoContent.create!(content: 'A cool photo post.') },
-               { author: User.find(1),
-                 postable: TextContent.create!(content: 'A cool text post.') },
-               { author: User.find(1),
-                 postable: PhotoContent.create!(content: 'A cool photo post.') },
-               { author: User.find(1),
-                 postable: TextContent.create!(content: 'A cool text post.') },
-               { author: User.find(1),
-                 postable: PhotoContent.create!(content: 'A cool photo post.') },
-               { author: User.find(1),
-                 postable: TextContent.create!(content: 'A cool text post.') },
-               { author: User.find(1),
-                 postable: PhotoContent.create!(content: 'A cool photo post.') },
-             ])
+def random_time(type)
+  if type == 'past'
+    rand(0..1_000_000).minutes.ago
+    # rand_date = rand(3..60).days.ago
+  elsif type == 'future'
+    rand(0..1_000_000).minutes.from_now
+  end
+end
+
+10.times do |_n|
+  random_past = random_time('past')
+  random_user = User.find(rand(1..User.count))
+  postable_types = [TextContent, PhotoContent]
+  Post.create!([
+                 { author: random_user,
+                   postable: postable_types.sample.create!(content: 'My post.'), # FIX: photo should be a link
+                   created_at: random_past,
+                   updated_at: random_past }
+               ])
+end
 
 # Nested comments
 # u = User.last

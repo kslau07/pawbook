@@ -33,8 +33,8 @@ class User < ApplicationRecord
   validates :email,
             format: { with: %r{\A[a-zA-Z0-9.!\#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+\z} }
   validates :username, presence: true, length: { minimum: 5, maximum: 30 },
-                       format: { with: /\A[\w]+\z/,
-                                 message: 'can only contain letters, numbers, and underscores' }
+                       format: { with: /\A[\w.]+\z/,
+                                 message: 'can only contain letters, numbers, periods, and underscores' }
 
   has_many :requests_sent, class_name: 'FriendRequest', foreign_key: :sender_id, dependent: :destroy
   has_many :requests_received, class_name: 'FriendRequest', foreign_key: :recipient_id, dependent: :destroy
@@ -51,7 +51,7 @@ class User < ApplicationRecord
   # TODO: check if dependent:destroy would orphan existing nested comments from other users
   has_many :comments, dependent: :destroy, foreign_key: 'author_id'
 
-  has_one :profile, dependent: :destroy
+  has_one :dashboard, dependent: :destroy
   # validates :pets_name, presence: true # TODO: Suggest that user add a pet, but not required
 
   def self.from_omniauth(auth)

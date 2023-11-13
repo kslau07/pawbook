@@ -11,7 +11,8 @@
 #
 # Indexes
 #
-#  index_posts_on_author_id  (author_id)
+#  index_posts_on_author_id   (author_id)
+#  index_posts_on_created_at  (created_at)
 #
 # Foreign Keys
 #

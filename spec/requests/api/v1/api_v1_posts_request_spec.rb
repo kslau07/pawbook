@@ -6,10 +6,6 @@ require 'rails_helper'
 
 # How to write request specs:
 # https://dev.to/kevinluo201/introduce-rspec-request-spec-4pbl
-#
-#  TODO: Enable signing up and signing in through the api (and Postman)
-# https://wajeeh-ahsan.medium.com/rails-user-authentication-with-devise-and-simple-token-authentication-7beafd1bb863
-#
 
 RSpec.describe 'api/v1/posts', type: :request do
   # RSpec.describe '/events', type: :request do
