@@ -20,4 +20,8 @@ Rails.application.routes.draw do
       resources :posts, only: %i[index show create]
     end
   end
+
+  # FIX: Separate bad api urls and bad html urls
+  get '/*a', to: 'api/v1/bad_requests#not_found'
+  post '/*a', to: 'api/v1/bad_requests#not_found'
 end

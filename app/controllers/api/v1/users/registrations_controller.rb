@@ -1,5 +1,5 @@
 class Api::V1::Users::RegistrationsController < ApplicationController
-  # Instead of a csrf token, the API be using a JWT for authentication
+  # Instead of a csrf token, the API uses a JWT for authentication
   skip_forgery_protection
 
   # TODO: Show: username, pets name
@@ -23,6 +23,6 @@ class Api::V1::Users::RegistrationsController < ApplicationController
   def user_params
     # We still use strong params, but we do not require the
     # API consumer to pass in a nested hash with a "user" key
-    params.permit(:email, :password)
+    params.permit(:email, :username, :password)
   end
 end
