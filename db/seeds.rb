@@ -3,7 +3,7 @@
 # creating a rake task
 # https://www.reddit.com/r/rails/comments/143j24q/seeding_the_db_best_approach/
 
-10.times do |n|
+4.times do |n|
   User.create!(email: Faker::Internet.email,
                username: "seeded_user#{n}",
                password: 'password123',
@@ -41,7 +41,7 @@ end
   postable_types = [TextContent, PhotoContent]
   Post.create!([
                  { author: random_user,
-                   postable: postable_types.sample.create!(content: 'My post.'), # FIX: photo should be a link
+                   postable: postable_types.sample.create!(content: 'My post.'),
                    created_at: random_past,
                    updated_at: random_past }
                ])

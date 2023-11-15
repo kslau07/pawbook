@@ -31,5 +31,9 @@ FactoryBot.define do
     username
     pets_name { Faker::Creature::Dog.name }
     password { 'password123' }
+
+    trait :cool_username do
+      username { 'cool_username' }
+    end
   end
 end

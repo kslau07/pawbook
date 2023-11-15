@@ -1,32 +1,25 @@
 class Api::V1::UsersController < ApplicationController
   before_action :authorize_request
+  before_action :find_user
   skip_forgery_protection
 
   def show
-    # user = User.find
-    render json: format_json(1), status: :ok
+    render json: format_json(@user), status: :ok
   end
 
   private
 
-  def format_json(_users)
+  def format_json(user)
     {
-      username: 'bob'
+      '1': { username: user.username,
+             pets_name: user.pets_name,
+             num_of_posts: user.posts.count }
     }
-    # posts.map do |post|
-    #   { post_id: post.id,
-    #     post_type: post.postable_type,
-    #     post_content: post.postable.content,
-    #     author_info: { username: post.author.username,
-    #                    pets_name: post.author.pets_name },
-    #     num_of_comments: post.comments.count,
-    #     num_of_reactions: post.reactions.count,
-    #     created_at: post.created_at,
-    #     updated_at: post.updated_at }
-    # end
   end
 
-  def user_params
-    params.permit(:id)
+  def find_user
+    @user = User.find_by!(username: params[:_username])
+  rescue ActiveRecord::RecordNotFound
+    render json: { errors: 'User not found' }, status: :not_found
   end
 end

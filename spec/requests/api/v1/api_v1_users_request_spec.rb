@@ -1,21 +1,23 @@
 require 'rails_helper'
 
-# When writing request specs, try to answer the question:
-# “For a given HTTP request (verb + path + parameters),
-# what HTTP response should the application return?”
-
-# How to write request specs:
-# https://dev.to/kevinluo201/introduce-rspec-request-spec-4pbl
-
 RSpec.describe 'api/v1/users', type: :request do
-  let!(:users) { create_list(:user, 3) }
-
-  # TODO: Instead of :id we route by :username
   describe 'api/v1/users/:id' do
+    let!(:user) { create(:user, :cool_username) }
+
     it 'responds with invalid request without JWT' do
-      get '/api/v1/users/1'
-      expect(response).to have_http_status 401 # unauthorized
+      get "/api/v1/users/#{User.last.username}"
+      expect(response).to have_http_status 401
       expect(response.body).to match(/Invalid token/)
+    end
+
+    it 'responds with JSON with JWT' do
+      dynamic_route = 'cool_username'
+      token = JsonWebToken.encode(user_id: user.id)
+      get "/api/v1/users/#{dynamic_route}", headers: { 'Authorization' => "Bearer #{token}" }
+      expect(response).to have_http_status 200
+
+      json_response = response.parsed_body
+      expect(json_response.length).to eq 1
     end
   end
 end
