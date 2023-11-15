@@ -14,9 +14,11 @@ Rails.application.routes.draw do
   post '/sign_up', to: 'api/v1/users/registrations#create'
   post '/login', to: 'api/v1/users/sessions#create'
 
+  # resources :users, param: :_username
+
   namespace :api do
     namespace :v1 do
-      # resources :users, only: %i[create]
+      resources :users, only: %i[show create]
       resources :posts, only: %i[index show]
     end
   end

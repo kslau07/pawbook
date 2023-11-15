@@ -20,8 +20,18 @@
 #
 FactoryBot.define do
   factory :post do
-    body { Faker::Lorem.sentences }
+    trait :text_content do
+      postable { TextContent.create(content: 'A text post.') }
+    end
+
+    trait :photo_content do
+      postable { PhotoContent.create(content: 'A link to a photo.') }
+    end
 
     association :author, factory: :user
+  end
+
+  factory :text_post, parent: :post, traits: [:text_content] do
+    # Somewhat redundant to above
   end
 end
