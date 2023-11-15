@@ -1,5 +1,4 @@
 class Api::V1::Users::RegistrationsController < ApplicationController
-  # Instead of a csrf token, the API uses a JWT for authentication
   skip_forgery_protection
 
   # TODO: Show: username, pets name

@@ -1,27 +1,35 @@
-# When writing request specs, try to answer the question:
-# “For a given HTTP request (verb + path + parameters),
-# what HTTP response should the application return?”
-
 require 'rails_helper'
 
-# How to write request specs:
-# https://dev.to/kevinluo201/introduce-rspec-request-spec-4pbl
-
 RSpec.describe 'api/v1/posts', type: :request do
-  # RSpec.describe '/events', type: :request do
-  # describe 'GET /index' do
-  #   it 'renders a successful response' do
-  #     Event.create! valid_attributes
-  #     get events_url
-  #     expect(response).to have_http_status :ok
-  #   end
-  # end
+  let!(:test_user) { create(:user) }
 
-  # describe 'GET /index' do
-  #   xit 'returns status code 200' do
-  #     get api_v1_posts_path
-  #     # get api_v1_posts_url
-  #     expect(response).to have_http_status :ok
-  #   end
-  # end
+  describe '/api/v1/posts' do
+    it 'responds with invalid request without JWT' do
+      get '/api/v1/posts'
+      expect(response).to have_http_status 401
+      expect(response.body).to match(/Invalid token/)
+    end
+
+    it 'responds with JSON with JWT' do
+      posts = create_list(:post, 3, :text_content)
+      token = JsonWebToken.encode(user_id: test_user.id)
+      get '/api/v1/posts', headers: { 'Authorization' => "Bearer #{token}" }
+      expect(response).to have_http_status 200
+
+      json_response = response.parsed_body
+      expect(json_response.length).to eq 3
+    end
+  end
+
+  describe '/api/v1/posts/:id' do
+    it 'responds with JSON with JWT' do
+      text_post = create(:text_post)
+      token = JsonWebToken.encode(user_id: test_user.id)
+      get "/api/v1/posts/#{text_post.id}", headers: { 'Authorization' => "Bearer #{token}" }
+      expect(response).to have_http_status 200
+
+      json_response = response.parsed_body
+      expect(json_response.length).to eq 1
+    end
+  end
 end
