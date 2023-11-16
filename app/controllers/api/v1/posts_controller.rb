@@ -16,17 +16,9 @@ class Api::V1::PostsController < ApplicationController
 
   private
 
-  # TODO: delete me
-  # posts comes in as an ActiveRecord Relation
-  # .as_json changes certain items into json compatible syntax or json primitives (ie symbols to strings, date objects to string, etc )
-  # .to_json first calls .as_json which creates an array of ruby hashes, then it serializes that into one long string
-  # It seems we probably do not need to call .to_json ever, as Rails takes care of serializing in the 'render' call.
   def format_json(posts)
     posts.map do |post|
       { post_id: post.id,
-        # postable: { type: post.postable_type,
-        #             content: post.postable.content },
-        # postable: post.postable.as_json,
         post_type: post.postable_type,
         post_content: post.postable.content,
         author_info: { username: post.author.username,

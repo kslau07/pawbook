@@ -8,20 +8,19 @@ require 'rails_helper'
 # https://dev.to/kevinluo201/introduce-rspec-request-spec-4pbl
 
 RSpec.describe 'api/v1/posts', type: :request do
-  # RSpec.describe '/events', type: :request do
-  # describe 'GET /index' do
-  #   it 'renders a successful response' do
-  #     Event.create! valid_attributes
-  #     get events_url
-  #     expect(response).to have_http_status :ok
-  #   end
-  # end
+  let(:test_user) { create(:user) }
 
-  # describe 'GET /index' do
-  #   xit 'returns status code 200' do
-  #     get api_v1_posts_path
-  #     # get api_v1_posts_url
-  #     expect(response).to have_http_status :ok
-  #   end
-  # end
+  describe 'GET /posts' do
+    it 'responds with invalid request without JWT' do
+      get api_v1_posts_url
+      expect(response).to have_http_status 401
+      expect(response.body).to match(/Invalid token/)
+    end
+
+    it 'it responds with JSON with JWT' do
+      token = JsonWebToken.encode(user_id: test_user.id)
+      get api_v1_posts_url, headers: { 'Authorization' => "Bearer #{token}" }
+      expect(response).to have_http_status 200
+    end
+  end
 end
