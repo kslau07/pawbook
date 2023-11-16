@@ -1,6 +1,6 @@
 class Api::V1::PostsController < ApplicationController
-  skip_forgery_protection
   before_action :authorize_request
+  skip_forgery_protection
 
   def index
     # Limit to last 10 newest posts

@@ -1,26 +1,35 @@
-# When writing request specs, try to answer the question:
-# “For a given HTTP request (verb + path + parameters),
-# what HTTP response should the application return?”
-
 require 'rails_helper'
 
-# How to write request specs:
-# https://dev.to/kevinluo201/introduce-rspec-request-spec-4pbl
-
 RSpec.describe 'api/v1/posts', type: :request do
-  let(:test_user) { create(:user) }
+  let!(:test_user) { create(:user) }
 
-  describe 'GET /posts' do
+  describe '/api/v1/posts' do
     it 'responds with invalid request without JWT' do
-      get api_v1_posts_url
+      get '/api/v1/posts'
       expect(response).to have_http_status 401
       expect(response.body).to match(/Invalid token/)
     end
 
-    it 'it responds with JSON with JWT' do
+    it 'responds with JSON with JWT' do
+      posts = create_list(:post, 3, :text_content)
       token = JsonWebToken.encode(user_id: test_user.id)
-      get api_v1_posts_url, headers: { 'Authorization' => "Bearer #{token}" }
+      get '/api/v1/posts', headers: { 'Authorization' => "Bearer #{token}" }
       expect(response).to have_http_status 200
+
+      json_response = response.parsed_body
+      expect(json_response.length).to eq 3
+    end
+  end
+
+  describe '/api/v1/posts/:id' do
+    it 'responds with JSON with JWT' do
+      text_post = create(:text_post)
+      token = JsonWebToken.encode(user_id: test_user.id)
+      get "/api/v1/posts/#{text_post.id}", headers: { 'Authorization' => "Bearer #{token}" }
+      expect(response).to have_http_status 200
+
+      json_response = response.parsed_body
+      expect(json_response.length).to eq 1
     end
   end
 end
