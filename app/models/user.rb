@@ -32,7 +32,7 @@ class User < ApplicationRecord
   # Require top-level domain in emails
   validates :email,
             format: { with: %r{\A[a-zA-Z0-9.!\#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+\z} }
-  validates :username, presence: true, length: { minimum: 5, maximum: 30 },
+  validates :username, presence: true, length: { minimum: 3, maximum: 30 },
                        format: { with: /\A[\w.]+\z/,
                                  message: 'can only contain letters, numbers, periods, and underscores' }
 

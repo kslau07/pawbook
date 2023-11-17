@@ -1,4 +1,8 @@
-Welcome to Pawbook!
+<%# root_path /posts %>
+<div>
+  Welcome to Pawbook!
+</div>
+<%= link_to "Log out", destroy_user_session_path, class: "link", method: :delete, data: { turbo_method: :delete } %>
 <p>
   <% @posts.each do |post|  %>
     <div class="p-6 border-4 border-blue-700  text-red-600">

@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %w[test] # TODO: Remove test
 
   def index
     @posts = Post.all
@@ -15,6 +15,9 @@ class PostsController < ApplicationController
   def update; end
 
   def destroy; end
+
+  # TODO: Delete me
+  def test; end
 
   private
 

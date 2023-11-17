@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
+  # TODO: Delete me, delete controller action, and delete view
+  # For testing purposes
+  get '/posts/test', to: 'posts#test'
+
   # Custom API endpoints
   post '/sign_up', to: 'api/v1/users/registrations#create'
   post '/login', to: 'api/v1/users/sessions#create'

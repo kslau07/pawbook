@@ -1,29 +1,44 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<!-- Sign-up page-->
+<div class="flex justify-center items-center content-center flex-wrap h-4/5">
+  <div class="w-96 flex flex-col gap-6">
+    <div class="text-6xl font-bold text-blue-500 logo-font">
+      <span>
+        pawbook
+        <%= image_tag "paw-3-svgrepo-com.svg", { class: 'logo-image', alt: 'A pawprint', size: '50x50' }%>
+      </span>
+    </div>
+    <div class="text-xl font-medium">A community for pets & pet lovers, creating paw-sitive memories together.</div>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+  <div class="w-96 bg-white rounded-lg shadow-zinc-400 shadow-lg">
+    <div class="p-4">
+      <div class="mb-4 flex flex-col">
+        <h1 class="font-bold text-lg">Sign Up</h1>
+        <div>It’s quick and simple.</div>
+        <hr class="self-center m-2 bg-slate-300 h-px border-0 w-full">
+      </div>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:class => 'pb-2 flex gap-3 flex-col justify-center items-center w-full'}) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="field w-full">
+          <%= f.text_field :username, autofocus: true,
+          class: "p-3 border-2 rounded focus:outline-blue-500 placeholder-slate-500 w-full",
+          placeholder: "Choose a username" %>
+        </div>
+        <div class="field w-full">
+          <%= f.email_field :email, autocomplete: "email",
+          class: "p-3 border-2 rounded focus:outline-blue-500 placeholder-slate-500 w-full",
+          placeholder: "Email" %>
+        </div>
+        <div class="field w-full">
+          <%= f.password_field :password, autocomplete: "new-password",
+          class: "p-3 border-2 rounded focus:outline-blue-500 placeholder-slate-500 w-full",
+          placeholder: "Password" %>
+        </div>
+        <div class="actions w-full">
+          <%= f.submit "Create account", 
+            class: "bg-lime-500 hover:bg-lime-600 text-white text-lg font-bold tracking-wide py-3 px-4 rounded-lg cursor-pointer w-full" %>
+        </div>
+        <%= render "devise/shared/links" %>
+      <% end %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
