@@ -38,3 +38,7 @@ ul {
   list-style-position: inside;
   list-style-type: disc;
 }
+
+.grid > * {
+  outline: 3px dashed orangered; /* delete me */
+}
