@@ -19,14 +19,14 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:class => 'pb-2 flex gap-3 flex-col justify-center items-center w-full'}) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
         <div class="field w-full">
-          <%= f.text_field :username, autofocus: true,
-          class: "p-3 border-2 rounded focus:outline-blue-500 placeholder-slate-500 w-full",
-          placeholder: "Choose a username" %>
-        </div>
-        <div class="field w-full">
           <%= f.email_field :email, autocomplete: "email",
           class: "p-3 border-2 rounded focus:outline-blue-500 placeholder-slate-500 w-full",
           placeholder: "Email" %>
+        </div>
+        <div class="field w-full">
+          <%= f.text_field :username, autofocus: true,
+          class: "p-3 border-2 rounded focus:outline-blue-500 placeholder-slate-500 w-full",
+          placeholder: "Choose a username" %>
         </div>
         <div class="field w-full">
           <%= f.password_field :password, autocomplete: "new-password",

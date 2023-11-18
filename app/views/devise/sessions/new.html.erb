@@ -12,10 +12,11 @@
   <div class="w-96 bg-white rounded-lg shadow-zinc-400 shadow-lg">
     <div class="p-4">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'pb-2 flex gap-3 flex-col justify-center items-center w-full'}) do |f| %>
+
         <div class="field w-full">
           <%= f.email_field :email, autofocus: true, autocomplete: "email",
           class: "p-3 border-2 rounded focus:outline-blue-500 placeholder-slate-500 w-full",
-          placeholder: "Username or email" %>
+          placeholder: "Email" %>
         </div>
         <div class="field w-full">
           <%= f.password_field :password, autocomplete: "current-password" ,

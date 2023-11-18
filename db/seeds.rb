@@ -3,6 +3,10 @@
 # creating a rake task
 # https://www.reddit.com/r/rails/comments/143j24q/seeding_the_db_best_approach/
 
+<<-HEREDOC
+User.create!(email:'test_user@example.com', password:'password123', username: 'test_user')
+HEREDOC
+
 4.times do |n|
   User.create!(email: Faker::Internet.email,
                username: "seeded_user#{n}",
