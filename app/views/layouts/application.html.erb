@@ -13,11 +13,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
   </head>
   <body>
-    <% unless [:sessions, :registrations].include?(controller_name) %>
+    <% unless ['sessions', 'registrations'].include?(controller_name) %>
       <%= render 'header' %>
     <% end %>
     <%= yield %>
-    <% unless [:sessions, :registrations].include?(controller_name) %>
+    <% unless ['sessions', 'registrations'].include?(controller_name) %>
       <%= render 'footer' %>
     <% end %>
   </body>
