@@ -1,4 +1,8 @@
 <!-- Login page-->
+<%- if controller_name == 'sessions' %>
+  <%# TODO: delete me %>
+  <div class="text-s text-zinc-600 text-center"> test_user@example.com // password123</div>
+<% end %>
 <div class="flex justify-center items-center content-center flex-wrap h-4/5">
   <div class="w-96 flex flex-col gap-6">
     <div class="text-6xl font-bold text-blue-500 logo-font">
@@ -12,7 +16,6 @@
   <div class="w-96 bg-white rounded-lg shadow-zinc-400 shadow-lg">
     <div class="p-4">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'pb-2 flex gap-3 flex-col justify-center items-center w-full'}) do |f| %>
-
         <div class="field w-full">
           <%= f.email_field :email, autofocus: true, autocomplete: "email",
           class: "p-3 border-2 rounded focus:outline-blue-500 placeholder-slate-500 w-full",
@@ -25,7 +28,7 @@
         </div>
         <% if devise_mapping.rememberable? %>
           <div class="field self-end">
-            <%= f.check_box :remember_me %>
+            <%= f.check_box :remember_me, { checked: true } %>
             <%= f.label :remember_me %>
           </div>
         <% end %>
