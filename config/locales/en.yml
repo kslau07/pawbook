@@ -28,6 +28,16 @@
 #
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
+#
+# Example:
+# en:
+#   devise:
+#     omniauth_callbacks:
+#       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
+#       success: "Successfully authenticated from %{kind} account."
 
 en:
   hello: "Hello world"
+  notices:
+    success: "%{model} saved successfully."
+

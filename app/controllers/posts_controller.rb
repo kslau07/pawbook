@@ -15,7 +15,8 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
-      redirect_to root_path, notice: 'Post saved successfully.'
+      flash[:notice] = t 'notices.success', model: 'Post'
+      redirect_to root_path
     else
       render :new, status: :unprocessable_entity
     end
