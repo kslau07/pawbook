@@ -4,7 +4,6 @@
 Rails.application.routes.draw do
   root 'posts#index'
   resources :posts, only: %w[index new create]
-  resources :users, param: :_username
   get 'dashboard', to: 'users/dashboards#show'
 
   devise_for :users, controllers: {
@@ -13,9 +12,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
-  # TODO: Delete me, delete controller action, and delete view
-  # For testing purposes
-  get '/posts/test', to: 'posts#test'
+  resources :users, param: :_username
 
   namespace :api do
     namespace :v1 do

@@ -1,5 +1,12 @@
-<%# posts/_form %>
+<%# TODO: Submit a post with postable_type TextContent (polymorphic association) %>
+<%# Possible solutions: We probably need to configure accepts_nested_attributes_for %>
+<%# Possible solutions: We probably need to pass in a TextContent object %>
 <div class="text-red-500 font-bold">NOTE: We start with text posts only, hard-coded, change it after we have picture uploads</div>
 <%= form_with model: post do |f| %>
+  <%= f.hidden_field :postable_type, value: 'TextContent' %>
+  <%= f.fields_for :postable do |sub_form| %>
+    <%= sub_form.label :content %>
+    <%= sub_form.text_field :content, value: 'Lorem ipsum dolor sit amet' %>
+  <% end %>
   <%= f.submit %>
 <% end %>

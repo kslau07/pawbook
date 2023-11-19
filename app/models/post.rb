@@ -23,6 +23,5 @@ class Post < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :reactions, as: :reactionable, dependent: :destroy
   delegated_type :postable, types: %w[PhotoContent TextContent]
-  # validates :postable_id, presence: true
-  # validates :postable_type, presence: true
+  accepts_nested_attributes_for :postable
 end

@@ -1,1 +1,4 @@
 _footer
+#posts=<%= Post.count %>
+#TextContent=<%= Post.where(postable_type: 'TextContent').count %>
+#PhotoContent=<%= Post.where(postable_type: 'PhotoContent').count %>
