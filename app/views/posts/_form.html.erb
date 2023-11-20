@@ -1,12 +1,16 @@
-<%# TODO: Submit a post with postable_type TextContent (polymorphic association) %>
-<%# Possible solutions: We probably need to configure accepts_nested_attributes_for %>
-<%# Possible solutions: We probably need to pass in a TextContent object %>
-<div class="text-red-500 font-bold">NOTE: We start with text posts only, hard-coded, change it after we have picture uploads</div>
-<%= form_with model: post do |f| %>
+<%= form_with model: post, class: "" do |f| %>
   <%= f.hidden_field :postable_type, value: 'TextContent' %>
   <%= f.fields_for :postable do |sub_form| %>
-    <%= sub_form.label :content %>
-    <%= sub_form.text_field :content, value: 'Lorem ipsum dolor sit amet' %>
+    <%= sub_form.text_area :content, placeholder: 'What\'s on your mind?',
+      class: "block h-24 rounded focus:outline-slate-500 placeholder-slate-500 focus:outline-zinc-200 w-full" %>
   <% end %>
-  <%= f.submit %>
+  <hr class="self-center m-2 bg-slate-300 h-px border-0 w-full">
+  <div class="grid grid-cols-3">
+    <div>item1</div>
+    <div>item2</div>
+    <%= f.submit "Post", 
+    class: "bg-blue-500 hover:bg-blue-600 text-white text-lg tracking-wide py-2 px-4 rounded cursor-pointer" %>
+  </div>
 <% end %>
+<%# TODO: Make Post btn smaller%>
+<%# TODO: Remove resize bit in textarea %>

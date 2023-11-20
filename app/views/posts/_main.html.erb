@@ -1,2 +1,17 @@
-<div>search bar</div>
-<%= render 'form', post: @post %>
+<style>
+  .grid > * { outline: none; }
+  <%# TODO: Delete me %>
+</style>
+<div>Create Post</div>
+<div class="bg-white p-4 rounded-lg w-full">
+  <%= render 'form', post: @post %>
+</div>
+<div class="grid gap-4 py-4">
+  <% @posts.each do |post|  %>
+    <div class="p-6 border-4 border-blue-700  text-red-600">
+      <%= post.author.username %>
+      <%= post.postable.content %>
+      <%= "posted " + time_ago_in_words(post.created_at) + " ago" %>
+    </div>
+  <% end %>
+</div>

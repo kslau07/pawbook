@@ -7,16 +7,3 @@
   <div><%= render 'main' %></div>
   <div><%= render 'contacts' %></div>
 </div>
-<%
-=begin ========================== commented out ================================%>
-<div>
-  <% @posts.each do |post|  %>
-    <div class="p-6 border-4 border-blue-700  text-red-600">
-      <%= post.author.username %>
-      <%= post.postable.content %>
-      <%= "posted " + time_ago_in_words(post.created_at) + " ago" %>
-    </div>
-  <% end %>
-</div>
-<% ============================== commented out ================================
-=end %>

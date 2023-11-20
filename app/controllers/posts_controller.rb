@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
-    @posts = Post.all
+    @posts = Post.order(created_at: :desc)
     @post = Post.new(postable_type: 'TextContent') # postable_type is required
     @post.build_postable
   end

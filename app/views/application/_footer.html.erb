@@ -1,11 +1,1 @@
 _footer
-#posts=<%= Post.count %>
-#TextContent=<%= Post.where(postable_type: 'TextContent').count %>
-#PhotoContent=<%= Post.where(postable_type: 'PhotoContent').count %>
-<% if flash.empty? %>
-  <div>No flash messages.</div>
-<% else %>
-  <% flash.each do |type, msg| %>
-    <div><%= msg %></div>
-  <% end %>
-<% end %>

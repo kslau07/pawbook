@@ -9,7 +9,7 @@
     sans-serif;
   /* background-color: SeaShell; */
   /* background-color: GhostWhite; */
-  background-color: Snow;
+  background-color: LightGray;
   margin: 0;
   height: 100%;
 }
@@ -37,8 +37,4 @@ a {
 ul {
   list-style-position: inside;
   list-style-type: disc;
-}
-
-.grid > * {
-  outline: 3px dashed orangered; /* delete me */
 }

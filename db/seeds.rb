@@ -39,7 +39,7 @@ def random_time(type)
   end
 end
 
-10.times do |_n|
+4.times do |_n|
   random_past = random_time('past')
   random_user = User.find(rand(1..User.count))
   postable_types = [TextContent, PhotoContent]
