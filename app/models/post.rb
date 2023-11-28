@@ -24,4 +24,10 @@ class Post < ApplicationRecord
   has_many :reactions, as: :reactionable, dependent: :destroy
   delegated_type :postable, types: %w[PhotoContent TextContent]
   accepts_nested_attributes_for :postable
+
+  def self.postable_new
+    postable_new = Post.new(postable_type: 'TextContent')
+    postable_new.build_postable
+    postable_new
+  end
 end
