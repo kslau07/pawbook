@@ -19,12 +19,14 @@
         <div class="field w-full">
           <%= f.email_field :email, autofocus: true, autocomplete: "email",
           class: "p-3 border-2 rounded focus:outline-blue-500 placeholder-slate-500 w-full",
-          placeholder: "Email" %>
+          placeholder: "Email",
+          value: "test_user@example.com" %>
         </div>
         <div class="field w-full">
           <%= f.password_field :password, autocomplete: "current-password" ,
           class: "p-3 border-2 rounded focus:outline-blue-500 placeholder-slate-500 w-full",
-          placeholder: "Password" %>
+          placeholder: "Password",
+          value: "password123" %>
         </div>
         <% if devise_mapping.rememberable? %>
           <div class="field self-end">

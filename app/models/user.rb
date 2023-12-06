@@ -54,6 +54,10 @@ class User < ApplicationRecord
   has_one :dashboard, dependent: :destroy
   # validates :pets_name, presence: true # TODO: Suggest that user add a pet, but not required
 
+  has_one_attached :avatar do |attachable|
+    attachable.variant :thumb, resize_to_limit: [50, 50]
+  end
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email

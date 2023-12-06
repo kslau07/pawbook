@@ -4,12 +4,19 @@
 # https://www.reddit.com/r/rails/comments/143j24q/seeding_the_db_best_approach/
 
 <<-HEREDOC
-User.create!(email:'test_user@example.com', password:'password123', username: 'test_user')
+User.create!(email:'test_user1@example.com', password:'password123', username: 'test_user')
 HEREDOC
+
+1.times do |n|
+  User.create!(email: "test_user@example.com",
+               username: "test_user",
+               password: 'password123',
+               pets_name: Faker::Creature::Dog.name)
+end
 
 4.times do |n|
   User.create!(email: Faker::Internet.email,
-               username: "seeded_user#{n}",
+               username: "test_user#{n}",
                password: 'password123',
                pets_name: Faker::Creature::Dog.name)
 end
@@ -39,7 +46,7 @@ def random_time(type)
   end
 end
 
-4.times do |_n|
+2.times do |_n|
   random_past = random_time('past')
   random_user = User.find(rand(1..User.count))
   postable_types = [TextContent, PhotoContent]

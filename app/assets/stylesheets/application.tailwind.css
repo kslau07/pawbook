@@ -8,8 +8,8 @@
   font-family: "Montserrat", "Helvetica", "Arial", "Verdana", "Tahoma",
     sans-serif;
   /* background-color: SeaShell; */
-  /* background-color: GhostWhite; */
-  background-color: LightGray;
+  background-color: GhostWhite;
+  /* background-color: LightGray; */
   margin: 0;
   height: 100%;
 }
@@ -37,4 +37,11 @@ a {
 ul {
   list-style-position: inside;
   list-style-type: disc;
+}
+
+.image-upload > input {
+  display: none;
+}
+.image-upload > label {
+  cursor: pointer;
 }

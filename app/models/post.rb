@@ -25,6 +25,10 @@ class Post < ApplicationRecord
   delegated_type :postable, types: %w[PhotoContent TextContent]
   accepts_nested_attributes_for :postable
 
+  # FIX:
+  has_many_attached :images
+  # has_one_attached :image
+
   def self.postable_new
     postable_new = Post.new(postable_type: 'TextContent')
     postable_new.build_postable

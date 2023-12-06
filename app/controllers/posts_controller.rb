@@ -52,7 +52,8 @@ class PostsController < ApplicationController
     # Nested attrs for 'delegated_type'
     # SOURCE: https://github.com/rails/rails/pull/41717
     params.require(:post)
-          .permit(:postable_type, postable_attributes: %i[content])
+          # FIX:
+          .permit(:postable_type, postable_attributes: %i[content], images: [])
           .merge(author: current_user)
   end
 end

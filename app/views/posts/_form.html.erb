@@ -1,16 +1,28 @@
 <%= form_with model: post, class: "" do |f| %>
   <%= f.hidden_field :postable_type, value: 'TextContent' %>
   <%= f.fields_for :postable do |sub_form| %>
-    <%= sub_form.text_area :content, placeholder: 'What\'s on your mind?',
-      class: "block h-24 rounded focus:outline-slate-500 resize-none placeholder-slate-500 focus:outline-zinc-200 w-full" %>
+    <%= sub_form.text_area :content, placeholder: 'What\'s on your mind?', autofocus: true,
+      class: "block h-16 rounded focus:outline-none resize-none placeholder-slate-500 w-full" %>
   <% end %>
   <hr class="self-center m-2 bg-slate-300 h-px border-0 w-full">
-  <div class="grid grid-cols-3">
-    <div>item1</div>
-    <div>item2</div>
+  <div class="grid grid-cols-[1fr_auto_auto]">
+    <!div class="grid grid-cols-[1fr_1fr_1fr]">
+    <div>
+      <%= f.label :pictures, "Upload photos" %>
+      <%= f.file_field :pictures, multiple: true %>
+    </div>
+    <div>(*_*)</div>
     <%= f.submit "Post", 
-    class: "bg-blue-500 hover:bg-blue-600 text-white text-lg tracking-wide py-2 px-4 rounded cursor-pointer" %>
+    class: "bg-blue-500 hover:bg-blue-600 text-white text-lg tracking-wide py-2 px-8 rounded cursor-pointer" %>
   </div>
 <% end %>
-<%# TODO: Make Post btn smaller%>
-<%# TODO: Remove resize bit in textarea %>
+<%
+=begin ========================== commented out ================================ %>
+<div class="image-upload">
+  <label for="file-input">
+    <span class="">picker</span>
+  </label>
+  <input type="file" id="file-input" multiple="multiple">
+</div>
+<% ============================== commented out ================================
+=end %>
