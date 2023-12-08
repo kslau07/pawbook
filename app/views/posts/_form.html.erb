@@ -2,27 +2,32 @@
   <%= f.hidden_field :postable_type, value: 'TextContent' %>
   <%= f.fields_for :postable do |sub_form| %>
     <%= sub_form.text_area :content, placeholder: 'What\'s on your mind?', autofocus: true,
+      id: "foo",
       class: "block h-16 rounded focus:outline-none resize-none placeholder-slate-500 w-full" %>
   <% end %>
   <hr class="self-center m-2 bg-slate-300 h-px border-0 w-full">
-  <div class="grid grid-cols-[1fr_auto_auto]">
+  <div class="grid grid-cols-[1fr_auto_auto] justify-center items-center gap-4">
     <!div class="grid grid-cols-[1fr_1fr_1fr]">
     <div>
-      <%= f.label :pictures, "Upload photos" %>
-      <%= f.file_field :pictures, multiple: true %>
+      <%= f.label :images, "Upload photos" %>
+      <%= f.file_field :images, multiple: true %>
     </div>
-    <div>(*_*)</div>
+
+    <div data-controller="toggle" class="relative">
+      <div src data-action="click->toggle#toggle" class="text-3xl cursor-pointer">
+        🐱
+      </div>
+      <div data-toggle-target="content" class="absolute hidden right-0">
+        <emoji-picker></emoji-picker>
+      </div>
+      <%# HACK: Can we extract this to a stimulus controller %>
+      <script>
+        document.querySelector('emoji-picker')
+          .addEventListener('emoji-click', event => document.getElementById("foo").value += event.detail.emoji.unicode);
+      </script>
+    </div>
+
     <%= f.submit "Post", 
     class: "bg-blue-500 hover:bg-blue-600 text-white text-lg tracking-wide py-2 px-8 rounded cursor-pointer" %>
   </div>
 <% end %>
-<%
-=begin ========================== commented out ================================ %>
-<div class="image-upload">
-  <label for="file-input">
-    <span class="">picker</span>
-  </label>
-  <input type="file" id="file-input" multiple="multiple">
-</div>
-<% ============================== commented out ================================
-=end %>

@@ -45,3 +45,8 @@ ul {
 .image-upload > label {
   cursor: pointer;
 }
+
+img {
+  border: 0px !important;
+  outline: 0 !important;
+}
