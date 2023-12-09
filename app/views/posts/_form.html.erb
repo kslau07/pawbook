@@ -7,15 +7,13 @@
   <% end %>
   <hr class="self-center m-2 bg-slate-300 h-px border-0 w-full">
   <div class="grid grid-cols-[1fr_auto_auto] justify-center items-center gap-4">
-    <!div class="grid grid-cols-[1fr_1fr_1fr]">
     <div>
       <%= f.label :images, "Upload photos" %>
       <%= f.file_field :images, multiple: true %>
     </div>
-
     <div data-controller="toggle" class="relative">
       <div src data-action="click->toggle#toggle" class="text-3xl cursor-pointer">
-        🐱
+        🐶
       </div>
       <div data-toggle-target="content" class="absolute hidden right-0">
         <emoji-picker></emoji-picker>
@@ -26,7 +24,6 @@
           .addEventListener('emoji-click', event => document.getElementById("foo").value += event.detail.emoji.unicode);
       </script>
     </div>
-
     <%= f.submit "Post", 
     class: "bg-blue-500 hover:bg-blue-600 text-white text-lg tracking-wide py-2 px-8 rounded cursor-pointer" %>
   </div>

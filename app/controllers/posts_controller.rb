@@ -24,7 +24,8 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post_reset_form = Post.postable_new
+    set_postable_type(@post)
+    @post_reset_form = Post.postable_new # for turbo_stream
 
     if @post.save
       respond_to do |format|
@@ -34,12 +35,6 @@ class PostsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-    # if @post.save
-    #   flash[:notice] = t 'notices.success', model: 'Post'
-    #   redirect_to root_path
-    # else
-    #   render :new, status: :unprocessable_entity
-    # end
   end
 
   def update; end
@@ -48,11 +43,23 @@ class PostsController < ApplicationController
 
   private
 
+  # HACK: Project specs asked for polymorphic associations with Post
+  #       This feels like a shoehorn though
+  def set_postable_type(post)
+    if post.images.attached? && post.postable.content.empty?
+      post.postable_type = PhotoContent
+      post.postable.content = 'PhotoContent'
+    elsif post.postable.content && !post.images.attached?
+      post.postable_type = TextContent
+    elsif post.postable.content && post.images.attached?
+      post.postable_type = MixedContent
+    end
+  end
+
   def post_params
     # Nested attrs for 'delegated_type'
     # SOURCE: https://github.com/rails/rails/pull/41717
     params.require(:post)
-          # FIX:
           .permit(:postable_type, postable_attributes: %i[content], images: [])
           .merge(author: current_user)
   end

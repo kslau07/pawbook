@@ -3,10 +3,6 @@
 # creating a rake task
 # https://www.reddit.com/r/rails/comments/143j24q/seeding_the_db_best_approach/
 
-<<-HEREDOC
-User.create!(email:'test_user1@example.com', password:'password123', username: 'test_user')
-HEREDOC
-
 1.times do |n|
   User.create!(email: "test_user@example.com",
                username: "test_user",
@@ -27,7 +23,8 @@ FriendRequest.create!(sender: User.find(1),
                       confirmed: true)
 # u1 requests u3
 FriendRequest.create!(sender: User.find(1),
-                      recipient: User.find(3))
+                      recipient: User.find(3),
+                      confirmed: false)
 
 # u4 requests u1 (confirmed)
 FriendRequest.create!(sender: User.find(4),
@@ -35,7 +32,8 @@ FriendRequest.create!(sender: User.find(4),
                       confirmed: true)
 # u5 requests u1
 FriendRequest.create!(sender: User.find(4),
-                      recipient: User.find(1))
+                      recipient: User.find(1),
+                      confirmed: false)
 
 def random_time(type)
   if type == 'past'
