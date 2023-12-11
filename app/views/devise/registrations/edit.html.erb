@@ -1,5 +1,19 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
+<% if @user.avatar.content_type.in?(%w[image/jpeg image/png]) %>
+ <%= link_to image_tag(@user.avatar_as_thumbnail.url), @user.avatar.url if @user.avatar.attached? %> 
+<% end %>
+
+<%
+=begin %>
+<%# TODO: Delete me %>
+  <%# Guard against other ftypes %>
+  <% if pin.image.content_type.in?(%w[image/jpeg image/png]) %>
+    <%= link_to image_tag(pin.image_as_thumbnail), pin.image if pin.image.attached? %>
+  <% end %>
+<%
+=end %>
+
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -37,7 +51,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "Save Changes" %>
   </div>
 <% end %>
 

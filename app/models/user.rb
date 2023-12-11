@@ -35,6 +35,7 @@ class User < ApplicationRecord
   validates :username, presence: true, length: { minimum: 3, maximum: 30 },
                        format: { with: /\A[\w.]+\z/,
                                  message: 'can only contain letters, numbers, periods, and underscores' }
+  validate :correct_avatar_mime_type
 
   has_many :requests_sent, class_name: 'FriendRequest', foreign_key: :sender_id, dependent: :destroy
   has_many :requests_received, class_name: 'FriendRequest', foreign_key: :recipient_id, dependent: :destroy
@@ -54,8 +55,13 @@ class User < ApplicationRecord
   # has_one :dashboard, dependent: :destroy
   # validates :pets_name, presence: true # TODO: Suggest that user add a pet, but not required
 
-  has_one_attached :avatar do |attachable|
-    attachable.variant :thumb, resize_to_limit: [50, 50]
+  has_one_attached :avatar
+
+  def avatar_as_thumbnail
+    # Guard clause against other ftypes
+    return unless avatar.content_type.in?(%w[image/jpeg image/png])
+
+    avatar.variant(resize_to_limit: [75, 75]).processed
   end
 
   def self.from_omniauth(auth)
@@ -65,10 +71,12 @@ class User < ApplicationRecord
     end
   end
 
-  def avatar_as_thumbnail
-    # Guard clause against other ftypes
-    return unless avatar.content_type.in?(%w[image/jpeg image/png])
+  private
 
-    avatar.variant(resize_to_limit: [75, 75]).processed
+  def correct_avatar_mime_type
+    return unless avatar.attached? && !avatar.content_type.in?(%w[image/jpeg image/jpg image/png])
+
+    avatar.purge
+    errors.add(:avatar, 'Avatar must be an image.')
   end
 end
