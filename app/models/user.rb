@@ -51,7 +51,7 @@ class User < ApplicationRecord
   # TODO: check if dependent:destroy would orphan existing nested comments from other users
   has_many :comments, dependent: :destroy, foreign_key: 'author_id'
 
-  has_one :dashboard, dependent: :destroy
+  # has_one :dashboard, dependent: :destroy
   # validates :pets_name, presence: true # TODO: Suggest that user add a pet, but not required
 
   has_one_attached :avatar do |attachable|
@@ -63,5 +63,12 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
     end
+  end
+
+  def avatar_as_thumbnail
+    # Guard clause against other ftypes
+    return unless avatar.content_type.in?(%w[image/jpeg image/png])
+
+    avatar.variant(resize_to_limit: [75, 75]).processed
   end
 end

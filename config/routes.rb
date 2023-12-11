@@ -4,7 +4,10 @@
 Rails.application.routes.draw do
   root 'posts#index'
   resources :posts, only: %w[index new create]
-  get 'dashboard', to: 'users/dashboards#show'
+
+  devise_scope :user do
+    get 'dashboard', to: 'users/registrations#edit'
+  end
 
   devise_for :users, controllers: {
     registrations: 'users/registrations',

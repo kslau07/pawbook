@@ -8,4 +8,6 @@
 #  updated_at :datetime         not null
 #
 class MixedContent < ApplicationRecord
+  has_one :post, as: :postable, dependent: :destroy
+  validates :content, presence: true
 end

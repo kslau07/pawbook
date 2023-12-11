@@ -1,1 +1,19 @@
-/users/dashboards/show
+<h1 class="text-xl text-red-600 font-bold">Dashboard</h1>
+<% if @user.avatar.content_type.in?(%w[image/jpeg image/png]) %>
+  <%= link_to image_tag(@user.avatar_as_thumbnail), @user.avatar if @user.avatar.attached? %>
+<% end %>
+
+<%= render "devise/registrations/edit" %>
+
+<%
+=begin ========================== commented out ================================ %>
+<%= form_with model: @user, class: "" do |f| %>
+  <div>
+    <%= f.label :avatar, "Upload photos" %>
+    <%= f.file_field :avatar, multiple: true %>
+  </div>
+    <%= f.submit "Upload", 
+    class: "bg-blue-500 hover:bg-blue-600 text-white text-lg tracking-wide py-2 px-8 rounded cursor-pointer" %>
+<% end %>
+<% ============================== commented out ================================
+=end %>
