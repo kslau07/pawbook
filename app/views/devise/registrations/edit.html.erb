@@ -11,17 +11,29 @@
             <%= render "devise/shared/error_messages", resource: resource %>
           </div>
         <% end %>
-        <div class="grid outline outline-blue-300 gap-1 bg-blue-300 rounded">
+        <div class="grid outline outline-blue-300 gap-1 bg-blue-300 rounded"
+             data-controller="toggle">
           <div class="bg-blue-300 px-4 py-1 text-lg text-white">Pets' names</div>
-          <div class="bg-slate-50 p-4 font-bold">
-            <%= f.text_field :pets_name %>
+          <div class="grid grid-cols-[1fr_auto] justify-between bg-slate-50 cursor-pointer"
+                data-action="click->toggle#toggle:once" >
+            <div class="bg-slate-50 p-4 font-bold"
+                 data-toggle-target="content">
+              <div class="p-1"><%= @user.pets_name %></div>
+            </div>
+            <div class="bg-slate-50 p-4 font-bold hidden"
+                 data-toggle-target="content">
+              <%= f.text_field :pets_name, class: "bg-green-200 p-1 rounded focus:outline-green-400 w-3/4" %>
+            </div>
+            <div class="bg-slate-50 p-4 font-bold">
+              <%= image_tag "pencil-ui-circle-svgrepo-com.svg", { class: '', alt: 'A pencil icon', size: "30x30" }%>
+            </div>
           </div>
         </div>
         <div class="grid outline outline-blue-300 gap-1 bg-blue-300 rounded">
           <div class="bg-blue-300 px-4 py-1 text-lg text-white">Profile Photo</div>
           <div class="bg-slate-50 p-4 grid justify-center">
             <% if @user.avatar.attached? %>
-              <%= link_to image_tag(@user.avatar_as_thumbnail("large").url), @user.avatar.url if @user.avatar.attached? %>
+              <%= link_to image_tag(@user.avatar_as_thumbnail("large").url), @user.avatar.url %>
             <% else %>
               <div class="circle-lg text-8xl flex justify-center items-center">
                 <%= @user.username[0] %>

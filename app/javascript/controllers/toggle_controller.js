@@ -6,6 +6,9 @@ export default class extends Controller {
 
   toggle() {
     let hiddenClass = "hidden";
-    this.contentTarget.classList.toggle(hiddenClass);
+    // this.contentTarget.classList.toggle(hiddenClass);
+    this.contentTargets.forEach((element) => {
+      element.classList.toggle(hiddenClass);
+    });
   }
 }
