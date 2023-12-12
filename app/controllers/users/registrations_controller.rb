@@ -38,7 +38,30 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+  def remove_avatar
+    current_user.avatar.purge_later
+    redirect_to dashboard_path
+  end
+
   protected
+
+  # Redirect after update
+  def after_update_path_for(_resource)
+    flash[:notice] = 'Your changes were saved!'
+    dashboard_path
+  end
+
+  # Require password on update for certain params only
+  def update_resource(resource, params)
+    # Old code, works
+    # resource.update_without_password(params)
+
+    # Require current password if user is trying to change password
+    return super if params['password']&.present?
+
+    # Allows user to update registration information without password
+    resource.update_without_password(params.except('current_password'))
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
@@ -47,7 +70,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:avatar])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[avatar username pets_name])
   end
 
   # The path used after sign up.

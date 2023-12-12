@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     get 'dashboard', to: 'users/registrations#edit'
   end
 
+  devise_scope :user do
+    get 'remove_avatar', to: 'users/registrations#remove_avatar'
+  end
+
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',

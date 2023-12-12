@@ -1,6 +1,6 @@
 <% if resource.errors.any? %>
   <div id="error_explanation" data-turbo-cache="false">
-    <h2 class="text-xs pb-2">
+    <h2 class="text-sm pb-2">
       <%= I18n.t("errors.messages.not_saved",
                  count: "Some",
                  resource: resource.class.model_name.human.downcase)
@@ -8,12 +8,12 @@
     </h2>
     <ul>
       <% resource.errors.full_messages.each do |message| %>
-        <%# If eg :username has "can't be blank", then
-       do not show the other errors. Otherwise, show them.%>
+        <%# If eg :username -> "can't be blank", then
+        showing additional :username errors is redundant. %>
         <% attr = message.split[0].downcase %>
         <% attr_msgs = resource.errors[attr] %>
         <% next if attr_msgs[0] == "can't be blank" && !message.include?("can't be blank") %>
-        <li class="text-xs text-red-500"><%= message %></li>
+        <li class="text-sm text-red-500"><%= message %></li>
       <% end %>
     </ul>
   </div>

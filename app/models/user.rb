@@ -32,7 +32,8 @@ class User < ApplicationRecord
   # Require top-level domain in emails
   validates :email,
             format: { with: %r{\A[a-zA-Z0-9.!\#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+\z} }
-  validates :username, presence: true, length: { minimum: 3, maximum: 30 },
+  validates :username, uniqueness: true,
+                       presence: true, length: { minimum: 3, maximum: 30 },
                        format: { with: /\A[\w.]+\z/,
                                  message: 'can only contain letters, numbers, periods, and underscores' }
   validate :correct_avatar_mime_type
@@ -57,11 +58,14 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
-  def avatar_as_thumbnail
-    # Guard clause against other ftypes
-    return unless avatar.content_type.in?(%w[image/jpeg image/png])
+  def avatar_as_thumbnail(size)
+    return unless avatar.content_type.in?(%w[image/jpeg image/jpg image/png])
 
-    avatar.variant(resize_to_limit: [75, 75]).processed
+    if size == 'small'
+      avatar.variant(resize_to_limit: [50, nil]).processed
+    elsif size == 'large'
+      avatar.variant(resize_to_limit: [200, nil]).processed
+    end
   end
 
   def self.from_omniauth(auth)
@@ -77,6 +81,6 @@ class User < ApplicationRecord
     return unless avatar.attached? && !avatar.content_type.in?(%w[image/jpeg image/jpg image/png])
 
     avatar.purge
-    errors.add(:avatar, 'Avatar must be an image.')
+    errors.add(:avatar, 'must be an image.')
   end
 end
