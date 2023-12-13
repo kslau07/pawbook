@@ -5,7 +5,6 @@
 #  id                     :bigint           not null, primary key
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
-#  pets_name              :string
 #  provider               :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
@@ -49,12 +48,14 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy, foreign_key: 'author_id'
   has_many :reactions, dependent: :destroy
+  # TODO: Add dependent: :destroy
+  has_one :pet
+  accepts_nested_attributes_for :pet
 
   # TODO: check if dependent:destroy would orphan existing nested comments from other users
   has_many :comments, dependent: :destroy, foreign_key: 'author_id'
 
   # has_one :dashboard, dependent: :destroy
-  # validates :pets_name, presence: true # TODO: Suggest that user add a pet, but not required
 
   has_one_attached :avatar
 

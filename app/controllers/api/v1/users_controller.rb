@@ -12,7 +12,6 @@ class Api::V1::UsersController < ApplicationController
   def format_json(user)
     {
       '1': { username: user.username,
-             pets_name: user.pets_name,
              num_of_posts: user.posts.count }
     }
   end

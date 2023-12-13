@@ -5,7 +5,6 @@
 #  id                     :bigint           not null, primary key
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
-#  pets_name              :string
 #  provider               :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime

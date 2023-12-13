@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_09_063207) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_12_223022) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -76,6 +76,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_09_063207) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "pets", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "age"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_pets_on_user_id"
+  end
+
   create_table "photo_contents", force: :cascade do |t|
     t.string "content", null: false
     t.datetime "created_at", null: false
@@ -116,7 +125,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_09_063207) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "pets_name"
     t.string "provider"
     t.string "uid"
     t.string "username"
@@ -131,6 +139,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_09_063207) do
   add_foreign_key "dashboards", "users"
   add_foreign_key "friend_requests", "users", column: "recipient_id"
   add_foreign_key "friend_requests", "users", column: "sender_id"
+  add_foreign_key "pets", "users"
   add_foreign_key "posts", "users", column: "author_id"
   add_foreign_key "reactions", "users"
 end

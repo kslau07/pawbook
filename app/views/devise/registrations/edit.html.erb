@@ -13,16 +13,45 @@
         <% end %>
         <div class="grid outline outline-blue-300 gap-1 bg-blue-300 rounded"
              data-controller="toggle">
-          <div class="bg-blue-300 px-4 py-1 text-lg text-white">Pets' names</div>
+          <div class="bg-blue-300 px-4 py-1 text-lg text-white">My Pets</div>
           <div class="grid grid-cols-[1fr_auto] justify-between bg-slate-50 cursor-pointer"
-                data-action="click->toggle#toggle:once" >
+                data-action="click->toggle#toggle_pets_name:once" >
             <div class="bg-slate-50 p-4 font-bold"
-                 data-toggle-target="content">
-              <div class="p-1"><%= @user.pets_name %></div>
+                 data-toggle-target="pets_name">
+              <div class="p-1 grid justify-between grid-cols-[1fr_1fr]">
+                <% if current_user.pet %>
+                  <div>
+                    <%= current_user.pet.name %>
+                  </div>
+                  <div>
+                    <%= current_user.pet.age %>
+                    <%= current_user.pet.age == 1 ? "year" : "years" %>
+                    old
+                  </div>
+                <% else %>
+                  Add a pet
+                <% end %>
+              </div>
             </div>
             <div class="bg-slate-50 p-4 font-bold hidden"
-                 data-toggle-target="content">
-              <%= f.text_field :pets_name, class: "bg-green-200 p-1 rounded focus:outline-green-400 w-3/4" %>
+                 data-toggle-target="pets_name">
+              <!-- HACK: Come back later and fix this. Allow adding additional pets.
+                            Get rid of if-statement and one of the forms -->
+              <% if current_user.pet %>
+                <%= f.fields_for :pet do |builder| %>
+                  <%= builder.label :name, "Name: " %>
+                  <%= builder.text_field :name, class: "bg-green-100 outline outline-green-300 rounded p-1" %>
+                  <%= builder.label :age, "Age: " %>
+                  <%= builder.text_field :age, class: "bg-green-100 outline outline-green-300 rounded p-1" %>
+                <% end %>
+              <% else %>
+                <%= f.fields_for :pet, Pet.new do |builder| %>
+                  <%= builder.label :name, "Name: " %>
+                  <%= builder.text_field :name, class: "bg-green-100 outline outline-green-300 rounded p-1" %>
+                  <%= builder.label :age, "Age: " %>
+                  <%= builder.text_field :age, class: "bg-green-100 outline outline-green-300 rounded p-1" %>
+                <% end %>
+              <% end %>
             </div>
             <div class="bg-slate-50 p-4 font-bold">
               <%= image_tag "pencil-ui-circle-svgrepo-com.svg", { class: '', alt: 'A pencil icon', size: "30x30" }%>
@@ -32,11 +61,11 @@
         <div class="grid outline outline-blue-300 gap-1 bg-blue-300 rounded">
           <div class="bg-blue-300 px-4 py-1 text-lg text-white">Profile Photo</div>
           <div class="bg-slate-50 p-4 grid justify-center">
-            <% if @user.avatar.attached? %>
-              <%= link_to image_tag(@user.avatar_as_thumbnail("large").url), @user.avatar.url %>
+            <% if current_user.avatar.attached? %>
+              <%= link_to image_tag(current_user.avatar_as_thumbnail("large").url), current_user.avatar.url %>
             <% else %>
               <div class="circle-lg text-8xl flex justify-center items-center">
-                <%= @user.username[0] %>
+                <%= current_user.username[0] %>
               </div>
             <% end %>
           </div>
@@ -44,7 +73,7 @@
             <%= f.label :avatar, "Upload: " %>
             <%= f.file_field :avatar %>
           </div>
-          <% if @user.avatar.attached? %>
+          <% if current_user.avatar.attached? %>
             <div class="bg-slate-50 p-4 text-center">
               <%# HACK: We should use POST here %>
               <%= link_to "Remove photo", { action: :remove_avatar },
@@ -52,14 +81,41 @@
             </div>
           <% end %>
         </div>
-        <div class="grid outline outline-blue-300 gap-1 bg-blue-300 rounded">
+
+        <div class="grid outline outline-blue-300 gap-1 bg-blue-300 rounded"
+             data-controller="toggle">
           <div class="bg-blue-300 px-4 py-1 text-lg text-white">Account Details</div>
-          <div class="bg-slate-50 p-4 font-bold">
-            <%= @user.email %>
+
+          <div class="grid grid-cols-[1fr_auto] justify-between bg-slate-50 cursor-pointer"
+               data-action="click->toggle#toggle_email:once">
+            <div class="bg-slate-50 p-4 font-bold"
+                  data-toggle-target="email">
+              <%= current_user.email %>
+            </div>
+            <div class="bg-slate-50 p-4 font-bold hidden"
+                  data-toggle-target="email">
+              <%= f.text_field :email %>
+            </div>
+            <div class="bg-slate-50 p-4 font-bold">
+              <%= image_tag "pencil-ui-circle-svgrepo-com.svg", { class: '', alt: 'A pencil icon', size: "30x30" }%>
+            </div>
           </div>
-          <div class="bg-slate-50 p-4 font-bold">
-            <%= f.text_field :username %>
+
+          <div class="grid grid-cols-[1fr_auto] justify-between bg-slate-50 cursor-pointer"
+               data-action="click->toggle#toggle_username:once">
+            <div class="bg-slate-50 p-4 font-bold"
+                  data-toggle-target="username">
+              <%= current_user.username %>
+            </div>
+            <div class="bg-slate-50 p-4 font-bold hidden"
+                  data-toggle-target="username">
+              <%= f.text_field :username %>
+            </div>
+            <div class="bg-slate-50 p-4 font-bold">
+              <%= image_tag "pencil-ui-circle-svgrepo-com.svg", { class: '', alt: 'A pencil icon', size: "30x30" }%>
+            </div>
           </div>
+
           <div class="field">
             <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
             <%= f.password_field :password, autocomplete: "new-password" %>
@@ -121,5 +177,28 @@ Allow deleting account
 <h3>Cancel my account</h3>
 <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
 <%= link_to "Back", :back %>
+
+
+
+
+<!-- Code for 1 togglable attribute -->
+<div class="grid grid-cols-[1fr_auto] justify-between bg-slate-50 cursor-pointer"
+      data-action="click->toggle#toggle:once" >
+  <div class="bg-slate-50 p-4 font-bold"
+        data-toggle-target="content">
+    <div>
+      foo
+    </div>
+  </div>
+  <div class="bg-slate-50 p-4 font-bold hidden"
+        data-toggle-target="content">
+    foo
+  </div>
+  <div class="bg-slate-50 p-4 font-bold">
+    <%= image_tag "pencil-ui-circle-svgrepo-com.svg", { class: '', alt: 'A pencil icon', size: "30x30" }%>
+  </div>
+</div>
+
+
 <% ============================== commented out ================================
 =end %>

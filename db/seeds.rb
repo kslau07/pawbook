@@ -6,15 +6,13 @@
 1.times do |n|
   User.create!(email: "test_user@example.com",
                username: "test_user",
-               password: 'password123',
-               pets_name: Faker::Creature::Dog.name)
+               password: 'password123')
 end
 
 4.times do |n|
   User.create!(email: Faker::Internet.email,
                username: "test_user#{n}",
-               password: 'password123',
-               pets_name: Faker::Creature::Dog.name)
+               password: 'password123')
 end
 
 # u1 requests u2 (confirmed)
