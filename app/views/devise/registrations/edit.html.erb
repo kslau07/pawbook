@@ -40,16 +40,16 @@
               <% if current_user.pet %>
                 <%= f.fields_for :pet do |builder| %>
                   <%= builder.label :name, "Name: " %>
-                  <%= builder.text_field :name, class: "bg-green-100 outline outline-green-300 rounded p-1" %>
+                  <%= builder.text_field :name, class: "bg-orange-100 border-2 rounded focus:outline-orange-300 p-1" %>
                   <%= builder.label :age, "Age: " %>
-                  <%= builder.text_field :age, class: "bg-green-100 outline outline-green-300 rounded p-1" %>
+                  <%= builder.text_field :age, class: "w-1/4 bg-orange-100 border-2 rounded focus:outline-orange-300 p-1" %>
                 <% end %>
               <% else %>
                 <%= f.fields_for :pet, Pet.new do |builder| %>
                   <%= builder.label :name, "Name: " %>
-                  <%= builder.text_field :name, class: "bg-green-100 outline outline-green-300 rounded p-1" %>
+                  <%= builder.text_field :name, class: "bg-orange-100 border-2 rounded focus:outline-orange-300 p-1" %>
                   <%= builder.label :age, "Age: " %>
-                  <%= builder.text_field :age, class: "bg-green-100 outline outline-green-300 rounded p-1" %>
+                  <%= builder.text_field :age, class: "w-1/4 bg-orange-100 border-2 rounded focus:outline-orange-300 p-1" %>
                 <% end %>
               <% end %>
             </div>
@@ -94,7 +94,8 @@
             </div>
             <div class="bg-slate-50 p-4 font-bold hidden"
                   data-toggle-target="email">
-              <%= f.text_field :email %>
+              Change email:  
+              <%= f.email_field :email, class: "bg-orange-100 border-2 rounded focus:outline-orange-300 p-1" %>
             </div>
             <div class="bg-slate-50 p-4 font-bold">
               <%= image_tag "pencil-ui-circle-svgrepo-com.svg", { class: '', alt: 'A pencil icon', size: "30x30" }%>
@@ -109,30 +110,26 @@
             </div>
             <div class="bg-slate-50 p-4 font-bold hidden"
                   data-toggle-target="username">
-              <%= f.text_field :username %>
+              Change username: 
+              <%= f.text_field :username, class: "bg-orange-100 border-2 rounded focus:outline-orange-300 p-1" %>
             </div>
             <div class="bg-slate-50 p-4 font-bold">
               <%= image_tag "pencil-ui-circle-svgrepo-com.svg", { class: '', alt: 'A pencil icon', size: "30x30" }%>
             </div>
           </div>
 
-          <div class="field">
-            <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-            <%= f.password_field :password, autocomplete: "new-password" %>
-            <% if @minimum_password_length %>
-              <br />
-              <em><%= @minimum_password_length %> characters minimum</em>
-            <% end %>
-          </div>
-          <div class="field">
-            <%= f.label :password_confirmation %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-          </div>
-          <div class="field">
-            <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-            <%= f.password_field :current_password, autocomplete: "current-password" %>
-          </div>
+          <div class="bg-slate-50 p-4 font-bold hidden"
+               data-toggle-target="currentPassword">
+            <div class="text-red-400">
+              *Enter current password: 
+              <%= f.password_field :current_password, autocomplete: "current-password",
+                                    class: "bg-purple-100 outline outline-orange-300 rounded p-1"%><br />
+                                  <div class="mt-4 text-slate-800">* required for updating email or username</div>
+            </div>
+          </div> 
+
         </div>
+
         <div class="actions grid grid-cols-1 gap-4 text-center">
           <%= f.submit "Save Changes", 
               class: "bg-lime-500 hover:bg-lime-600 text-white text-lg font-bold tracking-wide py-3 px-4 rounded-lg cursor-pointer w-full" %>

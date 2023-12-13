@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="toggle"
 export default class extends Controller {
-  static targets = ["content", "pets_name", "email", "username"];
+  static targets = ["content", "pets_name", "email", "username", "currentPassword"];
 
   toggle() {
     let hiddenClass = "hidden";
@@ -23,6 +23,8 @@ export default class extends Controller {
     this.emailTargets.forEach((element) => {
       element.classList.toggle(hiddenClass);
     });
+
+    this.currentPasswordTarget.classList.remove(hiddenClass);
   }
 
   toggle_username() {
@@ -30,5 +32,6 @@ export default class extends Controller {
     this.usernameTargets.forEach((element) => {
       element.classList.toggle(hiddenClass);
     });
+    this.currentPasswordTarget.classList.remove(hiddenClass);
   }
 }
