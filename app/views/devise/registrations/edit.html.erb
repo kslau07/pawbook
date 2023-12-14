@@ -81,11 +81,9 @@
             </div>
           <% end %>
         </div>
-
         <div class="grid outline outline-blue-300 gap-1 bg-blue-300 rounded"
              data-controller="toggle">
           <div class="bg-blue-300 px-4 py-1 text-lg text-white">Account Details</div>
-
           <div class="grid grid-cols-[1fr_auto] justify-between bg-slate-50 cursor-pointer"
                data-action="click->toggle#toggle_email:once">
             <div class="bg-slate-50 p-4 font-bold"
@@ -94,14 +92,13 @@
             </div>
             <div class="bg-slate-50 p-4 font-bold hidden"
                   data-toggle-target="email">
-              Change email:  
+              Update email:  
               <%= f.email_field :email, class: "bg-orange-100 border-2 rounded focus:outline-orange-300 p-1" %>
             </div>
             <div class="bg-slate-50 p-4 font-bold">
               <%= image_tag "pencil-ui-circle-svgrepo-com.svg", { class: '', alt: 'A pencil icon', size: "30x30" }%>
             </div>
           </div>
-
           <div class="grid grid-cols-[1fr_auto] justify-between bg-slate-50 cursor-pointer"
                data-action="click->toggle#toggle_username:once">
             <div class="bg-slate-50 p-4 font-bold"
@@ -110,26 +107,23 @@
             </div>
             <div class="bg-slate-50 p-4 font-bold hidden"
                   data-toggle-target="username">
-              Change username: 
+              Update username: 
               <%= f.text_field :username, class: "bg-orange-100 border-2 rounded focus:outline-orange-300 p-1" %>
             </div>
             <div class="bg-slate-50 p-4 font-bold">
               <%= image_tag "pencil-ui-circle-svgrepo-com.svg", { class: '', alt: 'A pencil icon', size: "30x30" }%>
             </div>
           </div>
-
           <div class="bg-slate-50 p-4 font-bold hidden"
                data-toggle-target="currentPassword">
             <div class="text-red-400">
               *Enter current password: 
               <%= f.password_field :current_password, autocomplete: "current-password",
                                     class: "bg-purple-100 outline outline-orange-300 rounded p-1"%><br />
-                                  <div class="mt-4 text-slate-800">* required for updating email or username</div>
+              <div class="mt-4 text-slate-800">* required for updating email or username</div>
             </div>
-          </div> 
-
+          </div>
         </div>
-
         <div class="actions grid grid-cols-1 gap-4 text-center">
           <%= f.submit "Save Changes", 
               class: "bg-lime-500 hover:bg-lime-600 text-white text-lg font-bold tracking-wide py-3 px-4 rounded-lg cursor-pointer w-full" %>
@@ -174,10 +168,6 @@ Allow deleting account
 <h3>Cancel my account</h3>
 <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
 <%= link_to "Back", :back %>
-
-
-
-
 <!-- Code for 1 togglable attribute -->
 <div class="grid grid-cols-[1fr_auto] justify-between bg-slate-50 cursor-pointer"
       data-action="click->toggle#toggle:once" >
@@ -195,7 +185,5 @@ Allow deleting account
     <%= image_tag "pencil-ui-circle-svgrepo-com.svg", { class: '', alt: 'A pencil icon', size: "30x30" }%>
   </div>
 </div>
-
-
 <% ============================== commented out ================================
 =end %>

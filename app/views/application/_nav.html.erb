@@ -1,23 +1,31 @@
-<div>
-  <%= link_to "username", ""  %>
-</div>
-<div>
-  <%= link_to "dashboard", dashboard_path  %>
-</div>
-<div>
-  <%= link_to "friends", ""  %>
-</div>
-<div>
-  <%= link_to "liked posts", ""  %>
-</div>
-<div>
-  <%= link_to "events", ""  %>
-</div>
-<div>
+<div class="p-6 grid grid-cols-[auto_auto] items-center gap-x-4 gap-y-4 ">
+  <div class="circle-sm text-lg flex justify-center items-center">
+    <% if current_user.avatar.attached? %>
+      <%= image_tag(current_user.avatar_as_thumbnail("small").url) %>
+    <% else %>
+      <%= current_user.username[0] %>
+    <% end %>
+  </div>
+  <%= current_user.username %>
+  <%= link_to image_tag("dashboard-svgrepo-com.svg", :alt => "A dashboard icon", :class => "", size: "30x30"), "#" %>
+  <%= link_to "Dashboard", dashboard_path  %>
+  <%= link_to image_tag("chat-chat-svgrepo-com.svg", :alt => "A chat icon", :class => "", size: "30x30"), "#" %>
+  <%= link_to "Chat", "#"  %>
+  <%= link_to image_tag("dogs.png", :alt => "Icon with 2 dogs", :class => "", size: "30x30"), "#" %>
+  <%= link_to "Friends", ""  %>
+  <%= link_to image_tag("logout-svgrepo-com.svg", :alt => "A logout icon", :class => "", size: "30x30"), "#" %>
   <%= link_to "Log out", destroy_user_session_path, class: "link", method: :delete, data: { turbo_method: :delete } %>
+  <%= link_to image_tag("support-svgrepo-com.svg", :alt => "An icon representing support", :class => "", size: "30x30"), "#" %>
+  <%= link_to "Support", ""  %>
+  <%= link_to image_tag("privacy-tips-svgrepo-com.svg", :alt => "A shield representing privacy", :class => "", size: "30x30"), "#" %>
+  <%= link_to "Privacy", ""  %>
+  <%= link_to image_tag("about-filled-svgrepo-com.svg", :alt => "An icon representing about us", :class => "", size: "30x30"), "#" %>
+  <%= link_to "About Pawbook", ""  %>
 </div>
+<%
+=begin %>
+TODO: Delete me
 <div>
-  <!-- TODO: delete me -->
   #posts=<%= Post.count %><br>
   #TextContent=<%= Post.where(postable_type: 'TextContent').count %><br>
   #PhotoContent=<%= Post.where(postable_type: 'PhotoContent').count %><br>
@@ -29,3 +37,5 @@
     <% end %>
   <% end %>
 </div>
+<%
+=end %>
