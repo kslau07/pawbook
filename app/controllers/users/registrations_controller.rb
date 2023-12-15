@@ -53,13 +53,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # Require password on update for certain params only
   def update_resource(resource, params)
-    # Require current password if user is trying to change password, username, or email
-    super if params['password'].present? ||
-             params['username'] != current_user.username ||
-             params['email'] != current_user.email ||
+    params.delete :pet_attributes if params['pet_attributes']['name'].empty?
 
-             # Allows user to update registration information without password
-             resource.update_without_password(params.except('current_password'))
+    # Require current password if user is trying to change password, username, or email
+    if params['password'].present? || params['username'] != current_user.username || params['email'] != current_user.email
+      return super
+    end
+
+    # Allows user to update registration information without password
+    resource.update_without_password(params.except('current_password'))
   end
 
   # If you have extra params to permit, append them to the sanitizer.

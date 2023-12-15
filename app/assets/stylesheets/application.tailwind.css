@@ -49,27 +49,27 @@ ul {
   cursor: pointer;
 }
 
-img {
-  border: 0px !important;
-  outline: 0 !important;
-}
-
-.circle-sm {
+.avatar-circle {
   border-radius: 50%;
-  width: 2rem;
-  height: 2rem;
-  /* padding: 10px; */
   background: LightBlue;
   color: white;
-  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.circle-lg {
-  border-radius: 50%;
+.avatar-circle-sm {
+  height: 2rem;
+  width: 2rem;
+}
+
+.avatar-circle-md {
+  height: 4rem;
+  width: 4rem;
+  font-size: 2rem;
+}
+
+.avatar-circle-lg {
   width: 12rem;
   height: 12rem;
-  padding: 10px;
-  background: LightBlue;
-  color: white;
-  text-align: center;
 }

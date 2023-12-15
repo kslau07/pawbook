@@ -1,8 +1,19 @@
 <%= turbo_frame_tag post do %>
-  <div class="bg-white mt-6 p-4 rounded-lg w-full shadow">
-    <!-- avatar - username -->
+  <div class="p-4 mt-6 w-full bg-white rounded-lg shadow">
+    <div id="post-author-info" class="grid gap-4 justify-start grid-cols-[auto_auto]">
+      <div class="avatar-circle avatar-circle-md">
+        <% if post.author.avatar.attached? %>
+          <%= image_tag(post.author.avatar_as_thumbnail("small").url) %>
+        <% else %>
+          <%= post.author.username[0] %>
+        <% end %>
+      </div>
+      <div id="author-time" class="grid gap-1">
+        <%= link_to post.author.username, root_path, class: "self-end font-bold" %>
+        <%= "#{time_ago_in_words(post.created_at)} ago" %>
+      </div>
+    </div>
     <!-- ---------time ago -->
-    
     <% if post.postable_type == 'TextContent' %>
     <% elsif post.postable_type == 'PhotoContent' %>
       <% if post.images.attached?  %>

@@ -1,10 +1,6 @@
-<div><%= render 'main' %></div>
-
-<%
-=begin %>
-<div class="grid grid-cols-[1fr_1fr_1fr] gap-8">
-  <div class="justify-self-end"><%= render 'nav' %></div>
-  <div><%= render 'contacts' %></div>
-</div>
-<%
-=end %>
+<%= render template: 'posts/new' %>
+<%= turbo_frame_tag "posts" do %>
+  <div class="grid">
+    <%= render @posts %>
+  </div>
+<% end %>
