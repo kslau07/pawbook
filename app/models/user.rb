@@ -63,7 +63,7 @@ class User < ApplicationRecord
     return unless avatar.content_type.in?(%w[image/jpeg image/jpg image/png])
 
     if size == 'small'
-      avatar.variant(resize_to_limit: [50, nil]).processed
+      avatar.variant(resize_to_limit: [75, nil]).processed
     elsif size == 'large'
       avatar.variant(resize_to_limit: [200, nil]).processed
     end

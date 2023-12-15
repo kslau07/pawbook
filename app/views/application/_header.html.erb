@@ -1,14 +1,19 @@
-<div class="grid gap-4 items-center px-6 h-12 bg-blue-500 grid-cols-[auto_1fr_auto_auto]">
-  <div class="flex gap-2 justify-center items-center mr-4">
-    <%= link_to root_path, { class: " text-3xl font-bold logo-font text-white" } do %>
-      pawbook
-      <%= image_tag "paw-3-svgrepo-com-white.svg", { class: 'logo-image', alt: 'A pawprint', size: "25x25" }%>
-    <% end %>
-  </div>
-  <div>
-    <div class="w-72 h-6 bg-white rounded-lg">search</div>
-  </div>
-  <div>notif.</div>
+<div id="gutter-left" class="bg-blue-500"></div>
+<div id="header-left" class="flex gap-2 items-center bg-blue-500">
+  <%= link_to root_path, { class: "text-3xl font-bold logo-font text-white" } do %>
+    pawbook
+    <%= image_tag "paw-3-svgrepo-com-white.svg", { class: 'logo-image pb-1', alt: 'A pawprint', size: "25x25" }%>
+  <% end %>
+</div>
+<div id="header-center" class="grid items-center bg-blue-500">
+  <input id="search-bar" type="text" placeholder="search" class="grid p-4 w-3/4 h-7 bg-white rounded-lg focus:outline-blue-500">
+</div>
+<div id="header-right" class="flex justify-end items-center gap-8 bg-blue-500">
+  <% if true %>
+    <%= link_to image_tag("bell-svgrepo-com.svg", :alt => "A bell icon", :class => "", size: "30x30"), root_path %>
+  <% else %>
+    <%= link_to image_tag("gray-bell-svgrepo-com.svg", :alt => "A grayed out bell icon", :class => "", size: "30x30"), root_path %>
+  <% end %>
   <%= link_to root_path do %>
     <div class="avatar-circle avatar-circle-sm">
       <% if current_user.avatar.attached? %>
@@ -19,3 +24,4 @@
     </div>
   <% end %>
 </div>
+<div id="gutter-right" class="bg-blue-500"></div>

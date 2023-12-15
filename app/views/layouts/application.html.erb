@@ -1,12 +1,8 @@
-<%= render 'header' %>
-<div class="grid grid-cols-[1fr_1fr_1fr] gap-8">
-  <div class="justify-self-end">
-    <%= render 'nav' %>
-  </div>
-  <div><%= yield %></div>
-  <div>
-    <%= render 'contacts' %>
-  </div>
+<div id="normal-layout">
+  <%= render 'header' %>
+  <%= render 'nav' %>
+  <%= yield %>
+  <%#= render 'contacts' %>
+  <%# render 'footer' %>
 </div>
-<% render 'footer' %>
 <% parent_layout "base" %>

@@ -18,6 +18,47 @@ body {
   height: 100%;
 }
 
+
+/* Grid areas for normal layout */
+ #normal-layout {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-areas:
+    "gutter-left    header-left   header-center     header-right  gutter-right"
+    "gutter-left    nav           main              contacts      gutter-right"
+    "gutter-left    footer-left   footer-center     footer-right  gutter-right";
+  grid-template-rows: 3.5rem 1fr 3.5rem;
+  grid-template-columns: 1fr 17rem 40rem 17rem 1fr;
+}
+#header-left {
+  grid-area: header-left;
+}
+#header-center {
+  grid-area: header-center;
+}
+#header-right {
+  grid-area: header-right;
+}
+#nav {
+  grid-area: nav;
+}
+#main {
+  grid-area: main;
+}
+#contacts {
+  grid-area: contacts;
+}
+#footer-left {
+  grid-area: footer-left;
+}
+#footer-center {
+  grid-area: footer-center;
+}
+#footer-right {
+  grid-area: footer-right;
+}
+
 .logo-font {
   font-family: "Comfortaa";
 }
@@ -59,8 +100,8 @@ ul {
 }
 
 .avatar-circle-sm {
-  height: 2rem;
-  width: 2rem;
+  height: 2.5rem;
+  width: 2.5rem;
 }
 
 .avatar-circle-md {
