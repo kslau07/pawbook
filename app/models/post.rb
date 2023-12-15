@@ -29,9 +29,30 @@ class Post < ApplicationRecord
   has_many_attached :images
   # has_one_attached :image
 
+  validate :correct_image_mime_type
+
+  def image_width300(img)
+    img.variant(resize_to_limit: [600, nil]).processed
+  end
+
   def self.postable_new
     postable_new = Post.new(postable_type: 'TextContent')
     postable_new.build_postable
     postable_new
+  end
+
+  private
+
+  def correct_image_mime_type
+    return unless images.attached?
+
+    images.each do |image|
+      next if image.content_type.in?(%w[image/jpeg image/jpg image/png])
+
+      images.purge
+      errors.add(:images, 'must be .jpg, .jpeg, or .png')
+
+      # return unless image.content_type.in?(%w[image/jpeg image/jpg image/png])
+    end
   end
 end

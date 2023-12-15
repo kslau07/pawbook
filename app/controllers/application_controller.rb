@@ -17,4 +17,19 @@ class ApplicationController < ActionController::Base
       # render json: { errors: e.message }, status: :unauthorized
     end
   end
+
+  # Custom layout for Devise
+  # SOURCE: https://github.com/heartcombo/devise/wiki/How-To:-Create-custom-layouts
+  # ./posts_controller.rb
+  layout :layout_by_resource
+
+  private
+
+  def layout_by_resource
+    if devise_controller? && action_name == 'new'
+      'devise'
+    else
+      'application'
+    end
+  end
 end

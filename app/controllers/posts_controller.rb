@@ -47,12 +47,16 @@ class PostsController < ApplicationController
   #       This feels like a shoehorn though
   def set_postable_type(post)
     if post.images.attached? && post.postable.content.empty?
+      post.postable = PhotoContent.new
       post.postable_type = PhotoContent
       post.postable.content = 'PhotoContent'
     elsif post.postable.content && !post.images.attached?
       post.postable_type = TextContent
     elsif post.postable.content && post.images.attached?
-      post.postable_type = MixedContent
+      content = post.postable.content
+      post.postable = MixedContent.new
+      post.postable_type = 'MixedContent'
+      post.postable.content = content
     end
   end
 

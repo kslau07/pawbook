@@ -1,4 +1,6 @@
 <%= render template: 'posts/new' %>
 <%= turbo_frame_tag "posts" do %>
-  <%= render @posts %>
+  <div class="grid">
+    <%= render @posts %>
+  </div>
 <% end %>

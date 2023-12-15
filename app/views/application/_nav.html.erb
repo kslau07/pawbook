@@ -1,4 +1,4 @@
-<div class="p-6 grid grid-cols-[auto_auto] items-center gap-x-4 gap-y-4 ">
+<div class="p-6 grid grid-cols-[auto_auto] items-center gap-x-4 gap-y-4" id="nav">
   <div class="circle-sm text-lg flex justify-center items-center">
     <% if current_user.avatar.attached? %>
       <%= image_tag(current_user.avatar_as_thumbnail("small").url) %>

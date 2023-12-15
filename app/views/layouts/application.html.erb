@@ -1,27 +1,12 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Pawbook</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <%= javascript_importmap_tags %>
-    <!-- HACK: Could not import this library through importmaps / esbuild -->
-    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
-  </head>
-  <body>
-    <% unless ['sessions', 'registrations'].include?(controller_name) %>
-      <%= render 'header' %>
-    <% end %>
-    <%= yield %>
-    <% unless ['sessions', 'registrations'].include?(controller_name) %>
-      <%= render 'footer' %>
-    <% end %>
-  </body>
-</html>
+<%= render 'header' %>
+<div class="grid grid-cols-[1fr_1fr_1fr] gap-8">
+  <div class="justify-self-end">
+    <%= render 'nav' %>
+  </div>
+  <div><%= yield %></div>
+  <div>
+    <%= render 'contacts' %>
+  </div>
+</div>
+<% render 'footer' %>
+<% parent_layout "base" %>

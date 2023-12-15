@@ -1,8 +1,6 @@
 <div class="py-2">Create a Post</div>
-<div class="bg-white p-2 rounded-lg w-full">
-  <div class="bg-white p-2 rounded-lg w-full">
-    <%= turbo_frame_tag @post do %>
-      <%= render "form", post: @post %>
-    <% end %>
-  </div>
+<div class="bg-white p-4 rounded-lg w-full shadow">
+  <%= turbo_frame_tag @post do %>
+    <%= render "form", post: @post %>
+  <% end %>
 </div>

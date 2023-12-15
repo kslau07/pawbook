@@ -1,16 +1,29 @@
 <%= turbo_frame_tag post do %>
-  <div class="my-6 p-6 border-4 border-blue-700  text-red-600">
-
-    <%# FIX: %>
-    <% if post.images.attached?  %>
-      <% post.images.each do |image| %>
-        <%= image_tag(image.url)%>
+  <div class="bg-white mt-6 p-4 rounded-lg w-full shadow">
+    <!-- avatar - username -->
+    <!-- ---------time ago -->
+    
+    <% if post.postable_type == 'TextContent' %>
+    <% elsif post.postable_type == 'PhotoContent' %>
+      <% if post.images.attached?  %>
+        <% post.images.each do |image| %>
+          <%= image_tag(image.url)%> <!-- works -->
+        <% end %>
       <% end %>
+    <% elsif post.postable_type == 'MixedContent' %>
     <% end %>
-    <%#= image_tag(post.image.url) if post.image.attached?  %>
-
-    <%= post.author.username %>
-    <%= post.postable.content %>
-    <%= "posted " + time_ago_in_words(post.created_at) + " ago" %>
   </div>
 <% end %>
+<%
+=begin ========================== commented out ================================ %>
+<% if post.images.attached?  %>
+  <% post.images.each do |image| %>
+    <%= image_tag(image.url)%>
+  <% end %>
+<% end %>
+<%#= image_tag(post.image.url) if post.image.attached?  %>
+<%= post.author.username %>
+<%= post.postable.content %>
+<%= "posted " + time_ago_in_words(post.created_at) + " ago" %>
+<% ============================== commented out ================================
+=end %>
