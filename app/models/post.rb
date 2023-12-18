@@ -19,9 +19,12 @@
 #  fk_rails_...  (author_id => users.id)
 #
 class Post < ApplicationRecord
+  # has_many :reactions, as: :reactionable, dependent: :destroy
+
+  include Reactionable
+
   belongs_to :author, class_name: 'User'
   has_many :comments, as: :commentable, dependent: :destroy
-  has_many :reactions, as: :reactionable, dependent: :destroy
   delegated_type :postable, types: %w[PhotoContent TextContent]
   accepts_nested_attributes_for :postable
 

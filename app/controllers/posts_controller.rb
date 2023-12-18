@@ -12,8 +12,9 @@ class PostsController < ApplicationController
   # turbo_stream.replace # Replace the contents of a turbo-frame
 
   def index
-    @posts = Post.order(created_at: :desc)
+    @posts = Post.order(created_at: :desc).includes(:reactions, :comments)
     @post = Post.postable_new
+    @reaction = Reaction.new
   end
 
   def show; end

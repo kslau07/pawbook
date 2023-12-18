@@ -25,7 +25,7 @@ RSpec.describe Reaction, type: :model do
     it { should belong_to(:user) }
     it do
       should define_enum_for(:kind)
-        .with_values(%i[like_emoji heart_emoji laugh_emoji sad_emoji])
+        .with_values(%i[like heart laugh sad])
         .backed_by_column_of_type(:integer)
     end
 

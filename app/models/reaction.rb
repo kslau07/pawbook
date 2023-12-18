@@ -19,10 +19,10 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Reaction < ApplicationRecord
-  enum kind: { like_emoji: 0,
-               heart_emoji: 1,
-               laugh_emoji: 2,
-               sad_emoji: 3 }
+  enum kind: { like: 0,
+               heart: 1,
+               laugh: 2,
+               sad: 3 }
   belongs_to :user
   belongs_to :reactionable, polymorphic: true
   validates :reactionable_id, presence: true

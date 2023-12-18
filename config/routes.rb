@@ -3,7 +3,20 @@
 
 Rails.application.routes.draw do
   root 'posts#index'
-  resources :posts, only: %w[index new create]
+
+  resources :reactions
+  # resources :reactions, only: %w[create destroy]
+
+  resources :posts do
+    resources :posts, only: %w[index new create]
+    resources :comments, only: %w[create destroy]
+    # resources :reactions, only: %w[create destroy]
+  end
+
+  resources :comments do
+    resources :comments, only: %w[create destroy]
+    # resources :reactions, only: %w[create destroy]
+  end
 
   devise_scope :user do
     get 'dashboard', to: 'users/registrations#edit'

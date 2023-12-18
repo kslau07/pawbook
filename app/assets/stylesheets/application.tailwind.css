@@ -12,6 +12,8 @@
   /* background-color: LightGray; */
   margin: 0;
   height: 100%;
+  font-kerning: normal;
+  letter-spacing: .01rem;
 }
 
 body {

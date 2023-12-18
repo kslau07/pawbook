@@ -19,10 +19,11 @@
 #  fk_rails_...  (author_id => users.id)
 #
 class Comment < ApplicationRecord
+  include Reactionable
+
   belongs_to :author, class_name: 'User'
   belongs_to :commentable, polymorphic: true
   has_many :comments, as: :commentable
-  has_many :reactions, as: :reactionable, dependent: :destroy
   validates :content, presence: true
   # validates :commentable_id, presence: true
   # validates :commentable_type, presence: true
