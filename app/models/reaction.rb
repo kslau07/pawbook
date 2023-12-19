@@ -12,7 +12,8 @@
 #
 # Indexes
 #
-#  index_reactions_on_user_id  (user_id)
+#  index_reactions_on_reactionable_id_and_user_id  (reactionable_id,user_id) UNIQUE
+#  index_reactions_on_user_id                      (user_id)
 #
 # Foreign Keys
 #
@@ -28,4 +29,5 @@ class Reaction < ApplicationRecord
   validates :reactionable_id, presence: true
   validates :reactionable_type, presence: true
   validates :kind, presence: true
+  validates :user_id, uniqueness: { scope: %i[reactionable_id reactionable_type] }
 end

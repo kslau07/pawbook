@@ -1,5 +1,10 @@
-
-<%=button_to( image_tag(emoji_pic, size: "25x25") , reactions_path,  class:"text-5xl",
+<%= button_to 'create', {:controller => "reactions", :action => "create", 
+                         params: { reaction: {:reactionable_id => reactionable.id, :reactionable_type => reactionable.class.to_s }  }} , :method=>:post  %>
+<%
+=begin %>
+<%= button_to( image_tag(emoji_pic, size: "25x25") , reactions_path, method: :post, class:"text-5xl",
               params: { reaction: { reactionable_id: reactionable.id,
                                     reactionable_type: reactionable.class.to_s,
-                                    kind: }})%>
+                                    kind: kind }})%>
+<%
+=end %>

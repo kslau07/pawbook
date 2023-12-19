@@ -1,0 +1,11 @@
+<%= button_to "delete", reaction_path(reactionable.id), params: { reaction: {:reactionable_id => reactionable.id, :reactionable_type => reactionable.class.to_s }  }, :method => :delete %>
+<%#= button_to 'create', {:controller => "reactions", :action => :destroy, 
+                         params: { reaction: {:reactionable_id => reactionable.id, :reactionable_type => reactionable.class.to_s }  }} , :method=>:delete  %>
+<%
+=begin %>
+<%= button_to( image_tag(emoji_pic, size: "25x25"), reaction_path(reactionable.id)), method: :delete, class:"text-5xl",
+                            params: { reaction: { reactionable_id: reactionable.id,
+                                    reactionable_type: reactionable.class.to_s,
+                                    kind: kind }})%>
+<%
+=end %>
