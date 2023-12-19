@@ -1,0 +1,12 @@
+<% if post.postable_type == 'TextContent' %>
+  <div class="p-6">
+    <%= post.postable.content %>
+  </div>
+<% elsif post.postable_type == 'PhotoContent' %>
+  <% if post.images.attached?  %>
+    <% post.images.each do |image| %>
+      <%= image_tag(image.url)%> <!-- works -->
+    <% end %>
+  <% end %>
+<% elsif post.postable_type == 'MixedContent' %>
+<% end %>

@@ -1,0 +1,36 @@
+<div id="post-interacted" class="grid grid-cols-2">
+  <div id="post-stats" class="flex items-center">
+    <%= image_tag "like.svg", { size:"18x18", alt: 'description_of_image', class:"inline-block mr-1" }%> <%= emoji_enum_count(post)['like'].to_s %>
+    <%= "❤️  " + emoji_enum_count(post)['heart'].to_s %>
+    <%= "😹 " + emoji_enum_count(post)['laugh'].to_s %>
+    <%= "😥 " + emoji_enum_count(post)['sad'].to_s %>
+  </div>
+  <div class="justify-self-end">3 comments</div>
+</div>
+<div id="post-interaction-buttons" class="grid grid-cols-3 items-center py-2 border border-white border-y-gray-300" data-controller="toggle" >
+  <div class="grid place-items-center">
+    <div id="reaction-menu" data-toggle-target="content" class="grid hidden absolute grid-cols-4 gap-x-6">
+      <% @emojis.each do |kind, enum| %>
+        <% if current_user_reaction(post) %>
+          <% if current_user_reaction(post).kind == kind.to_s %> <!-- NOTE: reactions#destroy -->
+            <%= render "reactions/button", reactionable: post, emoji_pic: "#{kind}.svg", kind: enum, httpverb: :delete, target_path: reaction_path(current_user_reaction(post).id)  %>
+          <% else %> <!-- NOTE: reactions#update (patch) -->
+            <%= render "reactions/button", reactionable: post, emoji_pic: "#{kind}.svg", kind: enum, httpverb: :patch, target_path: reaction_path(current_user_reaction(post).id) %>
+          <% end %>
+        <% else %> <!-- NOTE: reaction#create -->
+          <%= render "reactions/button", reactionable: post, emoji_pic: "#{kind}.svg", kind: enum, httpverb: :post, target_path: reactions_path %>
+        <% end %>
+      <% end %>
+    </div>
+    <div id="post-current_user-emoji" data-toggle-target="content" data-action="click->toggle#toggle" class="grid absolute justify-center">
+      <% current_reaction = current_user_reaction(post) %>
+      <% if current_reaction %>
+        <%= button_tag image_tag("#{current_reaction.kind}.svg", { class: '', alt: 'An emoji button', size: "25x25" }), class: "" %>
+      <% else %>
+        <%= button_tag image_tag("like-grayed.svg", { class: '', alt: 'A like button', size: "25x25" }), class: "" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="text-center">Comment</div>
+  <div class="text-center">Share</div>
+</div>

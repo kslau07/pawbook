@@ -1,68 +1,8 @@
 <%= turbo_frame_tag post do %>
   <div class="p-4 mt-6 w-full bg-white rounded-lg shadow">
-    <div id="post-author-info" class="grid gap-4 justify-start grid-cols-[auto_auto_1fr]">
-      <div class="text-sm avatar-circle avatar-circle-md">
-        <% if post.author.avatar.attached? %>
-          <%= image_tag(post.author.avatar_as_thumbnail("small").url) %>
-        <% else %>
-          <%= post.author.username[0] %>
-        <% end %>
-      </div>
-      <div id="author-time" class="grid gap-1 text-sm">
-        <%= link_to post.author.username, root_path, class: "self-end font-bold" %>
-        <%= "#{time_ago_in_words(post.created_at)} ago" %>
-      </div>
-      <div class="justify-self-end">* * *</div>
-    </div>
-    <% if post.postable_type == 'TextContent' %>
-      <div class="p-6">
-        <%= post.postable.content %>
-      </div>
-    <% elsif post.postable_type == 'PhotoContent' %>
-      <% if post.images.attached?  %>
-        <% post.images.each do |image| %>
-          <%= image_tag(image.url)%> <!-- works -->
-        <% end %>
-      <% end %>
-    <% elsif post.postable_type == 'MixedContent' %>
-    <% end %>
-    <div id="post-stats">
-      <%= "👍 " + emoji_enum_count(post)['like'].to_s %>
-      <%= "❤️  " + emoji_enum_count(post)['heart'].to_s %>
-      <%= "😹 " + emoji_enum_count(post)['laugh'].to_s %>
-      <%= "😥 " + emoji_enum_count(post)['sad'].to_s %>
-    </div>
-    <div id="post-reactions-comments" class="grid grid-cols-2">
-      <div class="grid grid-flow-col outline">
-        <!-- else display normal button -->
-        <% @emojis.each do |kind, enum| %>
-          <% if current_user_emoji(post) == kind.to_s %>
-            <%= render "reactions/button-delete", reactionable: post, emoji_pic: "#{kind}.svg", kind: enum %>
-          <% else %>
-            <%= render "reactions/button", reactionable: post, emoji_pic: "#{kind}.svg", kind: enum %>
-          <% end %>
-        <% end %>
-        <%#= render "reactions/button", reactionable: post, emoji_pic: "like.svg", kind: 0 %>
-        <%#= render "reactions/button", reactionable: post, emoji_pic: "heart.svg", kind: 1 %>
-        <%#= render "reactions/button", reactionable: post, emoji_pic: "laugh.svg", kind: 2 %>
-        <%#= render "reactions/button", reactionable: post, emoji_pic: "sad.svg", kind: 3 %>
-      </div>
-      <div class="justify-self-end">3 comments</div>
-    </div>
-    <hr>
-    <div id="post-interaction-buttons" class="grid grid-cols-3">
-      <div id="post-current_user-emoji">
-        <% current_emoji = current_user_emoji(post) %>
-        <% if current_user_emoji(post) %>
-          <%= render "reactions/button", reactionable: post, emoji_pic: "#{current_emoji}.svg", kind: @emojis[:current_emoji] %>
-        <% else %>
-          <%= render "reactions/button", reactionable: post, emoji_pic: "like.svg", kind: 0 %>
-        <% end %>
-      </div>
-      <div>Comment</div>
-      <div>Share</div>
-    </div>
-    <hr>
+    <%= render "post-author-info", post: post %>
+    <%= render "post-polymorphic-type", post: post %>
+    <%= render "post-interactions", post: post %>
     <div id="post-comments">
       <div>comment</div>
       <div>comment</div>
@@ -70,10 +10,3 @@
     </div>
   </div>
 <% end %>
-<%
-=begin %>
-<%#= render "reactions/button", reactionable: post, emoji_pic: "heart-svgrepo-com.svg", kind: 1 %>
-<%#= render "reactions/button", reactionable: post, emoji_pic: "cat-with-tears-of-joy-svgrepo-com.svg", kind: 2 %>
-<%#= render "reactions/button", reactionable: post, emoji_pic: "sad-but-relieved-face-svgrepo-com.svg", kind: 3 %>
-<%
-=end %>

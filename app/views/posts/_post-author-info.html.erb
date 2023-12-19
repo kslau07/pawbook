@@ -1,0 +1,14 @@
+<div id="post-author-info" class="grid gap-4 justify-start grid-cols-[auto_auto_1fr]">
+  <div class="text-sm avatar-circle avatar-circle-md">
+    <% if post.author.avatar.attached? %>
+      <%= image_tag(post.author.avatar_as_thumbnail("small").url) %>
+    <% else %>
+      <%= post.author.username[0] %>
+    <% end %>
+  </div>
+  <div id="author-time" class="grid gap-1 text-sm">
+    <%= link_to post.author.username, root_path, class: "self-end font-bold" %>
+    <%= "#{time_ago_in_words(post.created_at)} ago" %>
+  </div>
+  <div class="justify-self-end">* * *</div>
+</div>

@@ -1,9 +1,18 @@
 import { Controller } from "@hotwired/stimulus";
 
+// TODO: Clean up names, remove unnecessary forEach, abstract/extract classes
 // Connects to data-controller="toggle"
 export default class extends Controller {
-  static targets = ["content", "pets_name", "email", "username", "currentPassword"];
+  static targets = [
+    "content",
+    "content2",
+    "pets_name",
+    "email",
+    "username",
+    "currentPassword",
+  ];
 
+  // TODO: Abstract away all other togglers except toggle()
   toggle() {
     let hiddenClass = "hidden";
     this.contentTargets.forEach((element) => {
@@ -23,7 +32,6 @@ export default class extends Controller {
     this.emailTargets.forEach((element) => {
       element.classList.toggle(hiddenClass);
     });
-
     this.currentPasswordTarget.classList.remove(hiddenClass);
   }
 

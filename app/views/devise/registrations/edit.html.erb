@@ -1,21 +1,22 @@
-<div>
-  <h2 class="text-3xl my-6">Dashboard</h2>
+<%# TODO: Extract partials from each form section -> my-pets, profile-photo, account-details %>
+<main id="main">
+  <h2 class="my-6 text-3xl">Dashboard</h2>
   <div>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), 
           html: { method: :put, class: "grid gap-10" }) do |f| %>
       <% if resource.errors.any? %>
-        <div class="p-4 bg-red-100 outline outline-red-300 rounded">
+        <div class="p-4 bg-red-100 rounded outline outline-red-300">
           <%= render "devise/shared/error_messages", resource: resource %>
         </div>
       <% end %>
-      <div class="grid outline outline-blue-300 gap-1 bg-blue-300 rounded"
-             data-controller="toggle">
-        <div class="bg-blue-300 px-4 py-1 text-lg text-white">My Pets</div>
-        <div class="grid grid-cols-[1fr_auto] justify-between bg-slate-50 cursor-pointer"
+      <div id="edit-my-pets" class="grid gap-1 bg-blue-300 rounded outline outline-blue-300"
+              data-controller="toggle">
+        <div class="py-1 px-4 text-lg text-white bg-blue-300">My Pets</div>
+        <div class="grid justify-between cursor-pointer grid-cols-[1fr_auto] bg-slate-50"
                 data-action="click->toggle#toggle_pets_name:once" >
-          <div class="bg-slate-50 p-4 font-bold"
-                 data-toggle-target="pets_name">
-            <div class="p-1 grid justify-between grid-cols-[1fr_1fr]">
+          <div class="p-4 font-bold bg-slate-50"
+                  data-toggle-target="pets_name">
+            <div class="grid justify-between p-1 grid-cols-[1fr_1fr]">
               <% if current_user.pet %>
                 <div>
                   <%= current_user.pet.name %>
@@ -30,10 +31,10 @@
               <% end %>
             </div>
           </div>
-          <div class="bg-slate-50 p-4 font-bold hidden"
-                 data-toggle-target="pets_name">
+          <div class="hidden p-4 font-bold bg-slate-50"
+                  data-toggle-target="pets_name">
             <!-- HACK: Come back later and fix this. Allow adding additional pets.
-                            Get rid of if-statement and one of the forms -->
+                    Get rid of if-statement and one of the forms -->
             <% if current_user.pet %>
               <%= f.fields_for :pet do |builder| %>
                 <%= builder.label :name, "Name: " %>
@@ -50,69 +51,69 @@
               <% end %>
             <% end %>
           </div>
-          <div class="bg-slate-50 p-4 font-bold">
+          <div class="p-4 font-bold bg-slate-50">
             <%= image_tag "pencil-ui-circle-svgrepo-com.svg", { class: '', alt: 'A pencil icon', size: "30x30" }%>
           </div>
         </div>
       </div>
-      <div class="grid outline outline-blue-300 gap-1 bg-blue-300 rounded">
-        <div class="bg-blue-300 px-4 py-1 text-lg text-white">Profile Photo</div>
-        <div class="bg-slate-50 p-4 grid justify-center">
+      <div class="grid gap-1 bg-blue-300 rounded outline outline-blue-300">
+        <div class="py-1 px-4 text-lg text-white bg-blue-300">Profile Photo</div>
+        <div class="grid justify-center p-4 bg-slate-50">
           <% if current_user.avatar.attached? %>
             <%= link_to image_tag(current_user.avatar_as_thumbnail("large").url), current_user.avatar.url %>
           <% else %>
-            <div class="avatar-circle avatar-circle-lg text-8xl flex justify-center items-center">
+            <div class="flex justify-center items-center text-8xl avatar-circle avatar-circle-lg">
               <%= current_user.username[0] %>
             </div>
           <% end %>
         </div>
-        <div class="bg-slate-50 p-4">
+        <div class="p-4 bg-slate-50">
           <%= f.label :avatar, "Upload: " %>
           <%= f.file_field :avatar %>
         </div>
         <% if current_user.avatar.attached? %>
-          <div class="bg-slate-50 p-4 text-center">
+          <div class="p-4 text-center bg-slate-50">
             <%# HACK: We should use POST here %>
             <%= link_to "Remove photo", { action: :remove_avatar },
                            class: "text-red-500", method: :get %>
           </div>
         <% end %>
       </div>
-      <div class="grid outline outline-blue-300 gap-1 bg-blue-300 rounded"
-             data-controller="toggle">
-        <div class="bg-blue-300 px-4 py-1 text-lg text-white">Account Details</div>
-        <div class="grid grid-cols-[1fr_auto] justify-between bg-slate-50 cursor-pointer"
-               data-action="click->toggle#toggle_email:once">
-          <div class="bg-slate-50 p-4 font-bold"
+      <div class="grid gap-1 bg-blue-300 rounded outline outline-blue-300"
+              data-controller="toggle">
+        <div class="py-1 px-4 text-lg text-white bg-blue-300">Account Details</div>
+        <div class="grid justify-between cursor-pointer grid-cols-[1fr_auto] bg-slate-50"
+                data-action="click->toggle#toggle_email:once">
+          <div class="p-4 font-bold bg-slate-50"
                   data-toggle-target="email">
             <%= current_user.email %>
           </div>
-          <div class="bg-slate-50 p-4 font-bold hidden"
+          <div class="hidden p-4 font-bold bg-slate-50"
                   data-toggle-target="email">
             Update email:  
             <%= f.email_field :email, class: "bg-orange-100 border-2 rounded focus:outline-orange-300 p-1" %>
           </div>
-          <div class="bg-slate-50 p-4 font-bold">
+          <div class="p-4 font-bold bg-slate-50">
             <%= image_tag "pencil-ui-circle-svgrepo-com.svg", { class: '', alt: 'A pencil icon', size: "30x30" }%>
           </div>
         </div>
-        <div class="grid grid-cols-[1fr_auto] justify-between bg-slate-50 cursor-pointer"
-               data-action="click->toggle#toggle_username:once">
-          <div class="bg-slate-50 p-4 font-bold"
+        <div class="grid justify-between cursor-pointer grid-cols-[1fr_auto] bg-slate-50"
+                data-action="click->toggle#toggle_username:once">
+          <div class="p-4 font-bold bg-slate-50"
                   data-toggle-target="username">
             <%= current_user.username %>
           </div>
-          <div class="bg-slate-50 p-4 font-bold hidden"
+          <div class="hidden p-4 font-bold bg-slate-50"
                   data-toggle-target="username">
             Update username: 
             <%= f.text_field :username, class: "bg-orange-100 border-2 rounded focus:outline-orange-300 p-1" %>
           </div>
-          <div class="bg-slate-50 p-4 font-bold">
+          <div class="p-4 font-bold bg-slate-50">
             <%= image_tag "pencil-ui-circle-svgrepo-com.svg", { class: '', alt: 'A pencil icon', size: "30x30" }%>
           </div>
         </div>
-        <div class="bg-slate-50 p-4 font-bold hidden"
-               data-toggle-target="currentPassword">
+        <div class="hidden p-4 font-bold bg-slate-50"
+                data-toggle-target="currentPassword">
           <div class="text-red-400">
             *Enter current password: 
             <%= f.password_field :current_password, autocomplete: "current-password",
@@ -121,63 +122,11 @@
           </div>
         </div>
       </div>
-      <div class="actions grid grid-cols-1 gap-4 text-center">
+      <div class="grid grid-cols-1 gap-4 text-center actions">
         <%= f.submit "Save Changes", 
               class: "bg-lime-500 hover:bg-lime-600 text-white text-lg font-bold tracking-wide py-3 px-4 rounded-lg cursor-pointer w-full" %>
         <%= link_to "Discard changes", dashboard_path %>
       </div>
     </div>
   <% end %>
-</div>
-<%# TODO: Add below after app is finished %>
-<%
-=begin ========================== commented out ================================ %>
-Use stimulus to hide/show "Account Settings"
-Allow changing email
-Allow changing password
-Allow deleting account
-<div class="field">
-  <%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-</div>
-<% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-  <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-<% end %>
-<div class="field">
-  <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password, autocomplete: "new-password" %>
-  <% if @minimum_password_length %>
-    <br />
-    <em><%= @minimum_password_length %> characters minimum</em>
-  <% end %>
-</div>
-<div class="field">
-  <%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-</div>
-<div class="field">
-  <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password, autocomplete: "current-password" %>
-</div>
-<h3>Cancel my account</h3>
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-<%= link_to "Back", :back %>
-<!-- Code for 1 togglable attribute -->
-<div class="grid grid-cols-[1fr_auto] justify-between bg-slate-50 cursor-pointer"
-      data-action="click->toggle#toggle:once" >
-  <div class="bg-slate-50 p-4 font-bold"
-        data-toggle-target="content">
-    <div>
-      foo
-    </div>
-  </div>
-  <div class="bg-slate-50 p-4 font-bold hidden"
-        data-toggle-target="content">
-    foo
-  </div>
-  <div class="bg-slate-50 p-4 font-bold">
-    <%= image_tag "pencil-ui-circle-svgrepo-com.svg", { class: '', alt: 'A pencil icon', size: "30x30" }%>
-  </div>
-</div>
-<% ============================== commented out ================================
-=end %>
+</main>
