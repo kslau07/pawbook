@@ -10,5 +10,6 @@
     <%= link_to post.author.username, root_path, class: "self-end font-bold" %>
     <%= "#{time_ago_in_words(post.created_at)} ago" %>
   </div>
-  <div class="justify-self-end">* * *</div>
+  <div class="justify-self-end">post #00<%= post.id %> * * *</div>
 </div>
+
