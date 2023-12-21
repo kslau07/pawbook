@@ -1,0 +1,8 @@
+/home/sam/repos/pawbook/app/views/comments/_comment.html.erb BufWritePre
+BufWritePre
+/home/sam/repos/pawbook/app/controllers/comments_controller.rb BufWritePre
+BufWritePre
+/home/sam/repos/pawbook/app/controllers/comments_controller.rb BufWritePre
+BufWritePre
+/home/sam/repos/pawbook/app/views/comments/_comment.html.erb BufWritePre
+BufWritePre

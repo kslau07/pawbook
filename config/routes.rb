@@ -12,10 +12,9 @@ Rails.application.routes.draw do
   end
   # (shallow) resources :comments, only: [:show, :edit, :update, :destroy]
 
-  # Handled by shallow: true above
-  # resources :comments do
-  #   resources :comments, only: %w[create destroy]
-  # end
+  resources :comments do
+    resources :comments, shallow: true # only: [:index, :new, :create]
+  end
 
   devise_scope :user do
     get 'dashboard', to: 'users/registrations#edit'

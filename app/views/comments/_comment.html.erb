@@ -13,13 +13,19 @@
     <div>
       <div class="grid py-1 px-4 bg-gray-100 rounded-xl">
         <%= link_to current_user.username, root_path, class: "text-s font-bold text-black" %>
+        <div class=""><%= "pawbook comment id#" + comment.id.to_s %></div>
         <div class=""><%= comment.body %></div>
       </div>
       <div class="grid col-auto grid-flow-col gap-8 px-4 text-sm font-bold">
         <span>3w</span>
-        <span>Like</span>
+        <div>
+          <%= render "comments/form", commentable: comment %>
+        </div>
         <span>Reply</span>
       </div>
     </div>
   </div>
+    <% comment.comments.each do |comment| %>
+      <%= comment.body  %>
+    <% end %>
 <% end %>
