@@ -13,16 +13,15 @@
   margin: 0;
   height: 100%;
   font-kerning: normal;
-  letter-spacing: .01rem;
+  letter-spacing: 0.01rem;
 }
 
 body {
   height: 100%;
 }
 
-
 /* Grid areas for normal layout */
- #normal-layout {
+#normal-layout {
   display: grid;
   width: 100%;
   height: 100%;
@@ -115,4 +114,42 @@ ul {
 .avatar-circle-lg {
   width: 12rem;
   height: 12rem;
+}
+
+/* .nested-level-0 { */
+/*   margin-left: calc(var(--spacing-comment-nesting) * 0); */
+/* } */
+/* .nested-level-1 { */
+/*   margin-left: calc(var(--spacing-comment-nesting) * 1); */
+/* } */
+/* .nested-level-2 { */
+/*   margin-left: calc(var(--spacing-comment-nesting) * 2); */
+/* } */
+/* .nested-level-3 { */
+/*   margin-left: calc(var(--spacing-comment-nesting) * 3); */
+/* } */
+/* .nested-level-4 { */
+/*   margin-left: calc(var(--spacing-comment-nesting) * ); */
+/* } */
+
+
+body {
+  --spacing-nested-comment: 10%;
+  --nesting-multiplier: 0.7;
+}
+/* TODO: Can we abstract this css code */
+.nested-comment-lvl-0 {
+  grid-template-columns: var(--spacing-nested-comment) fit-content(10px) 1fr;
+}
+.nested-comment-lvl-1 {
+  grid-template-columns: calc(var(--spacing-nested-comment) * var(--nesting-multiplier) * 2) fit-content(10px) 1fr;
+}
+.nested-comment-lvl-2 {
+  grid-template-columns: calc(var(--spacing-nested-comment) * var(--nesting-multiplier) * 3) fit-content(10px) 1fr;
+}
+.nested-comment-lvl-3 {
+  grid-template-columns: calc(var(--spacing-nested-comment) * var(--nesting-multiplier) * 4) fit-content(10px) 1fr;
+}
+.nested-comment-lvl-4 {
+  grid-template-columns: calc(var(--spacing-nested-comment) * var(--nesting-multiplier) * 5) fit-content(10px) 1fr;
 }

@@ -1,7 +1,13 @@
 <%# TODO: Transition to using turbo-frames for comments %>
+<%# TODO: Add "replying to" when nesting > 4 %>
+<%# TODO: Only show 1 or 2 comments initially %>
+<%#       User must press "show comments" to see more %>
+<%# TODO: Comment should span till edge of container %>
+<%#       At the moment a long comment wraps before edge %>
 <% if comment.author  %>
-  <div class="grid col-auto grid-flow-col gap-4 justify-start">
-    <%= link_to root_path do %>
+  <% nested_level = 4 if nested_level >= 4  %>
+  <div class="nested-comment-lvl-<%= nested_level.to_s %> grid">
+    <%= link_to root_path, class: "justify-self-end pr-2" do %>
       <div class="avatar-circle avatar-circle-sm">
         <% if comment.author.avatar.attached? %>
           <%= image_tag(comment.author.avatar_as_thumbnail("small").url) %>
@@ -11,10 +17,13 @@
       </div>
     <% end %>
     <div>
-      <div class="grid py-1 px-4 bg-gray-100 rounded-xl">
+      <div class="w-fit grid py-1 px-4 bg-gray-100 rounded-xl">
         <%= link_to current_user.username, root_path, class: "text-s font-bold text-black" %>
-        <div class=""><%= "pawbook comment id#" + comment.id.to_s %></div>
-        <div class=""><%= comment.body %></div>
+        <div><%= "pawbook comment id#" + comment.id.to_s %></div>
+        <div>
+          <%= "Nested level: " + nested_level.to_s + " DELETE ME" %>
+        </div>
+        <div><%= comment.body %></div>
       </div>
       <div class="grid col-auto grid-flow-col gap-8 px-4 text-sm font-bold">
         <span>3w</span>
@@ -24,8 +33,13 @@
         <span>Reply</span>
       </div>
     </div>
+    <div></div>
   </div>
-    <% comment.comments.each do |comment| %>
-      <%= comment.body  %>
-    <% end %>
+  <!-- Recursive call base case -->
+  <% unless comment.comments.blank? %>
+    <div class="grid grid-flow-row gap-6 pt-6">
+      <!-- Pass in a variable can persist until recursion terminates -->
+      <%= render comment.comments, nested_level: nested_level + 1  %>
+    </div>
+  <% end %>
 <% end %>
