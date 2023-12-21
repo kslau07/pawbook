@@ -1,23 +1,25 @@
 <%# TODO: Transition to using turbo-frames for comments %>
-<div class="grid col-auto grid-flow-col gap-4 justify-start">
-  <%= link_to root_path do %>
-    <div class="avatar-circle avatar-circle-sm">
-      <% if comment.author.avatar.attached? %>
-        <%= image_tag(comment.author.avatar_as_thumbnail("small").url) %>
-      <% else %>
-        <%= comment.author.username[0] %>
-      <% end %>
-    </div>
-  <% end %>
-  <div>
-    <div class="grid py-1 px-4 bg-gray-100 rounded-xl">
-      <%= link_to current_user.username, root_path, class: "text-s font-bold text-black" %>
-      <div class=""><%= comment.content %></div>
-    </div>
-    <div class="gap-8 text-sm font-bold grid col-auto grid-flow-col px-4">
-      <span>3w</span>
-      <span>Like</span>
-      <span>Reply</span>
+<% if comment.author  %>
+  <div class="grid col-auto grid-flow-col gap-4 justify-start">
+    <%= link_to root_path do %>
+      <div class="avatar-circle avatar-circle-sm">
+        <% if comment.author.avatar.attached? %>
+          <%= image_tag(comment.author.avatar_as_thumbnail("small").url) %>
+        <% else %>
+          <%= comment.author.username[0] %>
+        <% end %>
+      </div>
+    <% end %>
+    <div>
+      <div class="grid py-1 px-4 bg-gray-100 rounded-xl">
+        <%= link_to current_user.username, root_path, class: "text-s font-bold text-black" %>
+        <div class=""><%= comment.body %></div>
+      </div>
+      <div class="grid col-auto grid-flow-col gap-8 px-4 text-sm font-bold">
+        <span>3w</span>
+        <span>Like</span>
+        <span>Reply</span>
+      </div>
     </div>
   </div>
-</div>
+<% end %>

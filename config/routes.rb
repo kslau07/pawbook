@@ -8,12 +8,14 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :posts, only: %w[index new create]
-    resources :comments, only: %w[create destroy]
+    resources :comments, shallow: true # only: [:index, :new, :create]
   end
+  # (shallow) resources :comments, only: [:show, :edit, :update, :destroy]
 
-  resources :comments do
-    resources :comments, only: %w[create destroy]
-  end
+  # Handled by shallow: true above
+  # resources :comments do
+  #   resources :comments, only: %w[create destroy]
+  # end
 
   devise_scope :user do
     get 'dashboard', to: 'users/registrations#edit'

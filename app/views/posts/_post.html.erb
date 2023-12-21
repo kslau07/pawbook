@@ -1,11 +1,11 @@
 <%= turbo_frame_tag post do %>
   <div class="p-4 mt-6 w-full bg-white rounded-lg shadow">
     <%= render "post-author-info", post: %>
-    <%= render "post-polymorphic-type", post: %>
-    <%= render "post-interactions", post: %>
+    <%= render "post-polymorphic-content", post: %>
+    <%= render "post-primary-buttons", post: %>
+    <%= render "comments/form", commentable: post %>
     <div class="grid grid-flow-row gap-6 pt-6">
-      <%= render post.comments, post: post %>
+      <%= render post.comments, post: %>
     </div>
-
   </div>
 <% end %>
