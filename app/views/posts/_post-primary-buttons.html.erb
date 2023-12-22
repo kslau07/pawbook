@@ -5,43 +5,47 @@
     <%= "😹 " + emoji_enum_count(post)['laugh'].to_s %>
     <%= "😥 " + emoji_enum_count(post)['sad'].to_s %>
   </div>
-  <div class="justify-self-end"><%= post.comments.count %> <%= "comment".pluralize(post.comments.count) %> </div> 
-  
-
+  <div class="justify-self-end"><%= post.comments.count %> <%= "comment".pluralize(post.comments.count) %> </div>
 </div>
-<div id="post-primary-buttons" class="grid grid-cols-3 items-center py-3 text-sm font-bold border border-white border-y-gray-300" data-controller="toggle" >
-  <div class="grid place-items-center">
-    <div id="reaction-menu" data-toggle-target="content" class="grid hidden absolute grid-cols-4 gap-x-6 cursor-pointer">
-      <% @emojis.each do |kind, enum| %>
-        <% if current_user_reaction(post) %>
-          <% if current_user_reaction(post).kind == kind.to_s %> <!-- NOTE: reactions#destroy -->
-            <%= render "reactions/button", reactionable: post, emoji_pic: "#{kind}.svg", kind: enum, httpverb: :delete, target_path: reaction_path(current_user_reaction(post).id)  %>
-          <% else %> <!-- NOTE: reactions#update (patch) -->
-            <%= render "reactions/button", reactionable: post, emoji_pic: "#{kind}.svg", kind: enum, httpverb: :patch, target_path: reaction_path(current_user_reaction(post).id) %>
+<div data-controller="toggle">
+  <div id="post-primary-buttons" class="grid grid-cols-3 items-center py-3 text-sm font-bold border border-white border-y-gray-300">
+    <div class="grid place-items-center" data-controller="toggle">
+      <div id="reaction-menu" data-toggle-target="content" class="grid hidden absolute grid-cols-4 gap-x-6 cursor-pointer">
+        <% @emojis.each do |kind, enum| %>
+          <% if current_user_reaction(post) %>
+            <% if current_user_reaction(post).kind == kind.to_s %> <!-- NOTE: reactions#destroy -->
+              <%= render "reactions/button", reactionable: post, emoji_pic: "#{kind}.svg", kind: enum, httpverb: :delete, target_path: reaction_path(current_user_reaction(post).id)  %>
+            <% else %> <!-- NOTE: reactions#update (patch) -->
+              <%= render "reactions/button", reactionable: post, emoji_pic: "#{kind}.svg", kind: enum, httpverb: :patch, target_path: reaction_path(current_user_reaction(post).id) %>
+            <% end %>
+          <% else %> <!-- NOTE: reaction#create -->
+            <%= render "reactions/button", reactionable: post, emoji_pic: "#{kind}.svg", kind: enum, httpverb: :post, target_path: reactions_path %>
           <% end %>
-        <% else %> <!-- NOTE: reaction#create -->
-          <%= render "reactions/button", reactionable: post, emoji_pic: "#{kind}.svg", kind: enum, httpverb: :post, target_path: reactions_path %>
         <% end %>
-      <% end %>
+      </div>
+      <a id="post-current_user-emoji" data-toggle-target="content" data-action="click->toggle#toggle" class="grid absolute justify-center cursor-pointer">
+        <% current_reaction = current_user_reaction(post) %>
+        <% if current_reaction %>
+          <%= button_tag image_tag("#{current_reaction.kind}.svg", { class: '', alt: 'An emoji button', size: "25x25" }), class: "" %>
+        <% else %>
+          <div class="grid grid-cols-2 justify-center items-center">
+            <%= button_tag image_tag("like-grayed.svg", { class: 'pb-1', alt: 'A grayed out like button', size: "20x20" }), class: "" %>
+            Like
+          </div>
+        <% end %>
+      </a>
     </div>
-    <a id="post-current_user-emoji" data-toggle-target="content" data-action="click->toggle#toggle" class="grid absolute justify-center cursor-pointer">
-      <% current_reaction = current_user_reaction(post) %>
-      <% if current_reaction %>
-        <%= button_tag image_tag("#{current_reaction.kind}.svg", { class: '', alt: 'An emoji button', size: "25x25" }), class: "" %>
-      <% else %>
-        <div class="grid grid-cols-2 justify-center items-center">
-          <%= button_tag image_tag("like-grayed.svg", { class: 'pb-1', alt: 'A grayed out like button', size: "20x20" }), class: "" %>
-          Like
-        </div>
-      <% end %>
-    </a>
+    <%# TODO: Today %>
+    <%# TODO: Create link %>
+    <%# TODO: Then create toggle  %>
+    <%= button_tag type: 'button', id: "post-comment-button", class: "text-center flex place-content-center gap-2" do %>
+      <%= image_tag("comment-4-svgrepo-com.svg", { class: 'pb-1', alt: 'A comment button', size: "20x20" }) %>
+      <div data-action="click->toggle#togglePostCommentForm">Comment</div>
+    <% end %>
+    <div class="text-center flex place-content-center gap-2">
+      <%= image_tag("share-svgrepo-com.svg", { class: 'pb-1', alt: 'A share button', size: "20x20" }) %>
+      Share
+    </div>
   </div>
-  <div class="text-center flex place-content-center gap-2">
-    <%= image_tag("comment-4-svgrepo-com.svg", { class: 'pb-1', alt: 'A comment button', size: "20x20" }) %>
-    Comment
-  </div>
-  <div class="text-center flex place-content-center gap-2">
-    <%= image_tag("share-svgrepo-com.svg", { class: 'pb-1', alt: 'A share button', size: "20x20" }) %>
-    Share
-  </div>
+  <%= render "comments/form", commentable: post %>
 </div>

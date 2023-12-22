@@ -7,9 +7,10 @@ export default class extends Controller {
     "content",
     // "content2",
     // "content3",
-    "pets_name",
     "email",
     "username",
+    "pets",
+    "postCommentForm",
     "currentPassword",
   ];
 
@@ -21,14 +22,31 @@ export default class extends Controller {
     });
   }
 
-  toggle_pets_name() {
+  togglePostCommentForm() {
+    // let hiddenClass = "hidden";
+    // this.cTargets.forEach((element) => {
+    //   element.classList.toggle(hiddenClass);
+    // });
+
+    let changeRows = "3";
+    this.postCommentFormTargets.forEach((element) => {
+      var rowSize = element.rows;
+      if (rowSize == "1") {
+        element.rows = changeRows;
+      } else {
+        element.rows = "1";
+      }
+    });
+  }
+
+  togglePets() {
     let hiddenClass = "hidden";
-    this.pets_nameTargets.forEach((element) => {
+    this.petsTargets.forEach((element) => {
       element.classList.toggle(hiddenClass);
     });
   }
 
-  toggle_email() {
+  toggleEmail() {
     let hiddenClass = "hidden";
     this.emailTargets.forEach((element) => {
       element.classList.toggle(hiddenClass);
@@ -36,7 +54,7 @@ export default class extends Controller {
     this.currentPasswordTarget.classList.remove(hiddenClass);
   }
 
-  toggle_username() {
+  toggleUsername() {
     let hiddenClass = "hidden";
     this.usernameTargets.forEach((element) => {
       element.classList.toggle(hiddenClass);
