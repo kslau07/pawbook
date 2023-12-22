@@ -18,7 +18,6 @@
       <div class="mb-4 flex flex-col">
         <h1 class="font-bold text-lg">Sign Up</h1>
         <div>It’s quick and simple.</div>
-        <hr class="self-center m-2 bg-slate-300 h-px border-0 w-full">
       </div>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:class => 'pb-2 flex gap-3 flex-col justify-center items-center w-full'}) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>

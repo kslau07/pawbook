@@ -1,11 +1,18 @@
-<h2>Add a comment:</h2>
-<%= form_with model: [ commentable, commentable.comments.build ] do |f| %>
+<%= form_with model: [ commentable, commentable.comments.build ], 
+              class: "mt-4 grid grid-cols-[auto_1fr_auto_auto] rounded gap-4" do |f| %>
   <%= f.hidden_field :commentable_id, value: commentable.id %>
-  <p>
-    <%= f.label :body %>
-    <%= f.text_area :body, class: "bg-red-400" %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
+  <div class="justify-self-end pr-2">
+    <div class="avatar-circle avatar-circle-sm">
+      <% if current_user.avatar.attached? %>
+        <%= image_tag(current_user.avatar_as_thumbnail("small").url) %>
+      <% else %>
+        <%= current_user.username[0] %>
+      <% end %>
+    </div>
+  </div>
+  <%= f.text_area :body, id: dom_ident(commentable, Comment.new), placeholder: "Write a comment...",
+                    class: "h-10 p-2 w-full bg-gray-100 resize-none focus:outline-none placeholder-slate-400 rounded" %>
+  <%= render "emoji-picker", dom_target: dom_ident(commentable, Comment.new) %>
+  <%= f.submit "Comment", 
+    class: "text-xs rounded-full cursor-pointer bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-3 border border-blue-500 hover:border-transparent rounded" %>
 <% end %>

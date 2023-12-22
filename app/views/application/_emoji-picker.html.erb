@@ -1,0 +1,14 @@
+<div data-controller="toggle" class="relative">
+  <div src data-action="click->toggle#toggle" class="text-3xl cursor-pointer">
+    🐶
+  </div>
+  <div data-toggle-target="content" class="hidden absolute right-0">
+    <emoji-picker id='<%= "#{dom_target}" %>-emoji-picker'></emoji-picker>
+  </div>
+  <%# HACK: Can we extract this to a stimulus controller %>
+  <script>
+    document.getElementById('<%= "#{dom_target}" %>-emoji-picker')
+      .addEventListener('emoji-click', event => document.getElementById("<%= "#{dom_target}" %>").value += event.detail.emoji.unicode);
+  </script>
+</div>
+

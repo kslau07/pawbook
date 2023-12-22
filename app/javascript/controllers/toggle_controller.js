@@ -5,7 +5,8 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = [
     "content",
-    "content2",
+    // "content2",
+    // "content3",
     "pets_name",
     "email",
     "username",

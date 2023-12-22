@@ -1,0 +1,43 @@
+<%= form_with model: post, class: "" do |f| %>
+  <%= f.hidden_field :postable_type, value: 'TextContent' %>
+  <%= f.fields_for :postable do |sub_form| %>
+
+    <%# NOTE:PICKER TARGET %>
+    <%= sub_form.text_area :content, placeholder: 'What\'s on your mind?', autofocus: true,
+    id: '<%= "#{dom_target}" %>',
+      class: "p-2 block h-16 rounded focus:outline-none resize-none placeholder-slate-500 w-full" %>
+  <% end %>
+  <div class="grid gap-4 justify-center items-center pt-2 border border-white grid-cols-[1fr_auto_auto] border-t-gray-300">
+    <div>
+      <%= f.label :images, "Upload photos" %>
+      <%= f.file_field :images, multiple: true %>
+    </div>
+    <%= f.submit "Post", 
+    class: "bg-blue-500 hover:bg-blue-600 text-white text-lg tracking-wide py-2 px-8 rounded cursor-pointer" %>
+  </div>
+<% end %>
+
+
+
+
+
+<%
+=begin %>
+<div data-controller="toggle" class="relative">
+  <div src data-action="click->toggle#toggle" class="text-3xl cursor-pointer">
+    🐶
+  </div>
+  <div data-toggle-target="content" class="hidden absolute right-0">
+                    <%# NOTE: picker ELEMENT %>
+    <emoji-picker id='<%= "#{dom_target}" %>-emoji-picker'></emoji-picker>
+  </div>
+  <%# HACK: Can we extract this to a stimulus controller %>
+  <script>
+                      <%# NOTE: picker ELEMENT %>
+    document.getElementById('<%= "#{dom_target}" %>-emoji-picker')                     
+                                                                 <%# NOTE:PICKER TARGET %>
+      .addEventListener('emoji-click', event => document.getElementById('post-form').value += event.detail.emoji.unicode);
+  </script>
+</div>
+<%
+=end %>

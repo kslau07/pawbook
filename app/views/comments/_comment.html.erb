@@ -6,7 +6,7 @@
 <%#       At the moment a long comment wraps before edge %>
 <% if comment.author  %>
   <% nested_level = 4 if nested_level >= 4  %>
-  <div class="nested-comment-lvl-<%= nested_level.to_s %> grid">
+  <div class="grid nested-comment-lvl-<%= "#{ nested_level < 4 ? nested_level : 4 }" %>">
     <%= link_to root_path, class: "justify-self-end pr-2" do %>
       <div class="avatar-circle avatar-circle-sm">
         <% if comment.author.avatar.attached? %>
@@ -17,7 +17,7 @@
       </div>
     <% end %>
     <div>
-      <div class="w-fit grid py-1 px-4 bg-gray-100 rounded-xl">
+      <div class="grid py-1 px-4 bg-gray-100 rounded-xl w-fit">
         <%= link_to current_user.username, root_path, class: "text-s font-bold text-black" %>
         <div><%= "pawbook comment id#" + comment.id.to_s %></div>
         <div>
@@ -27,9 +27,7 @@
       </div>
       <div class="grid col-auto grid-flow-col gap-8 px-4 text-sm font-bold">
         <span>3w</span>
-        <div>
-          <%= render "comments/form", commentable: comment %>
-        </div>
+        <%= render "comments/form", commentable: comment %>
         <span>Reply</span>
       </div>
     </div>
