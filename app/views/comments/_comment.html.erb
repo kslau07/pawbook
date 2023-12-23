@@ -17,13 +17,12 @@
       </div>
     <% end %>
     <div>
-      <div class="grid py-1 px-8 bg-gray-100 rounded-xl w-fit">
+      <div class="grid py-1 px-8 bg-gray-100 rounded-xl w-fit mb-1">
         <%= link_to current_user.username, root_path, class: "text-s font-bold text-black" %>
         <div><%= comment.body %></div>
       </div>
       <div class="grid grid-flow-col gap-6 px-4 justify-start text-sm font-bold">
-        <span>xyz ago</span>
-        <%# TODO: Today %>
+        <span>abbr ago</span><!-- #abbreviate_time_ago -->
         <div class="cursor-pointer">
           <%= render "reaction_menu", reactionable: comment %>
         </div>

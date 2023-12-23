@@ -146,3 +146,10 @@ body {
     calc(var(--spacing-nested-comment) * var(--nesting-multiplier) * 5)
     var(--comment-body) 1fr;
 }
+
+.share-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-10%, -80%);
+}

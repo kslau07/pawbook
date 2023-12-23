@@ -39,9 +39,15 @@
       <%= image_tag("comment-4-svgrepo-com.svg", { class: 'pb-1', alt: 'A comment button', size: "20x20" }) %>
       <div data-action="click->toggle#togglePostCommentForm">Comment</div>
     <% end %>
-    <div class="text-center flex place-content-center gap-2">
+    <div class="flex gap-2 place-content-center text-center">
       <%= image_tag("share-svgrepo-com.svg", { class: 'pb-1', alt: 'A share button', size: "20x20" }) %>
-      Share
+      <div data-controller="toggle">
+        <style></style>
+        <div data-toggle-target="content" class="hidden p-4 w-96 bg-white rounded shadow-md share-button outline outline-gray-300">
+          <%= render "share-button" %>
+        </div>
+        <div data-action="click->toggle#toggle">share-button</div>
+      </div>
     </div>
   </div>
   <%= render "comments/form", commentable: post %>
