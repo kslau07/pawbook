@@ -4,7 +4,7 @@
     <%= render "post-polymorphic-content", post: %>
     <%= render "post-primary-buttons", post: %>
     <%#= render "comments/form", commentable: post %> <%# comments/form is rendered by post-primary-buttons due to wrapping toggle_controller (stimulusjs) %>
-    <div id="comments-container" class="grid grid-flow-row gap-6 pt-6">
+    <div id="comments-container" class="grid grid-flow-row mt-6">
       <%= render post.comments, nested_level: 0 %>
     </div>
   </div>

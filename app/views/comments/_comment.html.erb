@@ -6,7 +6,7 @@
 <%#       At the moment a long comment wraps before edge %>
 <% if comment.author  %>
   <% nested_level = 4 if nested_level >= 4  %>
-  <div class="grid nested-comment-lvl-<%= "#{ nested_level < 4 ? nested_level : 4 }" %>">
+  <div class="mt-6 grid nested-comment-lvl-<%= "#{ nested_level < 4 ? nested_level : 4 }" %>">
     <%= link_to root_path, class: "justify-self-end pr-2" do %>
       <div class="avatar-circle avatar-circle-sm">
         <% if comment.author.avatar.attached? %>
@@ -17,25 +17,29 @@
       </div>
     <% end %>
     <div>
-      <div class="grid py-1 px-4 bg-gray-100 rounded-xl w-fit">
+      <div class="grid py-1 px-8 bg-gray-100 rounded-xl w-fit">
         <%= link_to current_user.username, root_path, class: "text-s font-bold text-black" %>
-        <div><%= "pawbook comment id#" + comment.id.to_s %></div>
-        <div>
-          <%= "Nested level: " + nested_level.to_s + " DELETE ME" %>
-        </div>
         <div><%= comment.body %></div>
       </div>
-      <div class="grid col-auto grid-flow-col gap-8 px-4 text-sm font-bold">
-        <span>3w</span>
-        <%= render "comments/form", commentable: comment %>
-        <span>Reply</span>
+      <div class="grid grid-flow-col gap-6 px-4 justify-start text-sm font-bold">
+        <span>xyz ago</span>
+        <%# TODO: Today %>
+        <div class="cursor-pointer">
+          <%= render "reaction_menu", reactionable: comment %>
+        </div>
+        <div data-controller="toggle">
+          <div data-toggle-target="content" class="absolute p-4 hidden outline outline-gray-300 rounded w-96 bg-white shadow-md">
+            <%= render 'comments/form-nested', commentable: comment %>
+          </div>
+          <div data-action="click->toggle#toggle" class="cursor-pointer">Reply</div>
+        </div>
       </div>
     </div>
     <div></div>
   </div>
   <!-- Recursive call base case -->
   <% unless comment.comments.blank? %>
-    <div class="grid grid-flow-row gap-6 pt-6">
+    <div class="grid grid-flow-row">
       <!-- Pass in a variable can persist until recursion terminates -->
       <%= render comment.comments, nested_level: nested_level + 1  %>
     </div>

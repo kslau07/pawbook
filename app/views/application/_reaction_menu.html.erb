@@ -1,0 +1,24 @@
+<!-- TODO: Combine this partial with the one in post -->
+<div data-controller="toggle">
+  <div id="reaction-menu" data-toggle-target="content" class="grid hidden absolute grid-cols-4 gap-x-6 cursor-pointer bg-white rounded p-3 border border-gray-300">
+    <% @emojis.each do |kind, enum| %>
+      <% if current_user_reaction(reactionable) %>
+        <% if current_user_reaction(reactionable).kind == kind.to_s %> <!-- NOTE: reactions#destroy -->
+          <%= render "reactions/button", reactionable:, emoji_pic: "#{kind}.svg", kind: enum, httpverb: :delete, target_path: reaction_path(current_user_reaction(reactionable).id)  %>
+        <% else %> <!-- NOTE: reactions#update (patch) -->
+          <%= render "reactions/button", reactionable:, emoji_pic: "#{kind}.svg", kind: enum, httpverb: :patch, target_path: reaction_path(current_user_reaction(reactionable).id) %>
+        <% end %>
+      <% else %> <!-- NOTE: reaction#create -->
+        <%= render "reactions/button", reactionable: , emoji_pic: "#{kind}.svg", kind: enum, httpverb: :post, target_path: reactions_path %>
+      <% end %>
+    <% end %>
+  </div>
+  <div data-toggle-target="content" data-action="click->toggle#toggle" class="cursor-pointer">
+    <% current_reaction = current_user_reaction(reactionable) %>
+    <% if current_reaction %>
+      <%= button_tag image_tag("#{current_reaction.kind}.svg", { alt: 'An emoji button', size: "20x20" }), class: "" %>
+    <% else %>
+      <div>Like</div>
+    <% end %>
+  </div>
+</div>

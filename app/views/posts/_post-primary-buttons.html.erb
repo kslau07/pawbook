@@ -1,6 +1,6 @@
 <div id="post-interacted" class="grid grid-cols-2 py-2">
   <div id="post-stats" class="flex items-center">
-    <%= image_tag "like.svg", { size:"18x18", alt: 'description_of_image', class:"inline-block mr-1" }%> <%= emoji_enum_count(post)['like'].to_s %>
+    <%= image_tag "like.svg", { size:"18x18", alt: 'A like button', class:"inline-block mr-1" }%> <%= emoji_enum_count(post)['like'].to_s %>
     <%= "❤️  " + emoji_enum_count(post)['heart'].to_s %>
     <%= "😹 " + emoji_enum_count(post)['laugh'].to_s %>
     <%= "😥 " + emoji_enum_count(post)['sad'].to_s %>
@@ -26,7 +26,7 @@
       <a id="post-current_user-emoji" data-toggle-target="content" data-action="click->toggle#toggle" class="grid absolute justify-center cursor-pointer">
         <% current_reaction = current_user_reaction(post) %>
         <% if current_reaction %>
-          <%= button_tag image_tag("#{current_reaction.kind}.svg", { class: '', alt: 'An emoji button', size: "25x25" }), class: "" %>
+          <%= button_tag image_tag("#{current_reaction.kind}.svg", { alt: 'An emoji button', size: "25x25" }), class: "" %>
         <% else %>
           <div class="grid grid-cols-2 justify-center items-center">
             <%= button_tag image_tag("like-grayed.svg", { class: 'pb-1', alt: 'A grayed out like button', size: "20x20" }), class: "" %>
@@ -35,9 +35,6 @@
         <% end %>
       </a>
     </div>
-    <%# TODO: Today %>
-    <%# TODO: Create link %>
-    <%# TODO: Then create toggle  %>
     <%= button_tag type: 'button', id: "post-comment-button", class: "text-center flex place-content-center gap-2" do %>
       <%= image_tag("comment-4-svgrepo-com.svg", { class: 'pb-1', alt: 'A comment button', size: "20x20" }) %>
       <div data-action="click->toggle#togglePostCommentForm">Comment</div>
