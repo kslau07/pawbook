@@ -1,3 +1,4 @@
+
 <% if post.postable_type == 'TextContent' %>
   <div class="p-6">
     <%= post.postable.content %>
@@ -9,4 +10,10 @@
     <% end %>
   <% end %>
 <% elsif post.postable_type == 'MixedContent' %>
+  <%= post.postable.content %>
+  <% if post.images.attached?  %>
+    <% post.images.each do |image| %>
+      <%= image_tag(image.url)%> <!-- works -->
+    <% end %>
+  <% end %>
 <% end %>
