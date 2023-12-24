@@ -12,8 +12,8 @@
 #
 # Indexes
 #
-#  index_reactions_on_reactionable_id_and_user_id  (reactionable_id,user_id) UNIQUE
-#  index_reactions_on_user_id                      (user_id)
+#  index_reactions_on_reactionable_and_user_id  (reactionable_id,reactionable_type,user_id) UNIQUE
+#  index_reactions_on_user_id                   (user_id)
 #
 # Foreign Keys
 #

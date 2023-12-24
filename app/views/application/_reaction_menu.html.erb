@@ -1,7 +1,7 @@
 <!-- TODO: Combine this partial with the one in post -->
 <div data-controller="toggle">
-  <div id="reaction-menu" data-toggle-target="content" class="grid hidden absolute grid-cols-4 gap-x-6 cursor-pointer bg-white rounded p-3 border border-gray-300">
-    <% @emojis.each do |kind, enum| %>
+  <div id="reaction-menu" data-toggle-target="content" class="grid hidden absolute grid-cols-4 gap-x-6 p-3 bg-white rounded border border-gray-300 cursor-pointer">
+    <% emoji_enums.each do |kind, enum| %>
       <% if current_user_reaction(reactionable) %>
         <% if current_user_reaction(reactionable).kind == kind.to_s %> <!-- NOTE: reactions#destroy -->
           <%= render "reactions/button", reactionable:, emoji_pic: "#{kind}.svg", kind: enum, httpverb: :delete, target_path: reaction_path(current_user_reaction(reactionable).id)  %>

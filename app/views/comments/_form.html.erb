@@ -1,5 +1,4 @@
 <%= form_with model: [ commentable, commentable.comments.build ], 
-              data: { toggle_target: "c" },
               class: "h-full mt-4 grid grid-cols-[auto_1fr_auto_auto] rounded gap-4" do |f| %>
   <%= f.hidden_field :commentable_id, value: commentable.id %>
   <div class="justify-self-end pr-2">

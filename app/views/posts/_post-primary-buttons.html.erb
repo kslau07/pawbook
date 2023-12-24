@@ -8,10 +8,10 @@
   <div class="justify-self-end"><%= post.comments.count %> <%= "comment".pluralize(post.comments.count) %> </div>
 </div>
 <div data-controller="toggle">
-  <div id="post-primary-buttons" class="grid grid-cols-3 items-center py-3 text-sm font-bold border border-white border-y-gray-300">
+  <div id="post-primary-buttons" class="grid relative grid-cols-3 items-center py-3 text-sm font-bold border border-white border-y-gray-300">
     <div class="grid place-items-center" data-controller="toggle">
       <div id="reaction-menu" data-toggle-target="content" class="grid hidden absolute grid-cols-4 gap-x-6 cursor-pointer">
-        <% @emojis.each do |kind, enum| %>
+        <% emoji_enums.each do |kind, enum| %>
           <% if current_user_reaction(post) %>
             <% if current_user_reaction(post).kind == kind.to_s %> <!-- NOTE: reactions#destroy -->
               <%= render "reactions/button", reactionable: post, emoji_pic: "#{kind}.svg", kind: enum, httpverb: :delete, target_path: reaction_path(current_user_reaction(post).id)  %>
@@ -35,20 +35,23 @@
         <% end %>
       </a>
     </div>
-    <%= button_tag type: 'button', id: "post-comment-button", class: "text-center flex place-content-center gap-2" do %>
+    <%= button_tag type: 'button', id: "post-comment-button", class: "text-center flex place-content-center gap-2", data: { action: "click->toggle#togglePostCommentForm" } do %>
       <%= image_tag("comment-4-svgrepo-com.svg", { class: 'pb-1', alt: 'A comment button', size: "20x20" }) %>
-      <div data-action="click->toggle#togglePostCommentForm">Comment</div>
+      Comment
     <% end %>
     <div class="flex gap-2 place-content-center text-center">
       <%= image_tag("share-svgrepo-com.svg", { class: 'pb-1', alt: 'A share button', size: "20x20" }) %>
-      <div data-controller="toggle">
-        <style></style>
-        <div data-toggle-target="content" class="hidden p-4 w-96 bg-white rounded shadow-md share-button outline outline-gray-300">
-          <%= render "share-button" %>
-        </div>
-        <div data-action="click->toggle#toggle">share-button</div>
+      <%= button_tag type: 'button', id: "post-comment-button", class: "text-center flex place-content-center gap-2", data: { action: "click->toggle#toggle" } do %>
+        share
+      <% end %>
+      <div data-toggle-target="content" class="hidden absolute bottom-full z-10 p-4 w-96 bg-white rounded shadow-md outline outline-gray-300">
+        <%= render "share-button" %>
       </div>
     </div>
   </div>
   <%= render "comments/form", commentable: post %>
 </div>
+<%
+=begin %>
+<%
+=end %>

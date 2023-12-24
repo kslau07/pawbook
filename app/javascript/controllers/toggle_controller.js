@@ -11,6 +11,7 @@ export default class extends Controller {
     "username",
     "pets",
     "postCommentForm",
+    "shareButton",
     "currentPassword",
   ];
 
@@ -23,11 +24,6 @@ export default class extends Controller {
   }
 
   togglePostCommentForm() {
-    // let hiddenClass = "hidden";
-    // this.cTargets.forEach((element) => {
-    //   element.classList.toggle(hiddenClass);
-    // });
-
     let changeRows = "3";
     this.postCommentFormTargets.forEach((element) => {
       var rowSize = element.rows;

@@ -5,7 +5,11 @@ module ApplicationHelper
     if child
       "#{parent.class}-#{parent.id}-#{child.class}-#{child.id || 'new'}".downcase
     else
-    "#{parent.class}-#{parent.id || 'new'}".downcase
+      "#{parent.class}-#{parent.id || 'new'}".downcase
     end
+  end
+
+  def emoji_enums
+    { like: 0, heart: 1, laugh: 2, sad: 3 }
   end
 end

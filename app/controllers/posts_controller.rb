@@ -15,7 +15,6 @@ class PostsController < ApplicationController
     @posts = Post.order(created_at: :desc).includes(:reactions, :comments)
     @post = Post.postable_new
     @reaction = Reaction.new
-    @emojis = { like: 0, heart: 1, laugh: 2, sad: 3 }
   end
 
   def show; end
