@@ -40,7 +40,17 @@ class PostsController < ApplicationController
 
   def update; end
 
-  def destroy; end
+  def destroy
+    @post = Post.find(params[:id])
+    return unless @post.author == current_user
+
+    @post.destroy
+
+    respond_to do |format|
+      format.html { redirect_to posts_path, status: :see_other }
+      format.turbo_stream
+    end
+  end
 
   private
 

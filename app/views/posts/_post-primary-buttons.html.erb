@@ -42,7 +42,7 @@
     <div class="flex gap-2 place-content-center text-center">
       <%= image_tag("share-svgrepo-com.svg", { class: 'pb-1', alt: 'A share button', size: "20x20" }) %>
       <%= button_tag type: 'button', id: "post-comment-button", class: "text-center flex place-content-center gap-2", data: { action: "click->toggle#toggle" } do %>
-        share
+        Share
       <% end %>
       <div data-toggle-target="content" class="hidden absolute bottom-full z-10 p-4 w-96 bg-white rounded shadow-md outline outline-gray-300">
         <%= render "share-button" %>
