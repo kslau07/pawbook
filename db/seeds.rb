@@ -20,22 +20,22 @@ end
 end
 
 # u1 requests u2 (confirmed)
-FriendRequest.create!(sender: User.find(1),
-                      recipient: User.find(2),
-                      confirmed: true)
+# FriendRequest.create!(sender: User.find(1),
+#                       recipient: User.find(2),
+#                       confirmed: true)
 # u1 requests u3
-FriendRequest.create!(sender: User.find(1),
-                      recipient: User.find(3),
-                      confirmed: false)
+# FriendRequest.create!(sender: User.find(1),
+#                       recipient: User.find(3),
+#                       confirmed: false)
 
 # u4 requests u1 (confirmed)
-FriendRequest.create!(sender: User.find(4),
-                      recipient: User.find(1),
-                      confirmed: true)
+# FriendRequest.create!(sender: User.find(4),
+#                       recipient: User.find(1),
+#                       confirmed: true)
 # u5 requests u1
-FriendRequest.create!(sender: User.find(4),
-                      recipient: User.find(1),
-                      confirmed: false)
+# FriendRequest.create!(sender: User.find(4),
+#                       recipient: User.find(1),
+#                       confirmed: false)
 
 def random_time(type)
   if type == 'past'

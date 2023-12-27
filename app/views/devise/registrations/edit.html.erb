@@ -9,9 +9,9 @@
           <%= render "devise/shared/error_messages", resource: resource %>
         </div>
       <% end %>
-      <div id="edit-my-pets" class="grid gap-1 bg-blue-300 rounded outline outline-blue-300"
+      <div id="edit-my-pets" class="grid gap-[1px] bg-blue-300 rounded outline outline-1 outline-blue-300"
               data-controller="toggle">
-        <div class="py-1 px-4 text-lg text-white bg-blue-300">My Pets</div>
+        <div class="py-1 px-4 text-base text-white bg-blue-300">My Pets</div>
         <div class="grid justify-between cursor-pointer grid-cols-[1fr_auto] bg-slate-50"
                 data-action="click->toggle#togglePets:once" >
           <div class="p-4 font-bold bg-slate-50"
@@ -56,8 +56,8 @@
           </div>
         </div>
       </div>
-      <div class="grid gap-1 bg-blue-300 rounded outline outline-blue-300">
-        <div class="py-1 px-4 text-lg text-white bg-blue-300">Profile Photo</div>
+      <div class="grid gap-[1px] bg-blue-300 rounded outline outline-1 outline-blue-300">
+        <div class="py-1 px-4 text-base text-white bg-blue-300">Profile Photo</div>
         <div class="grid justify-center p-4 bg-slate-50">
           <% if current_user.avatar.attached? %>
             <%= link_to image_tag(current_user.avatar_as_thumbnail("large").url), current_user.avatar.url %>
@@ -79,9 +79,9 @@
           </div>
         <% end %>
       </div>
-      <div class="grid gap-1 bg-blue-300 rounded outline outline-blue-300"
+      <div class="grid gap-[1px] bg-blue-300 rounded outline outline-1 outline-blue-300"
               data-controller="toggle">
-        <div class="py-1 px-4 text-lg text-white bg-blue-300">Account Details</div>
+        <div class="py-1 px-4 text-base text-white bg-blue-300">Account Details</div>
         <div class="grid justify-between cursor-pointer grid-cols-[1fr_auto] bg-slate-50"
                 data-action="click->toggle#toggleEmail:once">
           <div class="p-4 font-bold bg-slate-50"

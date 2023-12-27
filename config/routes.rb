@@ -5,12 +5,14 @@ Rails.application.routes.draw do
   root 'posts#index'
 
   resources :reactions, only: %w[create update destroy]
+  resources :friend_requests, only: %w[create destroy]
 
+  # (shallow outside) resources :comments, only: [:show, :edit, :update, :destroy]
+  # (shallow inside) only: [:index, :new, :create]
   resources :posts do
     resources :posts, only: %w[index create]
-    resources :comments, shallow: true # only: [:index, :new, :create]
+    resources :comments, shallow: true
   end
-  # (shallow) resources :comments, only: [:show, :edit, :update, :destroy]
 
   resources :comments do
     resources :comments, shallow: true # only: [:index, :new, :create]
