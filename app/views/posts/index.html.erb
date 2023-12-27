@@ -1,4 +1,7 @@
 <main id="main">
+  <div class="mt-6 mb-2 font-bold">
+    Create a Post
+  </div>
   <%= turbo_frame_tag Post.new do %>
     <%= render "form", post: @post %>
   <% end %>
