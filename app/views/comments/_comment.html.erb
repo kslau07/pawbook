@@ -18,7 +18,7 @@
     <% end %>
     <div>
       <div class="grid py-1 px-8 mb-1 bg-gray-100 rounded-xl w-fit">
-        <%= link_to current_user.username, root_path, class: "text-s font-bold text-black" %>
+        <%= link_to comment.author.username, user_path(comment.author.username), class: "text-sm font-bold text-black", data: { turbo_frame: "_top" } %>
         <div><%= "commentid##{comment.id}" %></div>
         <div><%= comment.body %></div>
       </div>
@@ -29,7 +29,7 @@
         </div>
         <div data-controller="toggle">
           <div data-action="click->toggle#toggle" class="cursor-pointer">Reply</div>
-          <div data-toggle-target="content" class="hidden absolute top-8 right-1/4 z-10 p-4 w-96 bg-white rounded shadow-md outline outline-gray-300">
+          <div data-toggle-target="content" class="hidden absolute top-8 right-1/4 z-10 p-2 w-96 bg-white rounded shadow-md outline outline-gray-300">
             <%= render 'comments/form-nested', commentable: comment %>
           </div>
         </div>

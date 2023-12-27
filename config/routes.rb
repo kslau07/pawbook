@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :reactions, only: %w[create update destroy]
 
   resources :posts do
-    resources :posts, only: %w[index new create]
+    resources :posts, only: %w[index create]
     resources :comments, shallow: true # only: [:index, :new, :create]
   end
   # (shallow) resources :comments, only: [:show, :edit, :update, :destroy]
@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     get 'dashboard', to: 'users/registrations#edit'
+    get 'profile', to: 'users#show'
     get 'remove_avatar', to: 'users/registrations#remove_avatar'
   end
 

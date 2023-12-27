@@ -6,23 +6,18 @@
       <%= post.author.username[0] %>
     <% end %>
   </div>
-  <!-- TODO: Hamburger menu 
-        # hidden absolute top-8 right-1/4 z-10 p-4 w-96 bg-white rounded shadow-md outline outline-gray-300
-          render "reactions/button", reactionable: post, emoji_pic: "#{kind}.svg", kind: enum, httpverb: :delete, target_path: reaction_path(current_user_reaction(post).id)
-
-        button_to image_tag(emoji_pic, size: "25x25"), target_path, 
-                  params: { reaction: { reactionable_id: reactionable.id, reactionable_type: reactionable.class.to_s, kind: }  }, 
-                  method: httpverb || :post
-
-        link_to "Log out", destroy_user_session_path, class: "link", method: :delete, data: { turbo_method: :delete }
-  -->
   <div id="author-time" class="grid gap-1 text-sm">
-    <%= link_to post.author.username, root_path, class: "self-end font-bold" %>
+    <%= link_to post.author.username, user_path(post.author.username), class: "self-end font-bold", data: { turbo_frame: "_top" } %>
     <%= "#{time_ago_in_words(post.created_at)} ago" %>
   </div>
   <div class="relative justify-self-end self-start" data-controller="toggle">
-    <div data-toggle-target="content" class="hidden absolute top-1/2 right-full z-10 p-4 w-max bg-white rounded shadow-md outline outline-gray-300">
-      <%= link_to "Delete this post", post_path(post.id), class: "text-sm text-blue-700 font-semibold py-1 px-2 hover:underline", method: :delete, data: { turbo_method: :delete } %>
+    <div data-toggle-target="content" class="hidden absolute top-1/2 right-full z-10 p-2 w-max bg-white rounded shadow-md outline outline-gray-300">
+      <% if post.author == current_user %>
+        <%= link_to "Delete this post", post_path(post.id), class: "block text-sm text-blue-700 font-semibold py-1 px-2 hover:underline", method: :delete, data: { turbo_method: :delete } %>
+      <% else %>
+        <%= link_to "Send friend request", root_path, class: "block text-sm text-blue-700 font-semibold py-1 px-2 hover:underline" %>
+        <%= link_to "Report this post", root_path, class: "block text-sm text-blue-700 font-semibold py-1 px-2 hover:underline" %>
+      <% end %>
     </div>
     <%= button_tag "⋮", type: 'button', id: "", class: "text-lg font-bold", data: { action: "click->toggle#toggle"} %>
   </div>

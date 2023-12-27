@@ -1,9 +1,9 @@
 <%= turbo_frame_tag post do %>
-  <div class="p-4 mt-6 w-full bg-white rounded-lg shadow">
-    <%= render "post-author-info", post: %>
-    <%= render "post-polymorphic-content", post: %>
-    <%= render "post-primary-buttons", post: %>
-    <%#= render "comments/form", commentable: post %> <%# comments/form is rendered by post-primary-buttons due to wrapping toggle_controller (stimulusjs) %>
+  <div class="p-4 mb-8 w-full bg-white rounded-lg shadow">
+    <%= render "posts/post-author-info", post: %>
+    <%= render "posts/post-polymorphic-content", post: %>
+    <%= render "posts/post-primary-buttons", post: %>
+    <%#= render "comments/form", commentable: post %> <!-- comments/form is rendered by post-primary-buttons due to wrapping toggle_controller (stimulusjs) -->
     <div id="comments-container" class="grid grid-flow-row mt-6">
       <%= render post.comments, nested_level: 0 %>
     </div>

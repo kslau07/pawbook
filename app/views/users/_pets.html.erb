@@ -1,0 +1,19 @@
+<div>Pets</div>
+<div class="grid grid-cols-[1fr_1fr]">
+  <div id="show-pets" class="grid gap-1 bg-blue-300 rounded outline outline-blue-300">
+    <div class="py-1 px-4 text-lg text-white bg-blue-300 rounded">My Pets</div>
+    <div class="p-4 font-bold bg-slate-50">
+      <% if @user.pet %>
+        <%= @user.pet&.name %>
+      <% else %>
+        No pets listed yet.
+      <% end %>
+    </div>
+  </div>
+</div>
+<!--div id="show-pets" class="grid grid-flow-row gap-1 bg-blue-300 rounded outline"-->
+<%
+=begin %>
+</div>
+<%
+=end %>

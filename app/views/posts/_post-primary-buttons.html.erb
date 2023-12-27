@@ -44,7 +44,7 @@
       <%= button_tag type: 'button', id: "post-comment-button", class: "text-center flex place-content-center gap-2", data: { action: "click->toggle#toggle" } do %>
         Share
       <% end %>
-      <div data-toggle-target="content" class="hidden absolute bottom-full z-10 p-4 w-96 bg-white rounded shadow-md outline outline-gray-300">
+      <div data-toggle-target="content" class="hidden absolute bottom-full z-10 p-2 w-96 bg-white rounded shadow-md outline outline-gray-300">
         <%= render "share-button" %>
       </div>
     </div>

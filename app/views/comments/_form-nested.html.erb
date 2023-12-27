@@ -2,11 +2,11 @@
               data: { toggle_target: "c" },
               class: "rounded gap-4" do |f| %>
   <%= f.hidden_field :commentable_id, value: commentable.id %>
-  <%= f.text_area :body, id: dom_ident(commentable, Comment.new), autofocus: true, placeholder: "Leave a reply...",
+  <%= f.text_area :body, id: dom_id_nested(commentable, Comment.new), autofocus: true, placeholder: "Leave a reply...",
     class: "p-2 w-full resize-none focus:outline-gray-300 placeholder-slate-400 rounded", data: { toggle_target: "postCommentForm" }, rows: "3" %>
   <div class="grid grid-flow-col justify-end gap-4 items-end">
     <%= button_tag "Cancel", type: 'button', id: "post-share-button", class: "text-xs text-blue-700 font-semibold py-1 px-2 hover:underline rounded", data: { action: "click->toggle#toggle"} %>
-    <%= render "emoji-picker", dom_target: dom_ident(commentable, Comment.new) %>
+    <%= render "emoji-picker", dom_target: dom_id_nested(commentable, Comment.new) %>
     <%= f.submit "Reply", 
     class: "text-xs rounded-fullbg-transparent cursor-pointer hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded" %>
   </div>

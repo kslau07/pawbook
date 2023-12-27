@@ -112,8 +112,9 @@ ul {
 }
 
 .avatar-circle-lg {
-  width: 12rem;
   height: 12rem;
+  width: 12rem;
+  font-size: 8rem;
 }
 
 body {

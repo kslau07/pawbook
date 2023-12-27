@@ -26,7 +26,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     set_postable_type(@post)
-    @post_reset_form = Post.postable_new # for turbo_stream
+    @post_new = Post.postable_new # for turbo_stream
 
     if @post.save
       respond_to do |format|

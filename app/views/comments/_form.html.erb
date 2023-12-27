@@ -8,12 +8,12 @@
       <% else %>
         <%= current_user.username[0] %>
       <% end %>
-    </div>
+    </div> 
   </div>
-  <%= f.text_area :body, id: dom_ident(commentable, Comment.new), placeholder: "Write a comment...",
+  <%= f.text_area :body, id: dom_id_nested(commentable, Comment.new), placeholder: "Write a comment...",
     class: "p-2 w-full bg-gray-100 resize-none focus:outline-gray-300 placeholder-slate-400 rounded", data: { toggle_target: "postCommentForm" }, rows: "1" %>
   <div class="self-end">
-    <%= render "emoji-picker", dom_target: dom_ident(commentable, Comment.new) %>
+    <%= render "emoji-picker", dom_target: dom_id_nested(commentable, Comment.new) %>
   </div>
   <%= f.submit "Comment", 
     class: "self-end text-xs rounded cursor-pointer bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-3 border border-blue-500 hover:border-transparent rounded" %>

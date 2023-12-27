@@ -1,5 +1,8 @@
 <main id="main">
-  <%= render template: 'posts/new' %>
+  <%= turbo_frame_tag Post.new do %>
+    <%= render "form", post: @post %>
+  <% end %>
+  <div class="mb-2 font-bold">Latest Activity</div>
   <%= turbo_frame_tag "posts" do %>
     <div class="grid">
       <%= render @posts %>
