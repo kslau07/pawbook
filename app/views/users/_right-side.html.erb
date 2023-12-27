@@ -1,0 +1,20 @@
+<div class="text-lg font-bold mb-4 mt-4"><%= @user.username %></div>
+<div id="<%= dom_id(@user) %>-my-pets" class="grid gap-1 bg-blue-500 rounded outline outline-blue-500 mb-6">
+  <div class="py-1 px-4 text-lg text-white bg-blue-500 rounded">My Pets</div>
+  <div class="p-4 font-bold bg-slate-50">
+    <% if @user.pet %>
+      <%= @user.pet&.name %>
+    <% else %>
+      No pets listed yet.
+    <% end %>
+  </div>
+</div>
+<div id="<%= dom_id(@user) %>-about-me" class="grid gap-1 bg-blue-500 rounded outline outline-blue-500">
+  <div class="py-1 px-4 text-lg text-white bg-blue-500 rounded">About me</div>
+  <div class="p-4 font-bold bg-slate-50">
+    User since 2023
+  </div>
+  <div class="p-4 font-bold bg-slate-50">
+    I love animals!
+  </div>
+</div>
