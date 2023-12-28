@@ -1,12 +1,14 @@
-<% if @friend_request_already_sent %>
-  <div class="mt-6 w-max">
-    <div class="bg-white text-purple-700 font-semibold py-1 px-2 text-sm border border-gray-400 rounded">
+<div class="mt-6 w-max">
+  <% if true %>
+    <div class="py-1 px-2 text-sm font-semibold text-green-500 bg-white rounded border border-green-400">
+      Friends ✔	
+    </div>
+  <% elsif @friend_request_already_sent %>
+    <div class="py-1 px-2 text-sm font-semibold text-purple-700 bg-white rounded border border-gray-400">
       Friend request sent
     </div>
-  </div>
-<% else %>
-  <div class="mt-6">
+  <% else %>
     <%= button_to "Send friend request", friend_requests_path, class: "bg-white hover:bg-gray-100 text-green-500 font-semibold py-1 px-2 text-sm border border-gray-400 rounded",
                     params: { friend_request: { recipient_id: @user.id, sender_id: current_user.id, confirmed: "false" }} %>
-  </div>
-<% end %>
+  <% end %>
+</div>

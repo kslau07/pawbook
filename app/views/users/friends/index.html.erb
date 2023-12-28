@@ -1,34 +1,32 @@
-<!-- TODO: Add "confirm" button to requests received -->
-<!-- TODO: Add "ignore" button to requests received -->
-<!-- TODO: Add "unfriend" button to friends -->
 <main id="main">
   <div class="mt-6 w-3/4">
-    <div class="grid gap-1 mb-6 bg-blue-500 rounded outline outline-blue-500 outline-1">
-      <div class="py-1 px-4 text-base text-white bg-blue-500 rounded">Requests you received</div>
+    <div class="grid gap-1 mb-6 bg-blue-300 rounded outline outline-blue-300 outline-1">
+      <div class="py-1 px-4 text-sm text-white bg-blue-300 rounded">Respond to requests</div>
       <% @user.pending_requests_sent.each do |request_sent| %>
-        <div class="p-4 font-bold bg-slate-50">
-          <%= request_sent.recipient.username %>
+        <div class="grid py-2 px-4 bg-neutral-50 grid-cols-[1fr_auto_auto]">
+          <%= link_to request_sent.recipient.username, user_path(request_sent.recipient.username) %>
+          <!-- TODO: Confirm friend request -->
+          <!-- TODO: Delete friend request -->
+          <%= button_to "Confirm", friend_requests_path, class: "bg-white hover:bg-gray-100 text-green-500 font-semibold py-1 px-2 text-xs border border-gray-400 rounded",
+                    params: { friend_request: { recipient_id: @user.id, sender_id: current_user.id, confirmed: "false" }} %>
+          <%= button_to "Ignore", friend_requests_path, class: "ml-2 bg-white hover:bg-gray-100 text-gray-500 font-semibold py-1 px-2 text-xs border border-gray-400 rounded",
+                    params: { friend_request: { recipient_id: @user.id, sender_id: current_user.id, confirmed: "false" }} %>
         </div>
       <% end %>
     </div>
-    <div class="grid gap-1 mb-6 bg-blue-500 rounded outline outline-blue-500 outline-1">
-      <div class="py-1 px-4 text-base text-white bg-blue-500 rounded">Requests you sent out</div>
+    <div class="grid gap-1 mb-6 rounded bg-neutral-400 outline outline-neutral-400 outline-1">
+      <div class="py-1 px-4 text-sm text-white rounded bg-neutral-400">Sent requests</div>
       <% @user.pending_requests_received.each do |request_received| %>
-        <div class="p-4 font-bold bg-slate-50">
-          <%= request_received.sender.username %>
+        <div class="py-2 px-4 bg-slate-50">
+          <%= link_to request_received.sender.username, user_path(request_received.sender.username) %>
         </div>
       <% end %>
     </div>
-    <div class="grid mb-6 bg-blue-500 rounded gap-[1px] outline outline-blue-500 outline-1">
-      <div class="py-1 px-4 text-base text-white bg-blue-500 rounded">All friends</div>
-      <% @user.friends_received.each do |friend_received| %>
-        <div class="p-4 font-bold bg-slate-50">
-          <%= friend_received.username %>
-        </div>
-      <% end %>
-      <% @user.friends_sent.each do |friend_sent| %>
-        <div class="p-4 font-bold bg-slate-50">
-          <%= friend_sent.username %>
+    <div class="grid bg-blue-500 rounded gap-[1px] outline outline-1 outline-blue-500">
+      <div class="py-1 px-4 text-sm text-white bg-blue-500 rounded">All friends</div>
+      <% @user.all_friends_usernames.each do |f_username| %>
+        <div class="py-2 px-4 bg-slate-50">
+          <%= link_to f_username, user_path(f_username) %>
         </div>
       <% end %>
     </div>
