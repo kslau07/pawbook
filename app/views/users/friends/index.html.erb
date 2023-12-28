@@ -1,0 +1,36 @@
+<!-- TODO: Add "confirm" button to requests received -->
+<!-- TODO: Add "ignore" button to requests received -->
+<!-- TODO: Add "unfriend" button to friends -->
+<main id="main">
+  <div class="mt-6 w-3/4">
+    <div class="grid gap-1 mb-6 bg-blue-500 rounded outline outline-blue-500 outline-1">
+      <div class="py-1 px-4 text-base text-white bg-blue-500 rounded">Requests you received</div>
+      <% @user.pending_requests_sent.each do |request_sent| %>
+        <div class="p-4 font-bold bg-slate-50">
+          <%= request_sent.recipient.username %>
+        </div>
+      <% end %>
+    </div>
+    <div class="grid gap-1 mb-6 bg-blue-500 rounded outline outline-blue-500 outline-1">
+      <div class="py-1 px-4 text-base text-white bg-blue-500 rounded">Requests you sent out</div>
+      <% @user.pending_requests_received.each do |request_received| %>
+        <div class="p-4 font-bold bg-slate-50">
+          <%= request_received.sender.username %>
+        </div>
+      <% end %>
+    </div>
+    <div class="grid mb-6 bg-blue-500 rounded gap-[1px] outline outline-blue-500 outline-1">
+      <div class="py-1 px-4 text-base text-white bg-blue-500 rounded">All friends</div>
+      <% @user.friends_received.each do |friend_received| %>
+        <div class="p-4 font-bold bg-slate-50">
+          <%= friend_received.username %>
+        </div>
+      <% end %>
+      <% @user.friends_sent.each do |friend_sent| %>
+        <div class="p-4 font-bold bg-slate-50">
+          <%= friend_sent.username %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</main>

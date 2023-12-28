@@ -19,23 +19,25 @@ end
                password: 'password123')
 end
 
-# u1 requests u2 (confirmed)
-# FriendRequest.create!(sender: User.find(1),
-#                       recipient: User.find(2),
-#                       confirmed: true)
-# u1 requests u3
-# FriendRequest.create!(sender: User.find(1),
-#                       recipient: User.find(3),
-#                       confirmed: false)
+# user1 confirmed friends
+# user1 -> user2
+FriendRequest.create!(sender: User.find(1),
+                      recipient: User.find(2),
+                      confirmed: true)
+# user3 -> user1
+FriendRequest.create!(sender: User.find(3),
+                      recipient: User.find(1),
+                      confirmed: true)
 
-# u4 requests u1 (confirmed)
-# FriendRequest.create!(sender: User.find(4),
-#                       recipient: User.find(1),
-#                       confirmed: true)
-# u5 requests u1
-# FriendRequest.create!(sender: User.find(4),
-#                       recipient: User.find(1),
-#                       confirmed: false)
+# Unconfirmed requests
+# user1 -> user4
+FriendRequest.create!(sender: User.find(1),
+                      recipient: User.find(4),
+                      confirmed: false)
+# user5 -> user1
+FriendRequest.create!(sender: User.find(5),
+                      recipient: User.find(1),
+                      confirmed: false)
 
 def random_time(type)
   if type == 'past'

@@ -11,7 +11,8 @@
   <div id="<%= dom_id(@user) %>-friends" class="mt-6 grid gap-[1px] bg-blue-500 rounded outline outline-1 outline-blue-500">
     <div class="py-1 px-4 text-base text-white bg-blue-500 rounded">Friends</div>
     <div class="p-4 bg-slate-50">
-      See friends
+      <%= link_to "See friends", "/users/#{@user.username}/friends" %>
+      <%#= link_to "See friends", users_friends_index_path(@user) %>
     </div>
   </div>
 </div>

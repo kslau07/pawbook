@@ -1,4 +1,5 @@
 class ReactionsController < ApplicationController
+  before_action :authenticate_user!
   # before_action :set_reactionable
 
   # TODO: Use turbo-stream to update associated post, comment, etc.

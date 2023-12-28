@@ -8,11 +8,4 @@ class UsersController < ApplicationController
     @posts = @user.posts
     @post = Post.postable_new
   end
-
-  private
-
-  def sent_friend_request_already?
-    unless @user == current_user
-    end
-  end
 end
