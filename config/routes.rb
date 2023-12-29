@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # get 'photos/:id/:user_id', to: 'photos#show'
 
   resources :reactions, only: %w[create update destroy]
-  resources :friend_requests, only: %w[create destroy]
+  resources :friend_requests, only: %w[create update destroy]
 
   # (shallow outside) resources :comments, only: [:show, :edit, :update, :destroy]
   # (shallow inside) only: [:index, :new, :create]

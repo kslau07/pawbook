@@ -17,8 +17,8 @@
     <%= link_to image_tag("chat-chat-svgrepo-com.svg", :alt => "A chat icon", :class => "", size: "30x30"), "#" %>
     <%= link_to "Chat", "#"  %>
     <%= link_to image_tag("dogs.png", :alt => "Icon with 2 dogs", :class => "", size: "30x30"), "#" %>
-    <%= link_to "Friends", ""  %>
-    <%= link_to image_tag("logout-svgrepo-com.svg", :alt => "A logout icon", :class => "", size: "30x30"), "#" %>
+    <%= link_to "Friends", "/users/#{current_user.username}/friends" %>
+    <%= link_to image_tag("logout-svgrepo-com.svg", :alt => "A logout icon", :class => "", size: "30x30"), "/users/#{current_user.username}/friends" %>
     <%= link_to "Log out", destroy_user_session_path, class: "link", method: :delete, data: { turbo_method: :delete } %>
     <%= link_to image_tag("support-svgrepo-com.svg", :alt => "An icon representing support", :class => "", size: "30x30"), "#" %>
     <%= link_to "Support", ""  %>

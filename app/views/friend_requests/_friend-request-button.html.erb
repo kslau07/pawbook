@@ -1,12 +1,16 @@
 <div class="mt-6 w-max">
-  <% if true %>
+  <% if current_user.all_friends_usernames.include?(@user.username) %>
     <div class="py-1 px-2 text-sm font-semibold text-green-500 bg-white rounded border border-green-400">
       Friends ✔	
     </div>
-  <% elsif @friend_request_already_sent %>
+  <% elsif @friend_request_outgoing_sent %>
     <div class="py-1 px-2 text-sm font-semibold text-purple-700 bg-white rounded border border-gray-400">
       Friend request sent
     </div>
+  <% elsif @friend_request_incoming_received %>
+    <% fr_request = @friend_request_incoming_received %>
+    <%= button_to "Confirm friend request", friend_request_path(fr_request.id), class: "bg-white hover:bg-gray-100 text-green-500 font-semibold py-1 px-2 text-xs border border-gray-400 rounded",
+                   params: { friend_request: { confirmed: "true" }}, method: :patch %>
   <% else %>
     <%= button_to "Send friend request", friend_requests_path, class: "bg-white hover:bg-gray-100 text-green-500 font-semibold py-1 px-2 text-sm border border-gray-400 rounded",
                     params: { friend_request: { recipient_id: @user.id, sender_id: current_user.id, confirmed: "false" }} %>

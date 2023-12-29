@@ -34,8 +34,16 @@ FriendRequest.create!(sender: User.find(3),
 FriendRequest.create!(sender: User.find(1),
                       recipient: User.find(4),
                       confirmed: false)
+# user1 -> user7
+FriendRequest.create!(sender: User.find(1),
+                      recipient: User.find(7),
+                      confirmed: false)
 # user5 -> user1
 FriendRequest.create!(sender: User.find(5),
+                      recipient: User.find(1),
+                      confirmed: false)
+# user6 -> user1
+FriendRequest.create!(sender: User.find(6),
                       recipient: User.find(1),
                       confirmed: false)
 
@@ -64,6 +72,9 @@ p = Post.create!(author: User.find(1), postable: TextContent.create!(content: 'T
 p.comments.create!(author_id: 1, body: 'My comment')
 p.comments.create!(author_id: 2, body: 'My comment2')
 
+p = Post.create!(author: User.find(5), postable: TextContent.create!(content: 'This is my post'))
+p.comments.create!(author_id: 1, body: 'My comment')
+p.comments.create!(author_id: 2, body: 'My comment2')
 # Nested comments
 # u = User.last
 # u.posts.create!(postable: TextContent.create!(content: 'My first post'))

@@ -1,9 +1,3 @@
-<%# TODO: Transition to using turbo-frames for comments %>
-<%# TODO: Add "replying to" when nesting > 4 %>
-<%# TODO: Only show 1 or 2 comments initially %>
-<%#       User must press "show comments" to see more %>
-<%# TODO: Comment should span till edge of container %>
-<%#       At the moment a long comment wraps before edge %>
 <% if comment.author  %>
   <% nested_level = 4 if nested_level >= 4  %>
   <div class="mt-6 grid nested-comment-lvl-<%= "#{ nested_level < 4 ? nested_level : 4 }" %>">
@@ -17,9 +11,8 @@
       </div>
     <% end %>
     <div>
-      <div class="grid py-1 px-8 mb-1 bg-gray-100 rounded-xl w-fit">
+      <div class="grid py-2 pr-8 pl-4 mb-1 bg-gray-100 rounded-xl w-fit">
         <%= link_to comment.author.username, user_path(comment.author.username), class: "text-sm font-bold text-black", data: { turbo_frame: "_top" } %>
-        <div><%= "commentid##{comment.id}" %></div>
         <div><%= comment.body %></div>
       </div>
       <div class="grid relative grid-flow-col gap-6 justify-start px-4 text-sm font-bold">

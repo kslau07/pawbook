@@ -15,7 +15,6 @@
       <% if post.author == current_user %>
         <%= link_to "Delete this post", post_path(post.id), class: "block text-sm text-blue-700 font-semibold py-1 px-2 hover:underline", method: :delete, data: { turbo_method: :delete } %>
       <% else %>
-        <%= link_to "Send friend request", root_path, class: "block text-sm text-blue-700 font-semibold py-1 px-2 hover:underline" %>
         <%= link_to "Report this post", root_path, class: "block text-sm text-blue-700 font-semibold py-1 px-2 hover:underline" %>
       <% end %>
     </div>
