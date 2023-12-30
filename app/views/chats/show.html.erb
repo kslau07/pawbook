@@ -1,0 +1,29 @@
+<style>
+  .chat-height {
+    height: calc(100vh - 20vh);
+  }
+</style>
+<main id="main" class="p-4 bg-ghost-white">
+  <div class="overflow-y-auto chat-height pr-3">
+    <div id="message-display" class="">
+      <% @messages.each do |message| %>
+        <div class="p-3 mb-4 bg-white rounded shadow w-fit">
+          <div class="text-sm font-bold">
+            <%= message.user.email %>
+          </div>
+          <div>
+            <%= message.body %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div id="message-form" class="p-2 h-min">
+    <%= form_with model: @message, class: "grid grid-cols-[1fr_auto]", local: false do |f| %>
+      <%= f.text_field :body, id: 'message-input', 
+                        class: 'p-2 rounded focus:outline-gray-300 bg-white outline outline-blue-200' %>
+      <%= f.submit "Send", 
+                    class: "ml-4 bg-blue-500 hover:bg-blue-600 text-white text-base font-bold tracking-wide py-1 px-6 rounded cursor-pointer" %>
+    <% end %>
+  </div>
+</main>

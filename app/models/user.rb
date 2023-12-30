@@ -27,8 +27,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[facebook google_oauth2 github]
 
-  # TODO: Add test
-  # Require top-level domain in emails
   validates :email,
             format: { with: %r{\A[a-zA-Z0-9.!\#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+\z} }
   validates :username, uniqueness: true,
@@ -49,12 +47,12 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy, foreign_key: 'author_id'
   has_many :reactions, dependent: :destroy
-  # TODO: Add dependent: :destroy
-  has_one :pet
+  has_one :pet, dependent: :destroy
   accepts_nested_attributes_for :pet
 
   # TODO: check if dependent:destroy would orphan existing nested comments from other users
   has_many :comments, dependent: :destroy, foreign_key: 'author_id'
+  has_many :messages
 
   # has_one :dashboard, dependent: :destroy
 
