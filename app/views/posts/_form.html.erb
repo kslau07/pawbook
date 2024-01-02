@@ -3,7 +3,7 @@
     <%= f.hidden_field :postable_type, value: 'TextContent' %>
     <%= f.fields_for :postable do |sub_form| %>
       <%= sub_form.text_area :content, placeholder: 'What\'s on your mind?', autofocus: true,
-      id: dom_id_nested(post),
+      id: "post_new",
       class: "p-2 block h-16 rounded focus:outline-none resize-none placeholder-slate-500 w-full" %>
     <% end %>
     <div class="grid gap-4 justify-center items-center pt-2 border border-white grid-cols-[1fr_auto_auto] border-t-gray-300">
@@ -11,7 +11,7 @@
         <%= f.label :images, "Upload photos" %>
         <%= f.file_field :images, multiple: true %>
       </div>
-      <%= render "emoji-picker", dom_target: dom_id_nested(@post) %>
+      <%= render "emoji-picker", dom_target: "post_new" %>
       <%= f.submit "Post", 
     class: "bg-blue-500 hover:bg-blue-600 text-white text-lg tracking-wide py-2 px-8 rounded cursor-pointer" %>
     </div>
