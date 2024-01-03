@@ -3,18 +3,28 @@
   <p>Find me in app/views/chats/index.html.erb</p>
   <div>
     <div id="message-display">
+      <% @msgs.each do |msg| %>
+        <article class="message">
+          <div class="message-header">
+            <%= msg.user.email %>
+          </div>
+          <div class="message-body">
+            <%= msg.body %>
+          </div>
+        </article>
+      <% end %>
     </div>
     <div id="message-form">
-      <form action="" id="message-form">
+      <%= form_with model: @msg, local: false do |f| %>
         <div class="field has-addons">
           <div class="control">
-            <input class="input" id="message-input" type="text">
+            <%= f.text_field :body, id: 'message-input', class: 'input' %>
           </div>
           <div class="control">
-            <input type="submit" value="Send Message" class="button is-primary">
+            <%= f.submit 'Send Message', class: 'button is-primary' %>
           </div>
         </div>
-      </form>
+      <% end %>
     </div>
   </div>
 </main>

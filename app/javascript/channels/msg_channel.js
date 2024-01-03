@@ -10,30 +10,30 @@ const msgChannel = consumer.subscriptions.create("MsgChannel", {
     messageDisplay.insertAdjacentHTML("beforeend", this.template(data));
   },
 
-
   template(data) {
     return `<article class="message">
               <div class="message-header">
-                <p>${data.inputData.body}</p>
+                <p>${data.user.email}</p>
               </div>
               <div class="message-body">
-                <p>${data.inputData.body}</p>
+                <p>${data.body}</p>
               </div>
-            </article>`
-  }
+            </article>`;
+  },
 });
 
-document.addEventListener("turbo:load", () => {
-  let form = document.querySelector("#message-form");
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      let messageInput = document.querySelector("#message-input").value;
-      if (messageInput == "") return;
-      const inputData = {
-        body: messageInput,
-      };
-      msgChannel.send({ inputData: inputData });
-    });
-  }
-});
+// TODO: Delete me
+// document.addEventListener("turbo:load", () => {
+//   let form = document.querySelector("#message-form");
+//   if (form) {
+//     form.addEventListener("submit", (e) => {
+//       e.preventDefault();
+//       let messageInput = document.querySelector("#message-input").value;
+//       if (messageInput == "") return;
+//       const inputData = {
+//         body: messageInput,
+//       };
+//       msgChannel.send({ inputData: inputData });
+//     });
+//   }
+// });

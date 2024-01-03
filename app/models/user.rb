@@ -37,6 +37,8 @@ class User < ApplicationRecord
                                  message: 'can only contain letters, numbers, periods, and underscores' }
   validate :correct_avatar_mime_type
 
+  has_many :msgs
+
   has_many :requests_sent, class_name: 'FriendRequest', foreign_key: :sender_id, dependent: :destroy
   has_many :requests_received, class_name: 'FriendRequest', foreign_key: :recipient_id, dependent: :destroy
   has_many :pending_requests_sent, -> { merge(FriendRequest.unconfirmed) },
