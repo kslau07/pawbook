@@ -4,6 +4,7 @@
 Rails.application.routes.draw do
   root 'posts#index'
 
+  resources :chats, only: %w[index create show]
   get 'users/:username/friends', to: 'users/friends#index'
 
   resources :reactions, only: %w[create update destroy]

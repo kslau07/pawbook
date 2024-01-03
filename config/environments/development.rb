@@ -37,6 +37,9 @@ Rails.application.configure do
   # config.active_storage.service = :local
   config.active_storage.service = :amazon
 
+  # Sends mail through port 3000 (?)
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
