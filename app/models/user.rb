@@ -37,7 +37,11 @@ class User < ApplicationRecord
                                  message: 'can only contain letters, numbers, periods, and underscores' }
   validate :correct_avatar_mime_type
 
-  has_many :msgs
+  # Chat msgs
+  has_many :msgee, foreign_key: :msg_recipient_id, class_name: 'Msg'
+  has_many :msg_senders, through: :msgee
+  has_many :msged, foreign_key: :msg_sender_id, class_name: 'Msg'
+  has_many :msg_recipients, through: :msged
 
   has_many :requests_sent, class_name: 'FriendRequest', foreign_key: :sender_id, dependent: :destroy
   has_many :requests_received, class_name: 'FriendRequest', foreign_key: :recipient_id, dependent: :destroy

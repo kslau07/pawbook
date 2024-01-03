@@ -1,29 +1,15 @@
 <main id="main">
-  <h1>Chats#index</h1>
-  <p>Find me in app/views/chats/index.html.erb</p>
   <div>
-    <div id="message-display">
-      <% @msgs.each do |msg| %>
-        <article class="message">
-          <div class="message-header">
-            <%= msg.user.email %>
-          </div>
-          <div class="message-body">
-            <%= msg.body %>
-          </div>
-        </article>
-      <% end %>
-    </div>
-    <div id="message-form">
-      <%= form_with model: @msg, local: false do |f| %>
-        <div class="field has-addons">
-          <div class="control">
-            <%= f.text_field :body, id: 'message-input', class: 'input' %>
-          </div>
-          <div class="control">
-            <%= f.submit 'Send Message', class: 'button is-primary' %>
-          </div>
-        </div>
+    <h1>Contacts</h1>
+    <div>
+      <%= form_for :chats, :url => "/chats/show", data: { turbo: false }, :html => { :method => 'GET' } do |f| %>
+        I am: <%= current_user.username %>
+        <%= f.label "Who do you want to chat with?" %> <br>
+        <% @users.each do |user| %>
+          <%= radio_button_tag(:recipient_id, user.id) %>
+          <%= label_tag(:name, user.username) %> <br>
+        <% end %>
+        <%= f.submit "Chat"%>
       <% end %>
     </div>
   </div>

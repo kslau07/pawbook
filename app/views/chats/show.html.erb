@@ -1,2 +1,18 @@
-<h1>Chats#show</h1>
-<p>Find me in app/views/chats/show.html.erb</p>
+<main id="main">
+  <div>
+    <div id="message-display">
+      <div id="messages">
+        <% @msgs.each do |msg| %>
+          <p><%= msg.msg_sender.username %>: <%= msg.body %></p>
+        <% end %>
+      </div>
+    </div>
+    <div>
+      <%= form_with model: Msg.new do |f| %>
+        <%= f.hidden_field :msg_recipient_id, value: @recipient.id %>
+        <%= f.hidden_field :chat_id, value: @chat_id, id: "chat_id" %>
+        <%= f.text_field :body %>
+        <%= f.submit %>
+      <% end %>
+    </div>
+  </main>

@@ -1,26 +1,40 @@
 import consumer from "channels/consumer";
 
-const msgChannel = consumer.subscriptions.create("MsgChannel", {
-  connected() {},
+const chat_id = document.getElementById("chat_id").value;
 
-  disconnected() {},
+const msgChannel = consumer.subscriptions.create(
+  { channel: "MsgChannel", chat_id: chat_id },
+  {
+    // const msgChannel = consumer.subscriptions.create("MsgChannel", {
+    connected() {
+      // console.log(chat_id)
+    },
 
-  received(data) {
-    const messageDisplay = document.querySelector("#message-display");
-    messageDisplay.insertAdjacentHTML("beforeend", this.template(data));
+    disconnected() {},
+
+    received(data) {
+      const messageDisplay = document.querySelector("#message-display");
+      console.log(data);
+      messageDisplay.insertAdjacentHTML("beforeend", this.template(data));
+    },
+    template(data) {
+      return `<div class="message">
+                <p>${data.msg_sender.username}: ${data.body}</p>
+            </div>`;
+    },
+
+    // template(data) {
+    //   return `<article class="message">
+    //             <div class="message-header">
+    //               <p>${data.user.email.split("@")[0]}</p>
+    //             </div>
+    //             <div class="message-body">
+    //               <p>${data.body}</p>
+    //             </div>
+    //           </article>`;
+    // },
   },
-
-  template(data) {
-    return `<article class="message">
-              <div class="message-header">
-                <p>${data.user.email}</p>
-              </div>
-              <div class="message-body">
-                <p>${data.body}</p>
-              </div>
-            </article>`;
-  },
-});
+);
 
 // TODO: Delete me
 // document.addEventListener("turbo:load", () => {

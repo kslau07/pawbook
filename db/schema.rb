@@ -79,10 +79,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_03_181719) do
 
   create_table "msgs", force: :cascade do |t|
     t.string "body"
-    t.bigint "user_id", null: false
+    t.bigint "msg_sender_id", null: false
+    t.bigint "msg_recipient_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_msgs_on_user_id"
+    t.index ["msg_recipient_id"], name: "index_msgs_on_msg_recipient_id"
+    t.index ["msg_sender_id"], name: "index_msgs_on_msg_sender_id"
   end
 
   create_table "pets", force: :cascade do |t|
@@ -149,7 +151,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_03_181719) do
   add_foreign_key "dashboards", "users"
   add_foreign_key "friend_requests", "users", column: "recipient_id"
   add_foreign_key "friend_requests", "users", column: "sender_id"
-  add_foreign_key "msgs", "users"
+  add_foreign_key "msgs", "users", column: "msg_recipient_id"
+  add_foreign_key "msgs", "users", column: "msg_sender_id"
   add_foreign_key "pets", "users"
   add_foreign_key "posts", "users", column: "author_id"
   add_foreign_key "reactions", "users"
