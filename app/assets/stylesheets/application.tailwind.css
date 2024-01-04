@@ -147,3 +147,8 @@ body {
     calc(var(--spacing-nested-comment) * var(--nesting-multiplier) * 5)
     var(--comment-body) 1fr;
 }
+
+.chat-height {
+  height: calc(100vh - 20vh);
+}
+

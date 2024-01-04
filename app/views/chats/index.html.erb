@@ -1,16 +1,14 @@
 <main id="main">
-  <div>
-    <h1>Contacts</h1>
-    <div>
-      <%= form_for :chats, :url => "/chats/show", data: { turbo: false }, :html => { :method => 'GET' } do |f| %>
-        I am: <%= current_user.username %>
-        <%= f.label "Who do you want to chat with?" %> <br>
-        <% @users.each do |user| %>
-          <%= radio_button_tag(:recipient_id, user.id) %>
-          <%= label_tag(:name, user.username) %> <br>
-        <% end %>
-        <%= f.submit "Chat"%>
-      <% end %>
+  <%= form_for :chats, :url => "/chats/show", data: { turbo: false }, :html => { :method => 'GET' } do |f| %>
+    <div class="grid mt-4 mb-6 w-max bg-blue-500 rounded gap-[1px] outline outline-blue-500 outline-1">
+      <div class="py-2 px-4 text-base text-white bg-blue-500 rounded">Select a friend: </div>
+      <div class="py-2 px-4 text-lg bg-neutral-50">
+        <%= f.select :recipient_username, options_for_select(@friend_options), { include_blank: "Select" }, class: "text-xl" %>
+        <%= f.submit name: "", value: "Go to chat",
+            class: "bg-blue-500 hover:bg-blue-600 text-white tracking-wide py-1 px-3 rounded-lg cursor-pointer ml-4" %>
+      </div>
     </div>
-  </div>
+    <div>
+    </div>
+  <% end %>
 </main>
