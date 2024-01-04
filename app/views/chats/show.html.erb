@@ -1,0 +1,25 @@
+<main id="main" class="p-4 bg-ghost-white">
+  <div id="message-display" class="overflow-y-auto pr-3 chat-height">
+    <% @msgs.each do |msg| %>
+      <div id="messages" class="p-3 mb-4 bg-white rounded shadow w-fit <%= msg[:msg_sender_id] == current_user.id ? 'mr-auto' : 'ml-auto' %>">
+        <div class="mb-1 text-sm font-bold text-blue-400">
+          <%= msg.msg_sender.username %>
+        </div>
+        <div>
+          <%= msg.body %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div id="message-form" class="p-2 h-min">
+    <%= form_with model: Msg.new, class: "grid grid-cols-[1fr_auto_auto] gap-4", local: false do |f| %>
+      <%= f.hidden_field :msg_recipient_id, value: @recipient.id %>
+      <%= f.hidden_field :chat_id, value: @chat_id, id: "chat_id" %>
+      <%= f.text_field :body, id: 'message-input', placeholder: "Write a message...", autofocus: true, 
+                        class: 'p-2 rounded focus:outline-gray-300 bg-white outline outline-blue-200' %>
+      <%= render "emoji-picker", dom_target: "message-input" %>
+      <%= f.submit "Send", 
+                    class: "bg-blue-500 hover:bg-blue-600 text-white text-base font-bold tracking-wide py-1 px-6 rounded cursor-pointer" %>
+    <% end %>
+  </div>
+</main>
