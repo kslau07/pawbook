@@ -27,4 +27,23 @@ class Comment < ApplicationRecord
   validates :body, presence: true
   # validates :commentable_id, presence: true
   # validates :commentable_type, presence: true
+
+  has_noticed_notifications
+  after_create_commit { broadcast_notifications }
+
+  private
+
+  def broadcast_notifications # ✅
+    # return if author == post.author
+
+    CommentNotification.with(message: self).deliver_later(commentable.author)
+
+    broadcast_prepend_to 'panda',
+                         target: 'panda',
+                         partial: 'notifications/notification',
+                         locals: { unread: true }
+    # broadcast_prepend_to "notifications_#{post.author.id}",
+    # target: "notifications_#{post.author.id}",
+    # locals: { author:, post:, unread: true }
+  end
 end

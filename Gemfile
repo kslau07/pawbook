@@ -93,3 +93,5 @@ group :test do
   gem "selenium-webdriver"
   gem "shoulda-matchers"
 end
+
+gem "noticed", "~> 1.6"

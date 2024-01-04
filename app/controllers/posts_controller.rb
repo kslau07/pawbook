@@ -15,6 +15,11 @@ class PostsController < ApplicationController
     @posts = Post.order(created_at: :desc).includes(:reactions, :comments)
     @post = Post.postable_new
     @reaction = Reaction.new
+    
+    return unless current_user
+
+    @notifications = current_user.notifications.reverse
+    current_user.notifications.mark_as_read!
   end
 
   def show; end
