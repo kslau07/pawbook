@@ -1,16 +1,22 @@
-<% if current_user %>
-  <div class="container">
-    <h6>Notifications</h6>
-    <%= turbo_stream_from "panda" %>
-    <%= turbo_frame_tag "panda" do %>
-    <%#= turbo_stream_from "notifications_#{user.id}" %>
-    <%#= turbo_frame_tag "notifications_#{user.id}" do %>
-      <% @notifications.each do |notification| %>
-        <%= render notification,
-                    # author: notification.to_notification.creator, # NOTE: These are the methods we defined in app/notifications/comment_notification.rb
-                    # post: notification.to_notification.post,
-                    unread: notification.unread? %>
+<!-- TODO: Show all notifications on its own page/route -->
+<!-- TODO: Make notifications "read" immediately if realtime -->
+<!--       Make notifications "read" if click on notifications bell -->
+<div data-controller="toggle">
+  <div data-toggle-target="content" class="hidden absolute right-0 top-full z-10 p-2 text-xs rounded shadow bg-slate-100">
+    <%= turbo_stream_from "notifications_#{current_user.id}" %>
+    <div class="font-bold mb-2">Notifications: </div>
+    <%= turbo_frame_tag "notifications_#{current_user.id}" do %>
+      <% current_user.notifications.each do |notification| %>
+        <%= render "notifications/notification",
+                   unread: notification.unread?,
+                   creator: notification.to_notification.creator,
+                   type: notification.type,
+                   url: notification.to_notification.url
+                   %>
       <% end %>
     <% end %>
   </div>
-<% end %>
+  <div data-action="click->toggle#toggle" class="cursor-pointer">
+    <%= image_tag("bell-svgrepo-com.svg", :alt => "A bell icon", :class => "", size: "30x30") %>
+  </div>
+</div>

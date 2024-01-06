@@ -28,11 +28,20 @@ class CommentNotification < Noticed::Base
     comment.author # NOTE: Uses above method, accesses the creator/user
   end
 
+  def parent_type
+    comment.commentable_type
+  end
+
+  def parent_id
+  comment.commentable_id
+  end
+
   def post
     comment.post
   end
-
+  
   def url
-    post_path(params[:post])
+    # post_path(params[:post])
+    "/#{parent_type.downcase}s/#{parent_id}"
   end
 end

@@ -1,8 +1,20 @@
-<div>
+<!-- TODO: Link to parent post if comment, link to /friends if friend request -->
+<!-- TODO: Add more notification types -->
+<!--       Friend requests -->
+<!--       Comment on comment -->
+<!--       Reaction on post -->
+<!--       Reaction on comment -->
+<div class="p-2 mb-2 w-max bg-white">
   <% if unread %>
-    <span>Unread</span>
+    <p>Unread: </p>
   <% end %>
-  <span>foo<%#= author.email %></span>
-  commented on 
-  <span>bar<%#= link_to post.title, post %></span>
+  <% if type == "CommentNotification" %>
+    <span class="font-bold">
+      <%= creator.username %>
+    </span>
+    left a comment! 
+    <span class="font-bold">
+      <%= link_to "(link)", post_path(1), data: { turbo: false }  %>
+    </span>
+  <% end %>
 </div>

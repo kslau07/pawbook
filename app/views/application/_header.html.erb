@@ -8,16 +8,9 @@
 <div id="header-center" class="grid items-center bg-blue-500">
   <input id="search-bar" type="text" placeholder="search" class="grid p-4 w-3/4 h-7 bg-white rounded-lg focus:outline-blue-500">
 </div>
-<div id="header-right" class="flex gap-8 justify-end items-center bg-blue-500">
-  <!-- TODO: ✅ Notifications if else -->
-  <% if true %>
-    hello
-    <%= turbo_frame_tag "notifications" do %>
-      <%= render "notifications/notifications", user: current_user %>
-    <% end %>
-    <%= link_to image_tag("bell-svgrepo-com.svg", :alt => "A bell icon", :class => "", size: "30x30"), root_path %>
-  <% else %>
-    <%= link_to image_tag("gray-bell-svgrepo-com.svg", :alt => "A grayed out bell icon", :class => "", size: "30x30"), root_path %>
+<div id="header-right" class="flex relative gap-8 justify-end items-center bg-blue-500">
+  <%= turbo_frame_tag "notifications" do %>
+    <%= render "notifications/notifications" %>
   <% end %>
   <%= link_to profile_path do %>
     <div class="avatar-circle avatar-circle-sm">
@@ -30,3 +23,12 @@
   <% end %>
 </div>
 <div id="gutter-right" class="bg-blue-500"></div>
+<%
+=begin %>
+<% if true %>
+  <%= link_to image_tag("bell-svgrepo-com.svg", :alt => "A bell icon", :class => "", size: "30x30"), root_path %>
+<% else %>
+  <%= link_to image_tag("gray-bell-svgrepo-com.svg", :alt => "A grayed out bell icon", :class => "", size: "30x30"), root_path %>
+<% end %>
+<%
+=end %>

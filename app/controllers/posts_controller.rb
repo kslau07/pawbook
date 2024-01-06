@@ -1,28 +1,19 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
 
-  # NOTE: Delete me
-  # Turbo Frame helper methods available
-  # turbo_stream.remove # Remove a turbo-frame
-  # turbo_stream.prepend # Insert turbo-frame before first frame
-  # turbo_stream.append # Append turbo-frame after last frame
-  # turbo_stream.before # Insert turbo-frame before the specified frame
-  # turbo_stream.after # Append turbo-frame after the specified frame
-  # turbo_stream.update # Update the contents of a turbo-frame
-  # turbo_stream.replace # Replace the contents of a turbo-frame
-
   def index
     @posts = Post.order(created_at: :desc).includes(:reactions, :comments)
     @post = Post.postable_new
     @reaction = Reaction.new
-    
-    return unless current_user
 
-    @notifications = current_user.notifications.reverse
-    current_user.notifications.mark_as_read!
+    # return unless current_user
+    # @notifications = current_user.notifications.reverse
+    # current_user.notifications.mark_as_read!
   end
 
-  def show; end
+  def show
+    @post = Post.find(params[:id])
+  end
 
   def new; end
 

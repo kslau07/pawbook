@@ -34,14 +34,19 @@ class Comment < ApplicationRecord
   private
 
   def broadcast_notifications # ✅
-    # return if author == post.author
+    # return if current_user == commentable.author
 
     CommentNotification.with(message: self).deliver_later(commentable.author)
 
-    broadcast_prepend_to 'panda',
-                         target: 'panda',
+    broadcast_prepend_to "notifications_#{commentable.author.id}",
+                         # broadcast_prepend_to 'panda',
+                         target: "notifications_#{commentable.author.id}",
                          partial: 'notifications/notification',
-                         locals: { unread: true }
+                         locals: { unread: true,
+                                   type: 'CommentNotification',
+                                   creator: author,
+                                   url: '/posts/1' }
+    # locals: { unread: true, creator: author, type: CommentNotification }
     # broadcast_prepend_to "notifications_#{post.author.id}",
     # target: "notifications_#{post.author.id}",
     # locals: { author:, post:, unread: true }

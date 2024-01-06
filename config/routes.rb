@@ -13,8 +13,7 @@ Rails.application.routes.draw do
 
   # (shallow outside) resources :comments, only: [:show, :edit, :update, :destroy]
   # (shallow inside) only: [:index, :new, :create]
-  resources :posts do
-    resources :posts, only: %w[index create]
+  resources :posts, only: %w[index create show] do
     resources :comments, shallow: true
   end
 

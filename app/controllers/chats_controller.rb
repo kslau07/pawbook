@@ -5,7 +5,7 @@ class ChatsController < ApplicationController
     @msg = Msg.new
     @msgs = Msg.includes(:user)
     @friends_usernames = current_user.all_friends_usernames
-    @friend_options = @friends_usernames.map { |v| [ v, v ] }
+    @friend_options = @friends_usernames.map { |v| [v, v] }
     # @friend_options = User.all.map{ |u| [ u.name, u.id ] }
   end
 
