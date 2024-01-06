@@ -1,4 +1,4 @@
-<main id="main" class="p-4 bg-ghost-white">
+<main class="p-4 main bg-ghost-white">
   <div id="message-display" class="overflow-y-auto pr-3 chat-height">
     <% @msgs.each do |msg| %>
       <div id="messages" class="p-3 mb-4 bg-white rounded shadow w-fit <%= msg[:msg_sender_id] == current_user.id ? 'mr-auto' : 'ml-auto' %>">

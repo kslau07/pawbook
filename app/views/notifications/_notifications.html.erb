@@ -4,9 +4,9 @@
 <div data-controller="toggle">
   <div data-toggle-target="content" class="hidden absolute right-0 top-full z-10 p-2 text-xs rounded shadow bg-slate-100">
     <%= turbo_stream_from "notifications_#{current_user.id}" %>
-    <div class="font-bold mb-2">Notifications: </div>
+    <div class="mb-2 font-bold">Notifications: </div>
     <%= turbo_frame_tag "notifications_#{current_user.id}" do %>
-      <% current_user.notifications.each do |notification| %>
+      <% current_user.notifications.reverse.each do |notification| %>
         <%= render "notifications/notification",
                    unread: notification.unread?,
                    creator: notification.to_notification.creator,
@@ -17,6 +17,10 @@
     <% end %>
   </div>
   <div data-action="click->toggle#toggle" class="cursor-pointer">
-    <%= image_tag("bell-svgrepo-com.svg", :alt => "A bell icon", :class => "", size: "30x30") %>
+    <% if current_user.notifications.any? %>
+      <%= image_tag("bell-svgrepo-com.svg", :alt => "A bell icon", :class => "", size: "30x30") %>
+    <% else %>
+      <%= image_tag("gray-bell-svgrepo-com.svg", :alt => "A bell icon", :class => "", size: "30x30") %>
+    <% end %>
   </div>
 </div>

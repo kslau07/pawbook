@@ -21,7 +21,7 @@ body {
 }
 
 /* Grid areas for normal layout */
-#normal-layout {
+.normal-layout {
   display: grid;
   width: 100%;
   height: 100%;
@@ -32,19 +32,19 @@ body {
   grid-template-rows: 3.5rem 1fr 3.5rem;
   grid-template-columns: 1fr 17rem 40rem 17rem 1fr;
 }
-#header-left {
+.header-left {
   grid-area: header-left;
 }
-#header-center {
+.header-center {
   grid-area: header-center;
 }
-#header-right {
+.header-right {
   grid-area: header-right;
 }
-#nav {
+.nav {
   grid-area: nav;
 }
-#main {
+.main {
   grid-area: main;
 }
 #contacts {

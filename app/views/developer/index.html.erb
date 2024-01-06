@@ -1,0 +1,17 @@
+<main class="main">
+  <div class="mt-6 mb-2 font-bold">Developer API Access</div>
+  <div class="grid mb-6 bg-blue-500 rounded gap-[1px] outline outline-blue-500 outline-1">
+    <div class="py-2 px-4 text-base text-white bg-blue-500 rounded">Generate an API Key</div>
+    <div data-controller="generate-random" class="grid py-2 px-4 bg-neutral-50 grid-cols-[1fr_auto_auto]">
+      <input data-generate-random-target="content" type="text" class="p-2 outline outline-gray-200" value="13cb8ac42a64a10ec26e40601e1560"/>
+      <button data-action="click->generate-random#copy" class="py-1 px-2 ml-4 text-base font-bold text-white bg-lime-400 rounded border border-lime-400">Copy</button>
+      <button data-action="click->generate-random#genHexString" class="py-1 px-2 ml-4 text-base text-white bg-blue-600 rounded border border-blue-600">Generate key</button>
+    </div>
+  </div>
+  <div class="grid mb-6 bg-green-500 rounded gap-[1px] outline outline-green-500 outline-1">
+    <div class="py-1 px-4 text-sm text-white bg-green-500 rounded">How to access API endpoints</div>
+    <div data-controller="generate-random" class="grid py-2 px-4 bg-neutral-50 grid-cols-[1fr_auto_auto]">
+      Instructions go here
+    </div>
+  </div>
+</main>

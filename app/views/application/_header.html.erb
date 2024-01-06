@@ -1,14 +1,14 @@
-<div id="gutter-left" class="bg-blue-500"></div>
-<div id="header-left" class="flex gap-2 items-center bg-blue-500">
+<div class="bg-blue-500 gutter-left"></div>
+<div class="flex gap-2 items-center bg-blue-500 header-left">
   <%= link_to root_path, { class: "text-3xl font-bold logo-font text-white" } do %>
     pawbook
     <%= image_tag "paw-3-svgrepo-com-white.svg", { class: 'logo-image pb-1', alt: 'A pawprint', size: "25x25" }%>
   <% end %>
 </div>
-<div id="header-center" class="grid items-center bg-blue-500">
+<div class="grid items-center bg-blue-500 header-center">
   <input id="search-bar" type="text" placeholder="search" class="grid p-4 w-3/4 h-7 bg-white rounded-lg focus:outline-blue-500">
 </div>
-<div id="header-right" class="flex relative gap-8 justify-end items-center bg-blue-500">
+<div class="flex relative gap-8 justify-end items-center bg-blue-500 header-right">
   <%= turbo_frame_tag "notifications" do %>
     <%= render "notifications/notifications" %>
   <% end %>
@@ -22,7 +22,7 @@
     </div>
   <% end %>
 </div>
-<div id="gutter-right" class="bg-blue-500"></div>
+<div class="bg-blue-500 gutter-right"></div>
 <%
 =begin %>
 <% if true %>

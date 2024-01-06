@@ -45,7 +45,7 @@ class Comment < ApplicationRecord
                          locals: { unread: true,
                                    type: 'CommentNotification',
                                    creator: author,
-                                   url: '/posts/1' }
+                                   url: "/posts/#{commentable.id}" }
     # locals: { unread: true, creator: author, type: CommentNotification }
     # broadcast_prepend_to "notifications_#{post.author.id}",
     # target: "notifications_#{post.author.id}",
